@@ -19,6 +19,7 @@
 		1D305FCB28FD5F4F00EE3FDF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1D305FCA28FD5F4F00EE3FDF /* Alamofire */; };
 		1D305FCE28FD5F7200EE3FDF /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1D305FCD28FD5F7200EE3FDF /* AlamofireImage */; };
 		1D305FD128FD5F9700EE3FDF /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 1D305FD028FD5F9700EE3FDF /* Factory */; };
+		1D676A3728FDB4DF00449823 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D676A3628FDB4DF00449823 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		1D305FB628FD299100EE3FDF /* TheVeggieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheVeggieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D305FBA28FD299100EE3FDF /* TheVeggieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheVeggieUITests.swift; sourceTree = "<group>"; };
 		1D305FBC28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheVeggieUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1D676A3628FDB4DF00449823 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,11 +108,13 @@
 			isa = PBXGroup;
 			children = (
 				1D305F9928FD298F00EE3FDF /* TheVeggieApp.swift */,
-				1D305F9B28FD298F00EE3FDF /* ContentView.swift */,
-				1D305F9D28FD299100EE3FDF /* Assets.xcassets */,
-				1D305FA228FD299100EE3FDF /* Persistence.swift */,
+				1D676A3028FDB16B00449823 /* Presentation */,
+				1D676A3228FDB1CB00449823 /* Models */,
+				1D676A2F28FDB14F00449823 /* Helpers */,
+				1D676A2E28FDB13300449823 /* networking */,
+				1D676A3128FDB17C00449823 /* CoreData */,
 				1D305FA728FD299100EE3FDF /* Info.plist */,
-				1D305FA428FD299100EE3FDF /* TheVeggie.xcdatamodeld */,
+				1D305F9D28FD299100EE3FDF /* Assets.xcassets */,
 				1D305F9F28FD299100EE3FDF /* Preview Content */,
 			);
 			path = TheVeggie;
@@ -139,6 +143,61 @@
 				1D305FBC28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift */,
 			);
 			path = TheVeggieUITests;
+			sourceTree = "<group>";
+		};
+		1D676A2E28FDB13300449823 /* networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = networking;
+			sourceTree = "<group>";
+		};
+		1D676A2F28FDB14F00449823 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1D676A3028FDB16B00449823 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				1D305F9B28FD298F00EE3FDF /* ContentView.swift */,
+				1D676A3528FDB20900449823 /* Views */,
+				1D676A3428FDB1FC00449823 /* ViewModel */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		1D676A3128FDB17C00449823 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1D305FA228FD299100EE3FDF /* Persistence.swift */,
+				1D676A3628FDB4DF00449823 /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		1D676A3228FDB1CB00449823 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1D305FA428FD299100EE3FDF /* TheVeggie.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1D676A3428FDB1FC00449823 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1D676A3528FDB20900449823 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D676A3728FDB4DF00449823 /* CoreDataManager.swift in Sources */,
 				1D305FA328FD299100EE3FDF /* Persistence.swift in Sources */,
 				1D305F9C28FD298F00EE3FDF /* ContentView.swift in Sources */,
 				1D305FA628FD299100EE3FDF /* TheVeggie.xcdatamodeld in Sources */,
