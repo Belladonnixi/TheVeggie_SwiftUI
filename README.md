@@ -1,5 +1,5 @@
 ## TheVeggie_SwiftUI
-#A Vegetarian recipe organizer in SwiftUI
+# A Vegetarian recipe organizer in SwiftUI
 Challenges in this Project:
 - Clean Architecture (MVVM)
 - TDD
