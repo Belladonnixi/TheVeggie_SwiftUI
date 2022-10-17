@@ -16,6 +16,9 @@
 		1D305FB128FD299100EE3FDF /* TheVeggieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FB028FD299100EE3FDF /* TheVeggieTests.swift */; };
 		1D305FBB28FD299100EE3FDF /* TheVeggieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FBA28FD299100EE3FDF /* TheVeggieUITests.swift */; };
 		1D305FBD28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FBC28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift */; };
+		1D305FCB28FD5F4F00EE3FDF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1D305FCA28FD5F4F00EE3FDF /* Alamofire */; };
+		1D305FCE28FD5F7200EE3FDF /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1D305FCD28FD5F7200EE3FDF /* AlamofireImage */; };
+		1D305FD128FD5F9700EE3FDF /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 1D305FD028FD5F9700EE3FDF /* Factory */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D305FD128FD5F9700EE3FDF /* Factory in Frameworks */,
+				1D305FCB28FD5F4F00EE3FDF /* Alamofire in Frameworks */,
+				1D305FCE28FD5F7200EE3FDF /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +157,11 @@
 			dependencies = (
 			);
 			name = TheVeggie;
+			packageProductDependencies = (
+				1D305FCA28FD5F4F00EE3FDF /* Alamofire */,
+				1D305FCD28FD5F7200EE3FDF /* AlamofireImage */,
+				1D305FD028FD5F9700EE3FDF /* Factory */,
+			);
 			productName = TheVeggie;
 			productReference = 1D305F9628FD298F00EE3FDF /* TheVeggie.app */;
 			productType = "com.apple.product-type.application";
@@ -223,6 +234,11 @@
 				Base,
 			);
 			mainGroup = 1D305F8D28FD298F00EE3FDF;
+			packageReferences = (
+				1D305FC928FD5F4F00EE3FDF /* XCRemoteSwiftPackageReference "Alamofire" */,
+				1D305FCC28FD5F7100EE3FDF /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+				1D305FCF28FD5F9700EE3FDF /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			productRefGroup = 1D305F9728FD298F00EE3FDF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -593,6 +609,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1D305FC928FD5F4F00EE3FDF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		1D305FCC28FD5F7100EE3FDF /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		1D305FCF28FD5F9700EE3FDF /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1D305FCA28FD5F4F00EE3FDF /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D305FC928FD5F4F00EE3FDF /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		1D305FCD28FD5F7200EE3FDF /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D305FCC28FD5F7100EE3FDF /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
+		};
+		1D305FD028FD5F9700EE3FDF /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D305FCF28FD5F9700EE3FDF /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1D305FA428FD299100EE3FDF /* TheVeggie.xcdatamodeld */ = {

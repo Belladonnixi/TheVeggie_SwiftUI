@@ -11,6 +11,7 @@
 
 import SwiftUI
 import CoreData
+import Alamofire
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
