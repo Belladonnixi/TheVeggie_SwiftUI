@@ -11,7 +11,6 @@
 		1D305F9C28FD298F00EE3FDF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305F9B28FD298F00EE3FDF /* ContentView.swift */; };
 		1D305F9E28FD299100EE3FDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D305F9D28FD299100EE3FDF /* Assets.xcassets */; };
 		1D305FA128FD299100EE3FDF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D305FA028FD299100EE3FDF /* Preview Assets.xcassets */; };
-		1D305FA328FD299100EE3FDF /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FA228FD299100EE3FDF /* Persistence.swift */; };
 		1D305FA628FD299100EE3FDF /* TheVeggie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FA428FD299100EE3FDF /* TheVeggie.xcdatamodeld */; };
 		1D305FB128FD299100EE3FDF /* TheVeggieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FB028FD299100EE3FDF /* TheVeggieTests.swift */; };
 		1D305FBB28FD299100EE3FDF /* TheVeggieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FBA28FD299100EE3FDF /* TheVeggieUITests.swift */; };
@@ -45,7 +44,6 @@
 		1D305F9B28FD298F00EE3FDF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1D305F9D28FD299100EE3FDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1D305FA028FD299100EE3FDF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		1D305FA228FD299100EE3FDF /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		1D305FA528FD299100EE3FDF /* TheVeggie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TheVeggie.xcdatamodel; sourceTree = "<group>"; };
 		1D305FA728FD299100EE3FDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D305FAC28FD299100EE3FDF /* TheVeggieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheVeggieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,7 +170,6 @@
 		1D676A3128FDB17C00449823 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				1D305FA228FD299100EE3FDF /* Persistence.swift */,
 				1D676A3628FDB4DF00449823 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
@@ -341,7 +338,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D676A3728FDB4DF00449823 /* CoreDataManager.swift in Sources */,
-				1D305FA328FD299100EE3FDF /* Persistence.swift in Sources */,
 				1D305F9C28FD298F00EE3FDF /* ContentView.swift in Sources */,
 				1D305FA628FD299100EE3FDF /* TheVeggie.xcdatamodeld in Sources */,
 				1D305F9A28FD298F00EE3FDF /* TheVeggieApp.swift in Sources */,

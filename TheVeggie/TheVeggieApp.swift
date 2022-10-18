@@ -13,7 +13,6 @@ import SwiftUI
 
 @main
 struct TheVeggieApp: App {
-    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
