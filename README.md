@@ -9,3 +9,6 @@ Challenges in this Project:
 - TDD
 - CleanCode
 - using standard frameworks
+
+## Design build with Sketch
+<img width="921" alt="Screenshot 2022-10-19 at 00 24 35" src="https://user-images.githubusercontent.com/99251460/196556884-4240ffcc-3c8b-4857-b679-b55718ba92ae.png">
