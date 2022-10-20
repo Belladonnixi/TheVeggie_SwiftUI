@@ -15,10 +15,15 @@
 		1D305FB128FD299100EE3FDF /* TheVeggieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FB028FD299100EE3FDF /* TheVeggieTests.swift */; };
 		1D305FBB28FD299100EE3FDF /* TheVeggieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FBA28FD299100EE3FDF /* TheVeggieUITests.swift */; };
 		1D305FBD28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FBC28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift */; };
-		1D305FCB28FD5F4F00EE3FDF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1D305FCA28FD5F4F00EE3FDF /* Alamofire */; };
-		1D305FCE28FD5F7200EE3FDF /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1D305FCD28FD5F7200EE3FDF /* AlamofireImage */; };
 		1D305FD128FD5F9700EE3FDF /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 1D305FD028FD5F9700EE3FDF /* Factory */; };
+		1D500663290136C100530D8F /* RoundedRectangleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D500662290136C000530D8F /* RoundedRectangleImage.swift */; };
+		1D50066529014B1500530D8F /* RecipeModelDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D50066429014B1500530D8F /* RecipeModelDataService.swift */; };
+		1D50066729014D6800530D8F /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D50066629014D6800530D8F /* RecipeModel.swift */; };
+		1D5FAF41290182B3004F28C3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5FAF40290182B3004F28C3 /* APIKeys.swift */; };
 		1D676A3728FDB4DF00449823 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D676A3628FDB4DF00449823 /* CoreDataManager.swift */; };
+		1D676A3A28FEDE8700449823 /* HomeAPIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D676A3928FEDE8700449823 /* HomeAPIView.swift */; };
+		1D676A3C28FEDF2700449823 /* HomeApiRecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D676A3B28FEDF2700449823 /* HomeApiRecipeCard.swift */; };
+		1D7E529229001109008685BC /* AvailableFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E529129001109008685BC /* AvailableFonts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +56,14 @@
 		1D305FB628FD299100EE3FDF /* TheVeggieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheVeggieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D305FBA28FD299100EE3FDF /* TheVeggieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheVeggieUITests.swift; sourceTree = "<group>"; };
 		1D305FBC28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheVeggieUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1D500662290136C000530D8F /* RoundedRectangleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleImage.swift; sourceTree = "<group>"; };
+		1D50066429014B1500530D8F /* RecipeModelDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModelDataService.swift; sourceTree = "<group>"; };
+		1D50066629014D6800530D8F /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
+		1D5FAF40290182B3004F28C3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		1D676A3628FDB4DF00449823 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		1D676A3928FEDE8700449823 /* HomeAPIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPIView.swift; sourceTree = "<group>"; };
+		1D676A3B28FEDF2700449823 /* HomeApiRecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeApiRecipeCard.swift; sourceTree = "<group>"; };
+		1D7E529129001109008685BC /* AvailableFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableFonts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +72,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D305FD128FD5F9700EE3FDF /* Factory in Frameworks */,
-				1D305FCB28FD5F4F00EE3FDF /* Alamofire in Frameworks */,
-				1D305FCE28FD5F7200EE3FDF /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +156,8 @@
 		1D676A2E28FDB13300449823 /* networking */ = {
 			isa = PBXGroup;
 			children = (
+				1D50066429014B1500530D8F /* RecipeModelDataService.swift */,
+				1D5FAF40290182B3004F28C3 /* APIKeys.swift */,
 			);
 			path = networking;
 			sourceTree = "<group>";
@@ -153,6 +165,8 @@
 		1D676A2F28FDB14F00449823 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1D7E529129001109008685BC /* AvailableFonts.swift */,
+				1D500662290136C000530D8F /* RoundedRectangleImage.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -179,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				1D305FA428FD299100EE3FDF /* TheVeggie.xcdatamodeld */,
+				1D50066629014D6800530D8F /* RecipeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -193,8 +208,18 @@
 		1D676A3528FDB20900449823 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1D676A3828FEDE6500449823 /* Home */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1D676A3828FEDE6500449823 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				1D676A3928FEDE8700449823 /* HomeAPIView.swift */,
+				1D676A3B28FEDF2700449823 /* HomeApiRecipeCard.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,8 +239,6 @@
 			);
 			name = TheVeggie;
 			packageProductDependencies = (
-				1D305FCA28FD5F4F00EE3FDF /* Alamofire */,
-				1D305FCD28FD5F7200EE3FDF /* AlamofireImage */,
 				1D305FD028FD5F9700EE3FDF /* Factory */,
 			);
 			productName = TheVeggie;
@@ -291,8 +314,6 @@
 			);
 			mainGroup = 1D305F8D28FD298F00EE3FDF;
 			packageReferences = (
-				1D305FC928FD5F4F00EE3FDF /* XCRemoteSwiftPackageReference "Alamofire" */,
-				1D305FCC28FD5F7100EE3FDF /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				1D305FCF28FD5F9700EE3FDF /* XCRemoteSwiftPackageReference "Factory" */,
 			);
 			productRefGroup = 1D305F9728FD298F00EE3FDF /* Products */;
@@ -337,10 +358,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D5FAF41290182B3004F28C3 /* APIKeys.swift in Sources */,
 				1D676A3728FDB4DF00449823 /* CoreDataManager.swift in Sources */,
 				1D305F9C28FD298F00EE3FDF /* ContentView.swift in Sources */,
+				1D7E529229001109008685BC /* AvailableFonts.swift in Sources */,
+				1D676A3C28FEDF2700449823 /* HomeApiRecipeCard.swift in Sources */,
 				1D305FA628FD299100EE3FDF /* TheVeggie.xcdatamodeld in Sources */,
+				1D50066529014B1500530D8F /* RecipeModelDataService.swift in Sources */,
 				1D305F9A28FD298F00EE3FDF /* TheVeggieApp.swift in Sources */,
+				1D676A3A28FEDE8700449823 /* HomeAPIView.swift in Sources */,
+				1D500663290136C100530D8F /* RoundedRectangleImage.swift in Sources */,
+				1D50066729014D6800530D8F /* RecipeModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,22 +695,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1D305FC928FD5F4F00EE3FDF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		1D305FCC28FD5F7100EE3FDF /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		1D305FCF28FD5F9700EE3FDF /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory.git";
@@ -694,16 +706,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1D305FCA28FD5F4F00EE3FDF /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1D305FC928FD5F4F00EE3FDF /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-		1D305FCD28FD5F7200EE3FDF /* AlamofireImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1D305FCC28FD5F7100EE3FDF /* XCRemoteSwiftPackageReference "AlamofireImage" */;
-			productName = AlamofireImage;
-		};
 		1D305FD028FD5F9700EE3FDF /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1D305FCF28FD5F9700EE3FDF /* XCRemoteSwiftPackageReference "Factory" */;

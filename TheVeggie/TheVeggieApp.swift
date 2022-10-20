@@ -18,6 +18,7 @@ struct TheVeggieApp: App {
         WindowGroup {
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            HomeAPIView()
         }
     }
 }
