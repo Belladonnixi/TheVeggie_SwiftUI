@@ -16,7 +16,7 @@ class RecipeModelDataService {
     
     static let instance = RecipeModelDataService() // Singleton
     
-    @Published var recipes: [RecipeModel] = []
+    @Published var recipes: [Recipe] = []
     var cancellables = Set<AnyCancellable>()
     
     private init() {
@@ -30,7 +30,7 @@ class RecipeModelDataService {
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
             .tryMap(handleOutput)
-            .decode(type: [RecipeModel].self, decoder: JSONDecoder())
+            .decode(type: [Recipe].self, decoder: JSONDecoder())
             .sink { (completion) in
                 switch completion {
                 case .finished:

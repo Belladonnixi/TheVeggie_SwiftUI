@@ -22,29 +22,8 @@ struct HomeAPIView: View {
     var body: some View {
         
         NavigationView {
-            VStack {
-                
-                HStack {
-                    HomeApiRecipeCard()
-                        .padding(8)
-                    HomeApiRecipeCard()
-                        .padding(8)
-                }
-                
-                HStack {
-                    HomeApiRecipeCard()
-                        .padding(8)
-                    HomeApiRecipeCard()
-                        .padding(8)
-                }
-                
-                HStack {
-                    HomeApiRecipeCard()
-                        .padding(8)
-                    HomeApiRecipeCard()
-                        .padding(8)
-                }
-                
+            List {
+                HomeApiRecipeCard()
             }
             .navigationBarTitleDisplayMode(.automatic)
             .navigationTitle("The Veggie")
