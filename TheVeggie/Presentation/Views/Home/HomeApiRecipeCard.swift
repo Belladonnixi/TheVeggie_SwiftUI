@@ -13,6 +13,8 @@ import SwiftUI
 
 struct HomeApiRecipeCard: View {
     
+    @StateObject var vm = HomeApiViewmodel()
+    
     var body: some View {
         VStack {
             RoundedRectangleImage(image: Image("ella-olsson-6UxD0NzDywI-unsplash"))

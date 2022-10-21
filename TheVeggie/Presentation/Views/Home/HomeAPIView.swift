@@ -14,6 +14,7 @@ import SwiftUI
 struct HomeAPIView: View {
     
     @State var searchQuery = ""
+    @StateObject var vm = HomeApiViewmodel()
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
@@ -23,7 +24,17 @@ struct HomeAPIView: View {
         
         NavigationView {
             List {
-                HomeApiRecipeCard()
+                ForEach(vm.dataArray) { model in
+                    
+//                        VStack {
+//                            RoundedRectangleImage(image: Image("ella-olsson-6UxD0NzDywI-unsplash"))
+//                                .frame(width: 160, height: 160)
+//                                .aspectRatio(contentMode: .fit)
+                            
+                            Text(model.label!)
+                        
+//                    }
+                }
             }
             .navigationBarTitleDisplayMode(.automatic)
             .navigationTitle("The Veggie")
