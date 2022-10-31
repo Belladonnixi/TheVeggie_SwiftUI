@@ -16,9 +16,12 @@
 		1D305FBB28FD299100EE3FDF /* TheVeggieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FBA28FD299100EE3FDF /* TheVeggieUITests.swift */; };
 		1D305FBD28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FBC28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift */; };
 		1D305FD128FD5F9700EE3FDF /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 1D305FD028FD5F9700EE3FDF /* Factory */; };
-		1D500663290136C100530D8F /* RoundedRectangleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D500662290136C000530D8F /* RoundedRectangleImage.swift */; };
 		1D50066529014B1500530D8F /* RecipeModelDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D50066429014B1500530D8F /* RecipeModelDataService.swift */; };
 		1D50066729014D6800530D8F /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D50066629014D6800530D8F /* RecipeModel.swift */; };
+		1D576ED52910159E00D39134 /* DownloadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D576ED42910159E00D39134 /* DownloadingImageView.swift */; };
+		1D576ED72910174800D39134 /* ImageLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D576ED62910174800D39134 /* ImageLoadingViewModel.swift */; };
+		1D576ED929104D3100D39134 /* RecipeImageModelFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D576ED829104D3100D39134 /* RecipeImageModelFileManager.swift */; };
+		1D576EDB2910525B00D39134 /* RecipeImageModelCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D576EDA2910525B00D39134 /* RecipeImageModelCacheManager.swift */; };
 		1D5FAF4C2902C3F1004F28C3 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5FAF4B2902C3F1004F28C3 /* ApiKeys.swift */; };
 		1D5FAF4E2902C5C6004F28C3 /* HomeAPIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5FAF4D2902C5C6004F28C3 /* HomeAPIViewModel.swift */; };
 		1D676A3728FDB4DF00449823 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D676A3628FDB4DF00449823 /* CoreDataManager.swift */; };
@@ -56,9 +59,12 @@
 		1D305FB628FD299100EE3FDF /* TheVeggieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheVeggieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D305FBA28FD299100EE3FDF /* TheVeggieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheVeggieUITests.swift; sourceTree = "<group>"; };
 		1D305FBC28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheVeggieUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		1D500662290136C000530D8F /* RoundedRectangleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleImage.swift; sourceTree = "<group>"; };
 		1D50066429014B1500530D8F /* RecipeModelDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModelDataService.swift; sourceTree = "<group>"; };
 		1D50066629014D6800530D8F /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
+		1D576ED42910159E00D39134 /* DownloadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingImageView.swift; sourceTree = "<group>"; };
+		1D576ED62910174800D39134 /* ImageLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadingViewModel.swift; sourceTree = "<group>"; };
+		1D576ED829104D3100D39134 /* RecipeImageModelFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeImageModelFileManager.swift; sourceTree = "<group>"; };
+		1D576EDA2910525B00D39134 /* RecipeImageModelCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeImageModelCacheManager.swift; sourceTree = "<group>"; };
 		1D5FAF4B2902C3F1004F28C3 /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		1D5FAF4D2902C5C6004F28C3 /* HomeAPIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPIViewModel.swift; sourceTree = "<group>"; };
 		1D676A3628FDB4DF00449823 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -118,7 +124,7 @@
 				1D305F9928FD298F00EE3FDF /* TheVeggieApp.swift */,
 				1D676A3028FDB16B00449823 /* Presentation */,
 				1D676A3228FDB1CB00449823 /* Models */,
-				1D676A2F28FDB14F00449823 /* Helpers */,
+				1D676A2F28FDB14F00449823 /* Utillities */,
 				1D676A2E28FDB13300449823 /* networking */,
 				1D676A3128FDB17C00449823 /* CoreData */,
 				1D305FA728FD299100EE3FDF /* Info.plist */,
@@ -157,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				1D5FAF4D2902C5C6004F28C3 /* HomeAPIViewModel.swift */,
+				1D576ED62910174800D39134 /* ImageLoadingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -170,12 +177,13 @@
 			path = networking;
 			sourceTree = "<group>";
 		};
-		1D676A2F28FDB14F00449823 /* Helpers */ = {
+		1D676A2F28FDB14F00449823 /* Utillities */ = {
 			isa = PBXGroup;
 			children = (
-				1D500662290136C000530D8F /* RoundedRectangleImage.swift */,
+				1D576ED829104D3100D39134 /* RecipeImageModelFileManager.swift */,
+				1D576EDA2910525B00D39134 /* RecipeImageModelCacheManager.swift */,
 			);
-			path = Helpers;
+			path = Utillities;
 			sourceTree = "<group>";
 		};
 		1D676A3028FDB16B00449823 /* Presentation */ = {
@@ -218,6 +226,7 @@
 			children = (
 				1D676A3928FEDE8700449823 /* HomeAPIView.swift */,
 				1D676A3B28FEDF2700449823 /* HomeApiRecipeCard.swift */,
+				1D576ED42910159E00D39134 /* DownloadingImageView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -360,13 +369,16 @@
 			files = (
 				1D676A3728FDB4DF00449823 /* CoreDataManager.swift in Sources */,
 				1D305F9C28FD298F00EE3FDF /* ContentView.swift in Sources */,
+				1D576EDB2910525B00D39134 /* RecipeImageModelCacheManager.swift in Sources */,
 				1D676A3C28FEDF2700449823 /* HomeApiRecipeCard.swift in Sources */,
+				1D576ED72910174800D39134 /* ImageLoadingViewModel.swift in Sources */,
 				1D305FA628FD299100EE3FDF /* TheVeggie.xcdatamodeld in Sources */,
+				1D576ED929104D3100D39134 /* RecipeImageModelFileManager.swift in Sources */,
 				1D5FAF4C2902C3F1004F28C3 /* ApiKeys.swift in Sources */,
 				1D50066529014B1500530D8F /* RecipeModelDataService.swift in Sources */,
 				1D305F9A28FD298F00EE3FDF /* TheVeggieApp.swift in Sources */,
 				1D676A3A28FEDE8700449823 /* HomeAPIView.swift in Sources */,
-				1D500663290136C100530D8F /* RoundedRectangleImage.swift in Sources */,
+				1D576ED52910159E00D39134 /* DownloadingImageView.swift in Sources */,
 				1D50066729014D6800530D8F /* RecipeModel.swift in Sources */,
 				1D5FAF4E2902C5C6004F28C3 /* HomeAPIViewModel.swift in Sources */,
 			);

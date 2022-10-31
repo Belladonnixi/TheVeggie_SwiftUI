@@ -58,36 +58,17 @@ struct Recipe: Codable {
     let uri: String
     let label: String
     let image: String
-    let images: Images
     let source: String
     let url: String
     let shareAs: String
     let yield: Int
     let ingredients: [Ingredient]
+    let calories: Double
     let totalWeight: Double
     let totalTime: Int
     let cuisineType: [String]
     let mealType: [MealType]
     let dishType: [String]?
-}
-
-// MARK: - Images
-struct Images: Codable {
-    let thumbnail, small, regular: Large
-    let large: Large?
-
-    enum CodingKeys: String, CodingKey {
-        case thumbnail = "THUMBNAIL"
-        case small = "SMALL"
-        case regular = "REGULAR"
-        case large = "LARGE"
-    }
-}
-
-// MARK: - Large
-struct Large: Codable {
-    let url: String
-    let width, height: Int
 }
 
 // MARK: - Ingredient

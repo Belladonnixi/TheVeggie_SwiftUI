@@ -26,14 +26,7 @@ struct HomeAPIView: View {
             List {
                 ForEach(vm.dataArray, id: \.label) { model in
                     
-                        VStack {
-                            RoundedRectangleImage(image: Image(""))
-                                .frame(width: 160, height: 160)
-                                .aspectRatio(contentMode: .fit)
-                            
-                            Text(model.label)
-                        
-                    }
+                     HomeApiRecipeCard(model: model)
                 }
             }
             .navigationBarTitleDisplayMode(.automatic)
