@@ -30,7 +30,7 @@ class RecipeModelDataService {
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
             .tryMap(handleOutput)
-            .decode(type: [Recipe].self, decoder: JSONDecoder())
+            .decode(type: Welcome.self, decoder: JSONDecoder())
             .sink { (completion) in
                 switch completion {
                 case .finished:
@@ -38,8 +38,14 @@ class RecipeModelDataService {
                 case .failure(let error):
                     print("Error downloading data. \(error)")
                 }
-            } receiveValue: { [weak self] (returnedRecipes) in
-                self?.recipes = returnedRecipes
+            } receiveValue: { [weak self] (returnedValues) in
+                for hit in returnedValues.hits {
+                    print(
+                        hit.recipe.label)
+                    var array = [Recipe]()
+                    array.append(hit.recipe)
+                    self?.recipes = array
+                }
             }
             .store(in: &cancellables)
     }

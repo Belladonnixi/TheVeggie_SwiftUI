@@ -26,7 +26,7 @@ class HomeApiViewmodel: ObservableObject {
     func addSubscribers() {
         dataService.$recipes
             .sink { [weak self] (returnedRecipes) in
-                self?.dataArray = returnedRecipes
+                self?.dataArray.append(contentsOf: returnedRecipes)
             }
             .store(in: &cancellables)
     }

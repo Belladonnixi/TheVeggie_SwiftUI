@@ -24,16 +24,16 @@ struct HomeAPIView: View {
         
         NavigationView {
             List {
-                ForEach(vm.dataArray) { model in
+                ForEach(vm.dataArray, id: \.label) { model in
                     
-//                        VStack {
-//                            RoundedRectangleImage(image: Image("ella-olsson-6UxD0NzDywI-unsplash"))
-//                                .frame(width: 160, height: 160)
-//                                .aspectRatio(contentMode: .fit)
+                        VStack {
+                            RoundedRectangleImage(image: Image(""))
+                                .frame(width: 160, height: 160)
+                                .aspectRatio(contentMode: .fit)
                             
-                            Text(model.label!)
+                            Text(model.label)
                         
-//                    }
+                    }
                 }
             }
             .navigationBarTitleDisplayMode(.automatic)
