@@ -16,6 +16,11 @@ struct HomeAPIView: View {
     @State var searchQuery = ""
     @StateObject var vm = HomeApiViewmodel()
     
+    
+    let backgroundGradient = LinearGradient(
+        colors: [Color.yellow, Color.orange],
+        startPoint: .top, endPoint: .bottom)
+    
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
     }
@@ -25,9 +30,9 @@ struct HomeAPIView: View {
         NavigationView {
             List {
                 ForEach(vm.dataArray, id: \.label) { model in
-                    
-                     HomeApiRecipeCard(model: model)
+                     HomeApiRecipeRow(model: model)
                 }
+                .listRowBackground(backgroundGradient)
             }
             .navigationBarTitleDisplayMode(.automatic)
             .navigationTitle("The Veggie")

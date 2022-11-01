@@ -100,3 +100,4 @@ enum MealType: String, Codable {
 // MARK: - WelcomeLinks
 struct WelcomeLinks: Codable {
 }
+

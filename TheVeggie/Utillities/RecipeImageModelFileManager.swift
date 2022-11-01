@@ -69,7 +69,4 @@ class RecipeImageModelFileManager {
         }
         return UIImage(contentsOfFile: url.path)
     }
-    
-    
 }
-

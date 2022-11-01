@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1D305F9A28FD298F00EE3FDF /* TheVeggieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305F9928FD298F00EE3FDF /* TheVeggieApp.swift */; };
-		1D305F9C28FD298F00EE3FDF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305F9B28FD298F00EE3FDF /* ContentView.swift */; };
 		1D305F9E28FD299100EE3FDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D305F9D28FD299100EE3FDF /* Assets.xcassets */; };
 		1D305FA128FD299100EE3FDF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D305FA028FD299100EE3FDF /* Preview Assets.xcassets */; };
 		1D305FA628FD299100EE3FDF /* TheVeggie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FA428FD299100EE3FDF /* TheVeggie.xcdatamodeld */; };
@@ -26,7 +25,7 @@
 		1D5FAF4E2902C5C6004F28C3 /* HomeAPIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5FAF4D2902C5C6004F28C3 /* HomeAPIViewModel.swift */; };
 		1D676A3728FDB4DF00449823 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D676A3628FDB4DF00449823 /* CoreDataManager.swift */; };
 		1D676A3A28FEDE8700449823 /* HomeAPIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D676A3928FEDE8700449823 /* HomeAPIView.swift */; };
-		1D676A3C28FEDF2700449823 /* HomeApiRecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D676A3B28FEDF2700449823 /* HomeApiRecipeCard.swift */; };
+		1D676A3C28FEDF2700449823 /* HomeApiRecipeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D676A3B28FEDF2700449823 /* HomeApiRecipeRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +48,6 @@
 /* Begin PBXFileReference section */
 		1D305F9628FD298F00EE3FDF /* TheVeggie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheVeggie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D305F9928FD298F00EE3FDF /* TheVeggieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheVeggieApp.swift; sourceTree = "<group>"; };
-		1D305F9B28FD298F00EE3FDF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1D305F9D28FD299100EE3FDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1D305FA028FD299100EE3FDF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1D305FA528FD299100EE3FDF /* TheVeggie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TheVeggie.xcdatamodel; sourceTree = "<group>"; };
@@ -69,7 +67,7 @@
 		1D5FAF4D2902C5C6004F28C3 /* HomeAPIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPIViewModel.swift; sourceTree = "<group>"; };
 		1D676A3628FDB4DF00449823 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		1D676A3928FEDE8700449823 /* HomeAPIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPIView.swift; sourceTree = "<group>"; };
-		1D676A3B28FEDF2700449823 /* HomeApiRecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeApiRecipeCard.swift; sourceTree = "<group>"; };
+		1D676A3B28FEDF2700449823 /* HomeApiRecipeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeApiRecipeRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,7 +187,6 @@
 		1D676A3028FDB16B00449823 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				1D305F9B28FD298F00EE3FDF /* ContentView.swift */,
 				1D676A3528FDB20900449823 /* Views */,
 			);
 			path = Presentation;
@@ -225,7 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				1D676A3928FEDE8700449823 /* HomeAPIView.swift */,
-				1D676A3B28FEDF2700449823 /* HomeApiRecipeCard.swift */,
+				1D676A3B28FEDF2700449823 /* HomeApiRecipeRow.swift */,
 				1D576ED42910159E00D39134 /* DownloadingImageView.swift */,
 			);
 			path = Home;
@@ -368,9 +365,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D676A3728FDB4DF00449823 /* CoreDataManager.swift in Sources */,
-				1D305F9C28FD298F00EE3FDF /* ContentView.swift in Sources */,
 				1D576EDB2910525B00D39134 /* RecipeImageModelCacheManager.swift in Sources */,
-				1D676A3C28FEDF2700449823 /* HomeApiRecipeCard.swift in Sources */,
+				1D676A3C28FEDF2700449823 /* HomeApiRecipeRow.swift in Sources */,
 				1D576ED72910174800D39134 /* ImageLoadingViewModel.swift in Sources */,
 				1D305FA628FD299100EE3FDF /* TheVeggie.xcdatamodeld in Sources */,
 				1D576ED929104D3100D39134 /* RecipeImageModelFileManager.swift in Sources */,
