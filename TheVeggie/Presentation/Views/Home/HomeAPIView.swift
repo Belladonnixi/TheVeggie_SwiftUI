@@ -33,6 +33,8 @@ struct HomeAPIView: View {
                      HomeApiRecipeRow(model: model)
                 }
                 .listRowBackground(backgroundGradient)
+                
+                Button("load more", action: vm.dataService.downloadData)
             }
             .navigationBarTitleDisplayMode(.automatic)
             .navigationTitle("The Veggie")
