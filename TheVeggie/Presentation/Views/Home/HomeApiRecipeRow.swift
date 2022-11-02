@@ -23,6 +23,9 @@ struct HomeApiRecipeRow: View {
             VStack(alignment: .leading) {
                 Text(model.label)
                     .font(.headline)
+                    .frame(height: 160)
+                    .lineLimit(5)
+                    .scaledToFit()
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }

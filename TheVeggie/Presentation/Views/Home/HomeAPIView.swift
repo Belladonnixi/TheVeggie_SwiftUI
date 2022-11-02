@@ -18,8 +18,8 @@ struct HomeAPIView: View {
     
     
     let backgroundGradient = LinearGradient(
-        colors: [Color.yellow, Color.orange],
-        startPoint: .top, endPoint: .bottom)
+        colors: [Color.green.opacity(0.4), Color.yellow.opacity(0.4), Color.orange.opacity(0.4)],
+        startPoint: .topLeading, endPoint: .bottomTrailing)
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]

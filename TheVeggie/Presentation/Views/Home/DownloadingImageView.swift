@@ -29,7 +29,7 @@ struct DownloadingImageView: View {
                     .background(Color.black.opacity(0.3))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 10).stroke(.teal, lineWidth: 2)
+                        RoundedRectangle(cornerRadius: 10).stroke(.white, lineWidth: 2)
                     )
                     .shadow(radius: 7)
             }
