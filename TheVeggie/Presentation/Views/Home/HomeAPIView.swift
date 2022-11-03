@@ -14,12 +14,7 @@ import SwiftUI
 struct HomeAPIView: View {
     
     @State var searchQuery = ""
-    @StateObject var vm = HomeApiViewmodel()
-    
-    
-    let backgroundGradient = LinearGradient(
-        colors: [Color.green.opacity(0.4), Color.yellow.opacity(0.4), Color.orange.opacity(0.4)],
-        startPoint: .topLeading, endPoint: .bottomTrailing)
+    @StateObject var vm = ApiViewmodel()
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
@@ -30,14 +25,20 @@ struct HomeAPIView: View {
         NavigationView {
             List {
                 ForEach(vm.dataArray, id: \.label) { model in
-                     HomeApiRecipeRow(model: model)
+                    NavigationLink {
+                        RecipeDetailView(recipe: model)
+                    } label: {
+                        HomeApiRecipeRow(recipe: model)
+                    }
                 }
-                .listRowBackground(backgroundGradient)
+                .listRowBackground(Color.primary.opacity(0.2))
                 
                 Button("load more", action: vm.dataService.downloadData)
             }
             .navigationBarTitleDisplayMode(.automatic)
             .navigationTitle("The Veggie")
+            .scrollContentBackground(.hidden)
+            .background(backgroundGradient)
         }
         .searchable(text: $searchQuery)
     }

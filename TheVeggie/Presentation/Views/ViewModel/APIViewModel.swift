@@ -11,15 +11,20 @@
 
 import Foundation
 import Combine
+import SwiftUI
+import WebKit
 
-class HomeApiViewmodel: ObservableObject {
+class ApiViewmodel: ObservableObject {
     
     @Published var dataArray: [Recipe] = []
     var cancellables = Set<AnyCancellable>()
 
     let dataService = RecipeModelDataService.instance
     
+    let webView: WKWebView
+    
     init() {
+        webView = WKWebView(frame: .zero)
         addSubscribers()
     }
     
@@ -30,4 +35,11 @@ class HomeApiViewmodel: ObservableObject {
             }
             .store(in: &cancellables)
     }
+    
+    func loadUrl(urlString: String) {
+           guard let url = URL(string: urlString) else {
+               return
+           }
+           webView.load(URLRequest(url: url))
+       }
 }
