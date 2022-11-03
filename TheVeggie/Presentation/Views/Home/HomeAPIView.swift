@@ -13,7 +13,6 @@ import SwiftUI
 
 struct HomeAPIView: View {
     
-    @State var searchQuery = ""
     @StateObject var vm = ApiViewmodel()
     
     init() {
@@ -40,7 +39,6 @@ struct HomeAPIView: View {
             .scrollContentBackground(.hidden)
             .background(backgroundGradient)
         }
-        .searchable(text: $searchQuery)
     }
 }
 

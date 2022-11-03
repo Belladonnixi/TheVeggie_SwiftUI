@@ -52,13 +52,12 @@ struct RecipeDetailView: View {
             
             if showWebView {
 
-                
                 Section("Original Recipe Source") {
                     RecipeWebView(webView: vm.webView)
                                 .onAppear {
                                     vm.loadUrl(urlString: recipe.url)
                                 }
-                        .frame(width:325,height: 600)
+                                .frame(width:325,height: 600)
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
             }
