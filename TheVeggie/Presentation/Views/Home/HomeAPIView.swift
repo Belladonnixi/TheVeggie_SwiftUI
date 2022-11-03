@@ -14,7 +14,7 @@ import SwiftUI
 struct HomeAPIView: View {
     
     @State var searchQuery = ""
-    @StateObject var vm = HomeApiViewmodel()
+    @StateObject var vm = ApiViewmodel()
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
@@ -25,7 +25,11 @@ struct HomeAPIView: View {
         NavigationView {
             List {
                 ForEach(vm.dataArray, id: \.label) { model in
-                     HomeApiRecipeRow(recipe: model)
+                    NavigationLink {
+                        RecipeDetailView(recipe: model)
+                    } label: {
+                        HomeApiRecipeRow(recipe: model)
+                    }
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
                 

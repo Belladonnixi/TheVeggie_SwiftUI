@@ -18,11 +18,6 @@ struct RecipeWebView: UIViewRepresentable {
     
     let webView: WKWebView
     
-    init() {
-        webView = WKWebView(frame: .zero)
-        webView.load(URLRequest(url: URL(string: "https://www.taste.com.au/recipes/lentils-crispy-brussel-sprouts-roasted-mushroom/782c78fa-d9b9-4505-b876-e3d6667b8b7e")!))
-    }
-    
     func makeUIView(context: Context) -> WKWebView {
         webView
     }
