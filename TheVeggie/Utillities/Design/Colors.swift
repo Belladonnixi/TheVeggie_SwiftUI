@@ -15,3 +15,7 @@ import SwiftUI
 let backgroundGradient = LinearGradient(
     colors: [Color.green.opacity(0.4), Color.yellow.opacity(0.4), Color.orange.opacity(0.4)],
     startPoint: .topLeading, endPoint: .bottomTrailing)
+
+struct CustomColor {
+    static let forestGreen = Color("ForestGreen")
+}

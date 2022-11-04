@@ -16,7 +16,7 @@ struct TheVeggieApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeAPIView()
+            ContentView()
         }
     }
 }
