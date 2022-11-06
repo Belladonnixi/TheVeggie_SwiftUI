@@ -25,7 +25,7 @@ struct HomeAPIView: View {
             List {
                 ForEach(vm.dataArray, id: \.label) { model in
                     NavigationLink {
-                        RecipeDetailView(recipe: model)
+                        ApiRecipeDetailView(recipe: model)
                     } label: {
                         HomeApiRecipeRow(recipe: model)
                     }

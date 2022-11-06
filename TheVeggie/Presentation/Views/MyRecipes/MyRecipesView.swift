@@ -13,6 +13,8 @@ import SwiftUI
 
 struct MyRecipesView: View {
     
+    @State private var addViewShown = false
+    @StateObject var vm = MyRecipeViewModel()
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
@@ -22,14 +24,14 @@ struct MyRecipesView: View {
         
         NavigationView {
             List {
-//                ForEach(vm.dataArray, id: \.label) { model in
-//                    NavigationLink {
-//                        RecipeDetailView(recipe: model)
-//                    } label: {
-//                        HomeApiRecipeRow(recipe: model)
-//                    }
-//                }
-//                .listRowBackground(Color.primary.opacity(0.2))
+                ForEach(vm.recipes) { recipe in
+                    NavigationLink {
+                        // TODO: - going to MyRecipesDetails 
+                    } label: {
+                        MyRecipeRow(entity: recipe)
+                    }
+                }
+                .listRowBackground(Color.primary.opacity(0.2))
                 
             }
             .navigationBarTitleDisplayMode(.automatic)
