@@ -30,6 +30,11 @@ struct MyRecipeRow: View {
                     .padding(EdgeInsets(top: 0.0, leading: 8.0, bottom: 0.0, trailing: 0.0))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            
+            if entity.isFavorite {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+            }
         }
     }
 }
