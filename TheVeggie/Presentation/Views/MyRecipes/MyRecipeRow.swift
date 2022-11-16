@@ -31,10 +31,10 @@ struct MyRecipeRow: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            if entity.isFavorite {
-                Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
-            }
+//            if entity.isFavorite {
+//                Image(systemName: "star.fill")
+//                    .foregroundColor(.yellow)
+//            }
         }
     }
 }

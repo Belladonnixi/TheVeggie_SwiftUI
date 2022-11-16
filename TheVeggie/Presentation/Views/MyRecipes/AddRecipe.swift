@@ -100,6 +100,20 @@ struct AddRecipe: View {
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
                 
+                Button(action: {
+                    print("Background color")
+                }, label: {
+                    HStack {
+                        Spacer()
+                        Label("Save to my recipes", systemImage: "square.and.arrow.down")
+                        Spacer()
+                    }
+                        
+                })
+                .padding(8)
+                .foregroundColor(Color.white)
+                .listRowBackground(CustomColor.forestGreen)
+                
             }
             .scrollContentBackground(.hidden)
             .background(backgroundGradient)

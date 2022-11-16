@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-struct ApiRecipeDetailView: View {
+struct RecipeDetailView: View {
     
     var recipe: Recipe
     
@@ -34,20 +34,6 @@ struct ApiRecipeDetailView: View {
             }
             .listRowBackground(Color.primary.opacity(0.2))
             
-            Button(action: {
-                print("Background color")
-            }, label: {
-                HStack {
-                    Spacer()
-                    Label("Save to my recipes", systemImage: "heart.fill")
-                    Spacer()
-                }
-                    
-            })
-            .padding(8)
-            .foregroundColor(Color.white)
-            .listRowBackground(CustomColor.forestGreen)
-            
             Section("Ingredients") {
                 ForEach(recipe.ingredients,id: \.foodID ) { ingredient in
                     Text(ingredient.text)
@@ -55,7 +41,7 @@ struct ApiRecipeDetailView: View {
             }
             .listRowBackground(Color.primary.opacity(0.2))
             
-            Section("preparation") {
+            Section("meal preparation") {
                 VStack(alignment: .leading) {
                     Text("Meal preparation instructions only at source website")
                     
@@ -66,19 +52,16 @@ struct ApiRecipeDetailView: View {
             
             if showWebView {
 
+                
                 Section("Original Recipe Source") {
                     RecipeWebView(webView: vm.webView)
                                 .onAppear {
                                     vm.loadUrl(urlString: recipe.url)
                                 }
-                                .frame(width:325,height: 600)
+                        .frame(width:325,height: 600)
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
             }
-            
-            
-            
-            
         }
         .scrollContentBackground(.hidden)
         .background(backgroundGradient)
@@ -90,6 +73,6 @@ struct ApiRecipeDetailView: View {
 
 struct RecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ApiRecipeDetailView(recipe: Recipe(uri: "uri here", label: "some dish", image: "https://via.placeholder.com/600/92c952", source: "String", url: "https://www.taste.com.au/recipes/lentils-crispy-brussel-sprouts-roasted-mushroom/782c78fa-d9b9-4505-b876-e3d6667b8b7e", shareAs: "redipe", yield: 4, ingredients: [Ingredient(text: "some", quantity: 2.00, measure: "spoon", food: "some food", weight: 32.00, foodCategory: "something", foodID: "some id", image: "some image")], calories: 35.00, totalWeight: 4878.00, totalTime: 85, cuisineType: ["american"], mealType: [MealType.lunchDinner], dishType: ["some"]))
+        RecipeDetailView(recipe: Recipe(uri: "uri here", label: "some dish", image: "https://via.placeholder.com/600/92c952", source: "String", url: "https://www.taste.com.au/recipes/lentils-crispy-brussel-sprouts-roasted-mushroom/782c78fa-d9b9-4505-b876-e3d6667b8b7e", shareAs: "redipe", yield: 4, ingredients: [Ingredient(text: "some", quantity: 2.00, measure: "spoon", food: "some food", weight: 32.00, foodCategory: "something", foodID: "some id", image: "some image")], calories: 35.00, totalWeight: 4878.00, totalTime: 85, cuisineType: ["american"], mealType: [MealType.lunchDinner], dishType: ["some"]))
     }
 }

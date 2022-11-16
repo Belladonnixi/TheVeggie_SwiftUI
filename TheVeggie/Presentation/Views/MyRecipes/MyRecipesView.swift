@@ -32,7 +32,6 @@ struct MyRecipesView: View {
                     }
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
-                
             }
             .navigationBarTitleDisplayMode(.automatic)
             .navigationTitle("My Recipes")
