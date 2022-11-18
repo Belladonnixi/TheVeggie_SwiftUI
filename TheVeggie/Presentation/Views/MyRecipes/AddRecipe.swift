@@ -43,7 +43,8 @@ struct AddRecipe: View {
                         RectangleImage(image: selectedImage == nil ? Image(systemName: "photo.artframe") : Image(uiImage: self.selectedImage!))
                             .frame(width: 230, height: 200)
                             .aspectRatio(contentMode: .fit)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(CustomColor.lightGray)
+                            .padding(8)
                         
                         Button {
                             withAnimation {
@@ -100,6 +101,14 @@ struct AddRecipe: View {
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
                 
+                Section("Recipe Source") {
+                    VStack {
+                        TextField("Recipe Source", text: $source, prompt: Text("Recipe Source"))
+                        TextField("Recipe Source URL", text: $sourceUrl, prompt: Text("Recipe Source URL"))
+                    }
+                }
+                .listRowBackground(Color.primary.opacity(0.2))
+                
                 Button(action: {
                     print("Background color")
                 }, label: {
@@ -119,11 +128,6 @@ struct AddRecipe: View {
             .background(backgroundGradient)
             .navigationBarTitleDisplayMode(.automatic)
             .navigationTitle("Add Recipe")
-            .toolbar {
-                Button("Save") {
-                    
-                }
-            }
         }
     }
 }

@@ -37,6 +37,11 @@ struct MyRecipesView: View {
             .navigationTitle("My Recipes")
             .scrollContentBackground(.hidden)
             .background(backgroundGradient)
+            .toolbar {
+                Button("Favorites") {
+                    print("Favorite Button Tapped")
+                }
+            }
         }
     }
 }

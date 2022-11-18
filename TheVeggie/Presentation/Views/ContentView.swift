@@ -12,6 +12,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     @State private var selection: Tab = .apiRecipes
     
     enum Tab {
@@ -19,7 +20,7 @@ struct ContentView: View {
         case myRecipes
         case addRecipe
     }
-    
+
     var body: some View {
         TabView(selection: $selection) {
             HomeAPIView()

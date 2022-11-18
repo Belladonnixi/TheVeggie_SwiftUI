@@ -11,7 +11,7 @@
 import Foundation
 
 // MARK: - Welcome
-struct Welcome: Codable {
+struct Welcome: Decodable {
     let from, to, count: Int
     let links: WelcomeLinks
     let hits: [Hit]
@@ -24,7 +24,7 @@ struct Welcome: Codable {
 }
 
 // MARK: - Hit
-struct Hit: Codable {
+struct Hit: Decodable {
     let recipe: Recipe
     let links: HitLinks
 
@@ -35,7 +35,7 @@ struct Hit: Codable {
 }
 
 // MARK: - HitLinks
-struct HitLinks: Codable {
+struct HitLinks: Decodable {
     let linksSelf: SelfClass
 
     enum CodingKeys: String, CodingKey {
@@ -44,17 +44,17 @@ struct HitLinks: Codable {
 }
 
 // MARK: - SelfClass
-struct SelfClass: Codable {
+struct SelfClass: Decodable {
     let href: String
     let title: Title
 }
 
-enum Title: String, Codable {
+enum Title: String, Decodable {
     case titleSelf = "Self"
 }
 
 // MARK: - Recipe
-struct Recipe: Codable {
+struct Recipe: Decodable {
     let uri: String
     let label: String
     let image: String
@@ -69,10 +69,11 @@ struct Recipe: Codable {
     let cuisineType: [String]
     let mealType: [MealType]
     let dishType: [String]?
+    
 }
 
 // MARK: - Ingredient
-struct Ingredient: Codable {
+struct Ingredient: Decodable {
     let text: String
     let quantity: Double
     let measure: String?
@@ -89,7 +90,7 @@ struct Ingredient: Codable {
     }
 }
 
-enum MealType: String, Codable {
+enum MealType: String, Decodable {
     case breakfast = "breakfast"
     case brunch = "brunch"
     case lunchDinner = "lunch/dinner"
@@ -98,6 +99,6 @@ enum MealType: String, Codable {
 }
 
 // MARK: - WelcomeLinks
-struct WelcomeLinks: Codable {
+struct WelcomeLinks: Decodable {
 }
 

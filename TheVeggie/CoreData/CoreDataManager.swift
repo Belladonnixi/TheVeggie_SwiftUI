@@ -28,7 +28,7 @@ class CoreDataManager {
         context = container.viewContext
     }
     
-    func save() {
+    private func save() {
         do {
             try context.save()
             print("Saved successfully!")
@@ -36,4 +36,21 @@ class CoreDataManager {
             print("Error saving Core Data. \(error.localizedDescription)")
         }
     }
+    
+    private func delete(entity: RecipeEntity) {
+        context.delete(entity)
+        updateView()
+    }
+    
+    private func updateView() {
+        save()
+        
+    }
+    
+//    func getRecipes() {
+//        let request = NSFetchRequest<RecipeEntity>(entityName: "RecipeEntity")
+//        do {
+//            
+//        }
+//    }
 }

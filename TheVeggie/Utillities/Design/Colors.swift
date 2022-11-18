@@ -18,4 +18,5 @@ let backgroundGradient = LinearGradient(
 
 struct CustomColor {
     static let forestGreen = Color("ForestGreen")
+    static let lightGray = Color("LightGray")
 }
