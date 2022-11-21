@@ -29,6 +29,9 @@ struct AddRecipe: View {
     
     //Ingredients
     
+    // webview
+    @State private var showWebView = false
+    @State private var showToggle = false
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
@@ -105,12 +108,13 @@ struct AddRecipe: View {
                     VStack {
                         TextField("Recipe Source", text: $source, prompt: Text("Recipe Source"))
                         TextField("Recipe Source URL", text: $sourceUrl, prompt: Text("Recipe Source URL"))
+                        Toggle("Show Original Recipe Instructions", isOn: $showWebView)
                     }
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
                 
                 Button(action: {
-                    print("Background color")
+                    print("Save to my recipes")
                 }, label: {
                     HStack {
                         Spacer()
