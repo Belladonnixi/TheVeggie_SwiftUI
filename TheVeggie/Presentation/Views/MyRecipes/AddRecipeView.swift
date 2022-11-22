@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-struct AddRecipe: View {
+struct AddRecipeView: View {
     
     // ImagePicker
     @Environment(\.managedObjectContext) private var viewContext
@@ -29,6 +29,9 @@ struct AddRecipe: View {
     
     //Ingredients
     @State var ingredients = [IngredientEntity]()
+    @State private var newIngredientName = ""
+    @State private var newIngredientQuantity = ""
+    @State private var newIngredientUnit = ""
     
     // webview
     @State private var showWebView = false
@@ -71,26 +74,50 @@ struct AddRecipe: View {
                             ImagePicker(selectedImage: $selectedImage)
                         }
                     }
-                    TextField("Recipe title", text: $title, prompt: Text("Recipe Title"))
+                    TextField("Recipe title", text: $title, prompt: Text("Recipe Title..."))
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
                 
                 Section("Category") {
-                    TextField("Category", text: $category, prompt: Text("Category"))
+                    TextField("Category", text: $category, prompt: Text("Category..."))
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
                 
                 Section("Ingredients") {
-                    List {
-                        ZStack(alignment:. topLeading) {
-                            TextEditor(text: $instruction)
-                                .foregroundColor(Color.black)
-                                .background(Color("textBackground"))
-                                .cornerRadius(10.0)
-                                .frame(height: 150.0)
-                        }
-                        .padding(.bottom)
+                    TextField("Ingredient", text: $newIngredientName, prompt: Text("Ingredient..."))
+                    HStack {
+                        TextField("Quantity", text: $newIngredientQuantity, prompt: Text("Quantity..."))
+                        TextField("Unit", text: $newIngredientUnit, prompt: Text("Unit..."))
                     }
+                    Button {
+                        
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Label("Add Ingredient", systemImage: "plus")
+                            Spacer()
+                        }
+                    }
+                    .foregroundColor(newIngredientName.isEmpty ? Color.gray : Color.white)
+                    .padding(8)
+                    .background(newIngredientName.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .disabled(newIngredientName.isEmpty)
+                    
+                    List {
+                        ForEach(ingredients) { ingredient in
+                            VStack {
+                                Text(ingredient.name!)
+                                HStack {
+                                    
+                                }
+                            }
+                        }
+//                        .onDelete(perform: deleteItems)
+                    }
+//                    .frame(height: 200.0)
+                    .listStyle(.plain)
+                    
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
                 
@@ -110,8 +137,8 @@ struct AddRecipe: View {
                 
                 Section("Recipe Source") {
                     VStack {
-                        TextField("Recipe Source", text: $source, prompt: Text("Recipe Source"))
-                        TextField("Recipe Source URL", text: $sourceUrl, prompt: Text("Recipe Source URL"))
+                        TextField("Recipe Source", text: $source, prompt: Text("Recipe Source..."))
+                        TextField("Recipe Source URL", text: $sourceUrl, prompt: Text("Recipe Source URL..."))
                         Toggle("Show Original Recipe Instructions", isOn: $showWebView)
                     }
                 }
@@ -142,6 +169,6 @@ struct AddRecipe: View {
 
 struct AddRecipe_Previews: PreviewProvider {
     static var previews: some View {
-        AddRecipe()
+        AddRecipeView()
     }
 }

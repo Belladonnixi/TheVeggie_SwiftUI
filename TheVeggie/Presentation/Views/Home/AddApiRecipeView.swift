@@ -25,7 +25,7 @@ struct AddApiRecipeView: View {
     @State var imageKey: String = ""
     
     //Ingredients
-    @State var ingredients = [Ingredient]()
+    @State var ingredients = [IngredientEntity]()
     
     // webview
     @State private var showWebView = false
@@ -100,6 +100,7 @@ struct AddApiRecipeView: View {
             
             Button(action: {
                 print("Save to my recipes")
+                
             }, label: {
                 HStack {
                     Spacer()
@@ -123,8 +124,6 @@ struct AddApiRecipeView: View {
             sourceUrl = recipe.url
             imageKey = "\(recipe.label)"
             imageUrl = recipe.image
-            ingredients = recipe.ingredients
-            
         }
     }
 }
