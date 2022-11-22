@@ -28,10 +28,14 @@ struct AddRecipe: View {
     @State var sourceUrl: String = ""
     
     //Ingredients
+    @State var ingredients = [IngredientEntity]()
     
     // webview
     @State private var showWebView = false
     @State private var showToggle = false
+    
+    // WebView
+    @StateObject var vm = ApiWebViewViewModel()
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]

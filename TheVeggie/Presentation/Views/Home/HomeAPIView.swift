@@ -13,7 +13,7 @@ import SwiftUI
 
 struct HomeAPIView: View {
     
-    @StateObject var vm = ApiViewmodel()
+    @StateObject var vm = ApiWebViewViewModel()
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]

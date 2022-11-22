@@ -14,7 +14,7 @@ import Combine
 import SwiftUI
 import WebKit
 
-class ApiViewmodel: ObservableObject {
+class ApiWebViewViewModel: ObservableObject {
     
     @Published var dataArray: [Recipe] = []
     var cancellables = Set<AnyCancellable>()
@@ -22,6 +22,7 @@ class ApiViewmodel: ObservableObject {
     let dataService = RecipeModelDataService.instance
     
     let webView: WKWebView
+    
     
     init() {
         webView = WKWebView(frame: .zero)
@@ -40,6 +41,7 @@ class ApiViewmodel: ObservableObject {
            guard let url = URL(string: urlString) else {
                return
            }
-           webView.load(URLRequest(url: url))
+        let urlRequest = URLRequest(url: url)
+        webView.load(urlRequest)
        }
 }

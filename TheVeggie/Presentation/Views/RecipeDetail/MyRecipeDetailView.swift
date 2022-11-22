@@ -12,9 +12,10 @@
 import SwiftUI
 
 struct MyRecipeDetailView: View {
+    
     var recipe: Recipe
     
-    @StateObject var vm = ApiViewmodel()
+    @StateObject var vm = ApiWebViewViewModel()
     
     @State private var showWebView = false
     
@@ -25,7 +26,7 @@ struct MyRecipeDetailView: View {
                 VStack {
                     DownloadingImageView(url: recipe.image, key: "\(recipe.label)")
                         .frame(width: 325, height: 300)
-                    .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fit)
                     
                     Text(recipe.label)
                         .font(.title)

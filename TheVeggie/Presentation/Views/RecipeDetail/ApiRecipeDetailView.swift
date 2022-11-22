@@ -15,9 +15,13 @@ struct ApiRecipeDetailView: View {
     
     var recipe: Recipe
     
-    @StateObject var vm = ApiViewmodel()
+    @StateObject var vm = ApiWebViewViewModel()
     
     @State private var showWebView = false
+    
+    @State private var path = NavigationPath()
+    
+    
     
     var body: some View {
         
@@ -26,7 +30,7 @@ struct ApiRecipeDetailView: View {
                 VStack {
                     DownloadingImageView(url: recipe.image, key: "\(recipe.label)")
                         .frame(width: 325, height: 300)
-                    .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fit)
                     
                     Text(recipe.label)
                         .font(.title)
@@ -34,19 +38,21 @@ struct ApiRecipeDetailView: View {
             }
             .listRowBackground(Color.primary.opacity(0.2))
             
-            Button(action: {
-                print("Background color")
-            }, label: {
+            
+            NavigationLink {
+                AddApiRecipeView(recipe: recipe)
+            } label: {
                 HStack {
                     Spacer()
                     Label("Save to my recipes", systemImage: "heart.fill")
                     Spacer()
                 }
-                    
-            })
+            }
             .padding(8)
             .foregroundColor(Color.white)
             .listRowBackground(CustomColor.forestGreen)
+            
+            
             
             Section("Ingredients") {
                 ForEach(recipe.ingredients,id: \.foodID ) { ingredient in
@@ -65,28 +71,26 @@ struct ApiRecipeDetailView: View {
             .listRowBackground(Color.primary.opacity(0.2))
             
             if showWebView {
-
+                
                 Section("Original Recipe Source") {
                     RecipeWebView(webView: vm.webView)
-                                .onAppear {
-                                    vm.loadUrl(urlString: recipe.url)
-                                }
-                                .frame(width:325,height: 600)
+                        .onAppear {
+                            vm.loadUrl(urlString: recipe.url)
+                        }
+                        .frame(width:325,height: 600)
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
             }
-            
-            
-            
             
         }
         .scrollContentBackground(.hidden)
         .background(backgroundGradient)
         .navigationBarTitleDisplayMode(.automatic)
         .navigationTitle("Recipe Details")
-
     }
+    
 }
+
 
 struct RecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
