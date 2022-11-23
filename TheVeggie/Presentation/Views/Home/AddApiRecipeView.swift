@@ -23,6 +23,7 @@ struct AddApiRecipeView: View {
     @State var sourceUrl: String = ""
     @State var imageUrl: String = ""
     @State var imageKey: String = ""
+    @State var totalTime: String = ""
     
     //Ingredients
     @State var ingredients = [IngredientEntity]()
@@ -51,6 +52,11 @@ struct AddApiRecipeView: View {
             
             Section("Category") {
                 TextField("Category", text: $category, prompt: Text("Category"))
+            }
+            .listRowBackground(Color.primary.opacity(0.2))
+            
+            Section("Total Time") {
+                TextField("Total Time", text: $totalTime, prompt: Text("Total Time..."))
             }
             .listRowBackground(Color.primary.opacity(0.2))
             
@@ -96,6 +102,8 @@ struct AddApiRecipeView: View {
                         .frame(width:325,height: 600)
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .padding(8)
             }  
             
             Button(action: {
@@ -124,6 +132,7 @@ struct AddApiRecipeView: View {
             sourceUrl = recipe.url
             imageKey = "\(recipe.label)"
             imageUrl = recipe.image
+            totalTime = "\(recipe.totalTime) min"
         }
     }
 }

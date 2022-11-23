@@ -13,6 +13,8 @@ import SwiftUI
 
 struct AddRecipeView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     // ImagePicker
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentation
@@ -26,12 +28,13 @@ struct AddRecipeView: View {
     @State var instruction: String = ""
     @State var source: String = ""
     @State var sourceUrl: String = ""
+    @State var totalTime: String = ""
     
     //Ingredients
     @State var ingredients = [IngredientEntity]()
     @State private var newIngredientName = ""
     @State private var newIngredientQuantity = ""
-    @State private var newIngredientUnit = ""
+    @State private var newIngredientMeasure = ""
     
     // webview
     @State private var showWebView = false
@@ -39,6 +42,8 @@ struct AddRecipeView: View {
     
     // WebView
     @StateObject var vm = ApiWebViewViewModel()
+    
+    @StateObject var addVm = AddRecipeViewModel()
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
@@ -83,13 +88,30 @@ struct AddRecipeView: View {
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
                 
+                Section("Total Time") {
+                    TextField("Total Time", text: $totalTime, prompt: Text("Total Time..."))
+                }
+                .listRowBackground(Color.primary.opacity(0.2))
+                
                 Section("Ingredients") {
                     TextField("Ingredient", text: $newIngredientName, prompt: Text("Ingredient..."))
                     HStack {
                         TextField("Quantity", text: $newIngredientQuantity, prompt: Text("Quantity..."))
-                        TextField("Unit", text: $newIngredientUnit, prompt: Text("Unit..."))
+                        TextField("Unit", text: $newIngredientMeasure, prompt: Text("Unit..."))
                     }
                     Button {
+                        let values = IngredientValues(
+                            name: newIngredientName,
+                            text: "\(newIngredientQuantity) \(newIngredientMeasure) \(newIngredientName)",
+                            measure: newIngredientMeasure,
+                            quantity: Float(newIngredientQuantity) ?? 0,
+                            weight: 0.00)
+                        
+                        addVm.addIngredient(ingredientValues: values)
+                        
+                        newIngredientName = ""
+                        newIngredientMeasure = ""
+                        newIngredientQuantity = ""
                         
                     } label: {
                         HStack {
@@ -105,23 +127,17 @@ struct AddRecipeView: View {
                     .disabled(newIngredientName.isEmpty)
                     
                     List {
-                        ForEach(ingredients) { ingredient in
-                            VStack {
-                                Text(ingredient.name!)
-                                HStack {
-                                    
-                                }
-                            }
+                        ForEach(addVm.ingredients) { ingredient in
+                            Text(ingredient.text!)
                         }
-//                        .onDelete(perform: deleteItems)
+                        .onDelete(perform: addVm.deleteItems)
                     }
-//                    .frame(height: 200.0)
-                    .listStyle(.plain)
+                  
                     
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
                 
-                Section("Preparation") {
+                Section("Preparation...") {
                     List {
                         ZStack(alignment:. topLeading) {
                             TextEditor(text: $instruction)
@@ -139,13 +155,41 @@ struct AddRecipeView: View {
                     VStack {
                         TextField("Recipe Source", text: $source, prompt: Text("Recipe Source..."))
                         TextField("Recipe Source URL", text: $sourceUrl, prompt: Text("Recipe Source URL..."))
-                        Toggle("Show Original Recipe Instructions", isOn: $showWebView)
+                        if !sourceUrl.isEmpty {
+                            Toggle("Show Original Recipe Instructions", isOn: $showWebView)
+                        }
+                        
                     }
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
                 
+                if showWebView {
+                    
+                    Section("Original Recipe Source") {
+                        RecipeWebView(webView: vm.webView)
+                            .onAppear {
+                                vm.loadUrl(urlString: sourceUrl)
+                            }
+                            .frame(width:325,height: 600)
+                    }
+                    .listRowBackground(Color.primary.opacity(0.2))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .padding(8)
+                } 
+                
                 Button(action: {
-                    print("Save to my recipes")
+                    let value = RecipeValues(
+                        title: title,
+                        category: category,
+                        image: selectedImage ?? UIImage(systemName: "photo.artframe"),
+                        imageUrl: "",
+                        instruction: instruction,
+                        source: source,
+                        sourceUrl: sourceUrl,
+                        totalTime: Int64(totalTime) ?? 0
+                    )
+                    addVm.addRecipe(recipeValues: value)
+                    dismiss()
                 }, label: {
                     HStack {
                         Spacer()

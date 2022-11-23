@@ -52,7 +52,10 @@ struct ApiRecipeDetailView: View {
             .foregroundColor(Color.white)
             .listRowBackground(CustomColor.forestGreen)
             
-            
+            Section("Total Time") {
+                Text("\(recipe.totalTime) min")
+            }
+            .listRowBackground(Color.primary.opacity(0.2))
             
             Section("Ingredients") {
                 ForEach(recipe.ingredients,id: \.foodID ) { ingredient in
@@ -78,6 +81,8 @@ struct ApiRecipeDetailView: View {
                             vm.loadUrl(urlString: recipe.url)
                         }
                         .frame(width:325,height: 600)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .padding(8)
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
             }

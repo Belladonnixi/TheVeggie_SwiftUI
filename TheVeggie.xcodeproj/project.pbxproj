@@ -38,6 +38,8 @@
 		1D6CDA852918F18F001408CD /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6CDA842918F18F001408CD /* FavoriteButton.swift */; };
 		1DCAD7AF292B77690009532F /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAD7AE292B77690009532F /* SplashScreenView.swift */; };
 		1DCAD7B1292BAB7B0009532F /* AddApiRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAD7B0292BAB7B0009532F /* AddApiRecipeView.swift */; };
+		1DCAD7B3292D04A40009532F /* RecipeValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAD7B2292D04A40009532F /* RecipeValues.swift */; };
+		1DCAD7B5292D05CD0009532F /* IngredientValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCAD7B4292D05CD0009532F /* IngredientValues.swift */; };
 		1DFA1EE12912A855000C98D8 /* ApiRecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA1EE02912A855000C98D8 /* ApiRecipeDetailView.swift */; };
 		1DFA1EE42912A8FC000C98D8 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA1EE32912A8FC000C98D8 /* Colors.swift */; };
 /* End PBXBuildFile section */
@@ -95,6 +97,8 @@
 		1D6CDA842918F18F001408CD /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		1DCAD7AE292B77690009532F /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		1DCAD7B0292BAB7B0009532F /* AddApiRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddApiRecipeView.swift; sourceTree = "<group>"; };
+		1DCAD7B2292D04A40009532F /* RecipeValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeValues.swift; sourceTree = "<group>"; };
+		1DCAD7B4292D05CD0009532F /* IngredientValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientValues.swift; sourceTree = "<group>"; };
 		1DFA1EE02912A855000C98D8 /* ApiRecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRecipeDetailView.swift; sourceTree = "<group>"; };
 		1DFA1EE32912A8FC000C98D8 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -259,6 +263,8 @@
 			children = (
 				1D305FA428FD299100EE3FDF /* TheVeggie.xcdatamodeld */,
 				1D50066629014D6800530D8F /* RecipeModel.swift */,
+				1DCAD7B2292D04A40009532F /* RecipeValues.swift */,
+				1DCAD7B4292D05CD0009532F /* IngredientValues.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -437,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DCAD7B5292D05CD0009532F /* IngredientValues.swift in Sources */,
 				1D46F726291565AD00CC28CF /* MyRecipeViewModel.swift in Sources */,
 				1D53EB842918235800AC633A /* ImagePicker.swift in Sources */,
 				1D676A3728FDB4DF00449823 /* CoreDataManager.swift in Sources */,
@@ -448,6 +455,7 @@
 				1D676A3C28FEDF2700449823 /* HomeApiRecipeRow.swift in Sources */,
 				1DCAD7AF292B77690009532F /* SplashScreenView.swift in Sources */,
 				1D576ED72910174800D39134 /* ImageLoadingViewModel.swift in Sources */,
+				1DCAD7B3292D04A40009532F /* RecipeValues.swift in Sources */,
 				1D305FA628FD299100EE3FDF /* TheVeggie.xcdatamodeld in Sources */,
 				1D576ED929104D3100D39134 /* RecipeImageModelFileManager.swift in Sources */,
 				1D5FAF4C2902C3F1004F28C3 /* ApiKeys.swift in Sources */,

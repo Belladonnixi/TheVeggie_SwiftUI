@@ -28,7 +28,7 @@ class CoreDataManager {
         context = container.viewContext
     }
     
-    private func save() {
+    func save() {
         do {
             try context.save()
             print("Saved successfully!")
@@ -37,12 +37,12 @@ class CoreDataManager {
         }
     }
     
-    private func delete(entity: RecipeEntity) {
+    func delete(entity: RecipeEntity) {
         context.delete(entity)
         updateView()
     }
     
-    private func updateView() {
+    func updateView() {
         save()
         
     }
