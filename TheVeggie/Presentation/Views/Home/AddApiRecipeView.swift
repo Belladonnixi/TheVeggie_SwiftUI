@@ -28,9 +28,6 @@ struct AddApiRecipeView: View {
     @State var totalTime: String = ""
     @State var image: UIImage?
     
-    //Ingredients
-    @State var ingredients = [Ingredient]()
-    
     // webview
     @State private var showWebView = false
     @State private var showToggle = false
@@ -125,7 +122,7 @@ struct AddApiRecipeView: View {
         .safeAreaInset(edge: .bottom) {
             Button(action: {
                 
-                for ingredient in ingredients {
+                for ingredient in recipe.ingredients {
                     let value = IngredientValues(
                         name: ingredient.food,
                         text: ingredient.text,
