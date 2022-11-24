@@ -42,6 +42,9 @@ struct AddRecipeView: View {
     
     @StateObject var addVm = AddRecipeViewModel()
     
+    // saved Alert
+    @State private var presentAlert = false
+    
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
     }
@@ -110,7 +113,6 @@ struct AddRecipeView: View {
                         newIngredientMeasure = ""
                         newIngredientQuantity = ""
                         
-                        
                     } label: {
                         HStack {
                             Spacer()
@@ -173,8 +175,14 @@ struct AddRecipeView: View {
                     .listRowBackground(Color.primary.opacity(0.2))
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                     .padding(8)
-                } 
-                
+                }
+
+            }
+            .scrollContentBackground(.hidden)
+            .background(backgroundGradient)
+            .navigationBarTitleDisplayMode(.automatic)
+            .navigationTitle("Add Recipe")
+            .safeAreaInset(edge: .bottom) {
                 Button(action: {
                     let value = RecipeValues(
                         title: title,
@@ -200,6 +208,9 @@ struct AddRecipeView: View {
                     source = ""
                     sourceUrl = ""
                     totalTime = ""
+                    
+                    presentAlert = true
+                    
                 }, label: {
                     HStack {
                         Spacer()
@@ -208,16 +219,16 @@ struct AddRecipeView: View {
                     }
                         
                 })
-                .padding(8)
-                .foregroundColor(Color.white)
-                .listRowBackground(CustomColor.forestGreen)
-                
+                .padding(.vertical)
+                .frame(width: 355)
+                .alert("Recipe saved", isPresented: $presentAlert, actions: {})
+                .foregroundColor(title.isEmpty ? Color.gray : Color.white)
+                .background(title.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
+                .disabled(title.isEmpty)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .padding( .bottom)
                 
             }
-            .scrollContentBackground(.hidden)
-            .background(backgroundGradient)
-            .navigationBarTitleDisplayMode(.automatic)
-            .navigationTitle("Add Recipe")
         }
     }
 }
