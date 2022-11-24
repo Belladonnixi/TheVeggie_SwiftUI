@@ -18,6 +18,7 @@ struct MyRecipesView: View {
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
+
     }
     
     var body: some View {
@@ -40,9 +41,14 @@ struct MyRecipesView: View {
             .scrollContentBackground(.hidden)
             .background(backgroundGradient)
             .toolbar {
-                Button("Favorites") {
+                Button {
                     print("Favorite Button Tapped")
+                } label: {
+                    Label("Favorites", systemImage: "star")
                 }
+            }
+            .onAppear {
+                vm.getRecipes()
             }
         }
     }
