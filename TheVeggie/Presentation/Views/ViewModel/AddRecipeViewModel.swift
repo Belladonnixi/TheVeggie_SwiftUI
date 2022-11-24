@@ -17,7 +17,6 @@ class AddRecipeViewModel: ObservableObject {
     
     let manager = CoreDataManager.instance
     
-    @Published var recipes = [RecipeEntity]()
     @Published var ingredients = [IngredientEntity]()
     
     func addRecipe(recipeValues: RecipeValues) {
