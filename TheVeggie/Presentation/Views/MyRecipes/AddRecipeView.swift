@@ -196,12 +196,8 @@ struct AddRecipeView: View {
                     )
                     addVm.addRecipe(recipeValues: value)
                     
-                    newIngredientName = ""
-                    newIngredientMeasure = ""
-                    newIngredientQuantity = ""
                     selectedImage = nil
                     addVm.ingredients = []
-                    
                     title = ""
                     category = ""
                     instruction = ""
