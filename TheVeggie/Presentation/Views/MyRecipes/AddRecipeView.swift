@@ -13,8 +13,6 @@ import SwiftUI
 
 struct AddRecipeView: View {
     
-    @Environment(\.dismiss) private var dismiss
-    
     // ImagePicker
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentation
@@ -31,7 +29,6 @@ struct AddRecipeView: View {
     @State var totalTime: String = ""
     
     //Ingredients
-    @State var ingredients = [IngredientEntity]()
     @State private var newIngredientName = ""
     @State private var newIngredientQuantity = ""
     @State private var newIngredientMeasure = ""
@@ -109,9 +106,6 @@ struct AddRecipeView: View {
                         
                         addVm.addIngredient(ingredientValues: values)
                         
-                        newIngredientName = ""
-                        newIngredientMeasure = ""
-                        newIngredientQuantity = ""
                         
                     } label: {
                         HStack {
@@ -189,7 +183,19 @@ struct AddRecipeView: View {
                         totalTime: Int64(totalTime) ?? 0
                     )
                     addVm.addRecipe(recipeValues: value)
-                    dismiss()
+                    
+                    newIngredientName = ""
+                    newIngredientMeasure = ""
+                    newIngredientQuantity = ""
+                    selectedImage = nil
+                    addVm.ingredients = []
+                    
+                    title = ""
+                    category = ""
+                    instruction = ""
+                    source = ""
+                    sourceUrl = ""
+                    totalTime = ""
                 }, label: {
                     HStack {
                         Spacer()
@@ -201,6 +207,7 @@ struct AddRecipeView: View {
                 .padding(8)
                 .foregroundColor(Color.white)
                 .listRowBackground(CustomColor.forestGreen)
+                
                 
             }
             .scrollContentBackground(.hidden)

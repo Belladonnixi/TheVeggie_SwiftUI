@@ -30,7 +30,9 @@ struct MyRecipesView: View {
                     } label: {
                         MyRecipeRow(entity: recipe)
                     }
+                    
                 }
+                .onDelete(perform: vm.deleteItems)
                 .listRowBackground(Color.primary.opacity(0.2))
             }
             .navigationBarTitleDisplayMode(.automatic)

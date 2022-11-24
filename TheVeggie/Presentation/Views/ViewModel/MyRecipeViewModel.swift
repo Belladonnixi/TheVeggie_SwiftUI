@@ -12,6 +12,7 @@
 import Foundation
 import CoreData
 import UIKit
+import SwiftUI
 
 class MyRecipeViewModel: ObservableObject {
     
@@ -58,7 +59,10 @@ class MyRecipeViewModel: ObservableObject {
         return finalImage!
     }
     
-    func deleteRecipes() {
-        
+    func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { recipes[$0] }.forEach(manager.context.delete)
+            recipes.remove(atOffsets: offsets)
+        }
     }
 }
