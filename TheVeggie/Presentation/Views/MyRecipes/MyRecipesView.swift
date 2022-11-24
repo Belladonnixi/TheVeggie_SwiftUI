@@ -27,7 +27,7 @@ struct MyRecipesView: View {
             List {
                 ForEach(vm.recipes) { recipe in
                     NavigationLink {
-                        // TODO: - going to MyRecipesDetails 
+                        MyRecipeDetailView(recipeId: recipe.objectID)
                     } label: {
                         MyRecipeRow(entity: recipe)
                     }

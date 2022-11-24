@@ -39,8 +39,3 @@ struct MyRecipeRow: View {
     }
 }
 
-//struct MyRecipeRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MyRecipeRow(entity: R)
-//    }
-//}

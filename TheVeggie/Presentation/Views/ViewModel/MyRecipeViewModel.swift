@@ -73,4 +73,11 @@ class MyRecipeViewModel: ObservableObject {
         }
     }
     
+    func fetchRecipe(for objectId: NSManagedObjectID) ->
+    RecipeEntity? {
+        guard let recipe = manager.context.object(with: objectId) as? RecipeEntity else {
+            return nil
+        }
+        return recipe
+    }
 }

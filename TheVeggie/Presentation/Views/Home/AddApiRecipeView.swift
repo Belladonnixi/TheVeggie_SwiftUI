@@ -141,7 +141,7 @@ struct AddApiRecipeView: View {
                     instruction: instruction,
                     source: source,
                     sourceUrl: sourceUrl,
-                    totalTime: Int64(totalTime) ?? 0
+                    totalTime: String(recipe.totalTime)
                 )
                 addVm.addRecipe(recipeValues: value)
                 

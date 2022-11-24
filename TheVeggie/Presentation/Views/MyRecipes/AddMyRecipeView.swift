@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-struct AddRecipeView: View {
+struct AddMyRecipeView: View {
     
     // ImagePicker
     @Environment(\.managedObjectContext) private var viewContext
@@ -192,7 +192,7 @@ struct AddRecipeView: View {
                         instruction: instruction,
                         source: source,
                         sourceUrl: sourceUrl,
-                        totalTime: Int64(totalTime) ?? 0
+                        totalTime: totalTime
                     )
                     addVm.addRecipe(recipeValues: value)
                     
@@ -231,6 +231,6 @@ struct AddRecipeView: View {
 
 struct AddRecipe_Previews: PreviewProvider {
     static var previews: some View {
-        AddRecipeView()
+        AddMyRecipeView()
     }
 }

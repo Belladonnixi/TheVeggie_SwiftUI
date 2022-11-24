@@ -10,34 +10,63 @@
 
 
 import SwiftUI
+import CoreData
 
 struct MyRecipeDetailView: View {
     
-    var recipe: Recipe
+    var recipeId: NSManagedObjectID?
     
+    @StateObject var recipeVm = MyRecipeViewModel()
+    
+    // Recipe
+    @State var title: String = ""
+    @State var category: String = ""
+    @State var instruction: String = ""
+    @State var source: String = ""
+    @State var sourceUrl: String = ""
+    @State var totalTime: String = ""
+    @State private var image = UIImage()
+    
+    //Ingredients
+    @State private var ingredients = [IngredientEntity]()
+    
+    // webview
+    @State private var showWebView = false
+    @State private var showToggle = false
+    
+    // WebView
     @StateObject var vm = ApiWebViewViewModel()
     
-    @State private var showWebView = false
+    @StateObject var addVm = AddRecipeViewModel()
     
     var body: some View {
         
         Form {
             Section {
                 VStack {
-                    DownloadingImageView(url: recipe.image, key: "\(recipe.label)")
+                    RectangleImage(image: Image(uiImage: self.image))
                         .frame(width: 325, height: 300)
                         .aspectRatio(contentMode: .fit)
                     
-                    Text(recipe.label)
+                    Text(title)
                         .font(.title)
                 }
             }
             .listRowBackground(Color.primary.opacity(0.2))
             
+            Section("Category") {
+                Text(category.isEmpty ? "-" : category)
+            }
+            .listRowBackground(Color.primary.opacity(0.2))
+            
+            Section("Total Time") {
+                Text(totalTime)
+            }
+            .listRowBackground(Color.primary.opacity(0.2))
             
             Section("Ingredients") {
-                ForEach(recipe.ingredients,id: \.foodID ) { ingredient in
-                    Text(ingredient.text)
+                ForEach(ingredients) { ingredient in
+                    Text(ingredient.text!)
                 }
             }
             .listRowBackground(Color.primary.opacity(0.2))
@@ -46,19 +75,21 @@ struct MyRecipeDetailView: View {
                 VStack(alignment: .leading) {
                     Text("Meal preparation instructions only at source website")
                     
-                    Toggle("Show Original Recipe Instructions", isOn: $showWebView)
+                    if !sourceUrl.isEmpty {
+                        Toggle("Show Original Recipe Instructions", isOn: $showWebView)
+                    }
                 }
             }
             .listRowBackground(Color.primary.opacity(0.2))
             
             if showWebView {
-
+                
                 Section("Original Recipe Source") {
                     RecipeWebView(webView: vm.webView)
-                                .onAppear {
-                                    vm.loadUrl(urlString: recipe.url)
-                                }
-                                .frame(width:325,height: 600)
+                        .onAppear {
+                            vm.loadUrl(urlString: sourceUrl)
+                        }
+                        .frame(width:325,height: 600)
                 }
                 .listRowBackground(Color.primary.opacity(0.2))
             }
@@ -70,18 +101,30 @@ struct MyRecipeDetailView: View {
         .scrollContentBackground(.hidden)
         .background(backgroundGradient)
         .navigationBarTitleDisplayMode(.automatic)
-        .navigationTitle("My Recipes Details")
-        .toolbar {
-            Button("Favorite") {
-                print("Favorite Button Tapped")
+        .navigationTitle("Recipe Details")
+        .onAppear {
+            guard
+                let objectId = recipeId,
+                let recipe = recipeVm.fetchRecipe(for: objectId)
+            else {
+                return
             }
+            
+            title = recipe.title ?? ""
+            category = recipe.category ?? ""
+            instruction = recipe.instruction ?? ""
+            source = recipe.source ?? ""
+            sourceUrl = recipe.sourceUrl ?? ""
+            totalTime = "\(recipe.totalTime) min"
+            image = recipeVm.getImageFromData(recipe: recipe)
+            ingredients = recipe.ingredients?.allObjects as! [IngredientEntity]
         }
-
+        
     }
 }
 
 struct MyRecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MyRecipeDetailView(recipe: Recipe(uri: "uri here", label: "some dish", image: "https://via.placeholder.com/600/92c952", source: "String", url: "https://www.taste.com.au/recipes/lentils-crispy-brussel-sprouts-roasted-mushroom/782c78fa-d9b9-4505-b876-e3d6667b8b7e", shareAs: "redipe", yield: 4, ingredients: [Ingredient(text: "some", quantity: 2.00, measure: "spoon", food: "some food", weight: 32.00, foodCategory: "something", foodID: "some id", image: "some image")], calories: 35.00, totalWeight: 4878.00, totalTime: 85, cuisineType: ["american"], mealType: [MealType.lunchDinner], dishType: ["some"]))
+        MyRecipeDetailView()
     }
 }

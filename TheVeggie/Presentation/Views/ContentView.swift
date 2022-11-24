@@ -35,7 +35,7 @@ struct ContentView: View {
                 }
                 .tag(Tab.myRecipes)
             
-            AddRecipeView()
+            AddMyRecipeView()
                 .tabItem {
                     Label("Add Recipe", systemImage: "plus.app.fill")
                 }
