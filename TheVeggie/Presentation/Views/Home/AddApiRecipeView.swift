@@ -29,7 +29,7 @@ struct AddApiRecipeView: View {
     @State var image: UIImage?
     
     //Ingredients
-    @State var ingredients = [IngredientEntity]()
+    @State var ingredients = [Ingredient]()
     
     // webview
     @State private var showWebView = false
@@ -124,6 +124,18 @@ struct AddApiRecipeView: View {
         }
         .safeAreaInset(edge: .bottom) {
             Button(action: {
+                
+                for ingredient in ingredients {
+                    let value = IngredientValues(
+                        name: ingredient.food,
+                        text: ingredient.text,
+                        measure: ingredient.measure ?? "",
+                        quantity: Float(ingredient.quantity),
+                        weight: Float(ingredient.weight )
+                    )
+                    addVm.addIngredient(ingredientValues: value)
+                }
+            
                 let value = RecipeValues(
                     title: title,
                     category: category,
@@ -135,7 +147,10 @@ struct AddApiRecipeView: View {
                     totalTime: Int64(totalTime) ?? 0
                 )
                 addVm.addRecipe(recipeValues: value)
-
+                
+                addVm.ingredients = []
+                
+                dismiss()
                 
             }, label: {
                 HStack {

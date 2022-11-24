@@ -40,8 +40,6 @@ class RecipeModelDataService {
                 }
             } receiveValue: { [weak self] (returnedValues) in
                 for hit in returnedValues.hits {
-                    print(
-                        hit.recipe.label)
                     var array = [Recipe]()
                     array.append(hit.recipe)
                     self?.recipes = array
