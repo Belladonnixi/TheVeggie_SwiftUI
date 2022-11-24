@@ -16,6 +16,8 @@ struct MyRecipeDetailView: View {
     
     var recipeId: NSManagedObjectID?
     
+    var recipe: RecipeEntity
+    
     @StateObject var recipeVm = MyRecipeViewModel()
     
     // Recipe
@@ -39,6 +41,10 @@ struct MyRecipeDetailView: View {
     
     @StateObject var addVm = AddRecipeViewModel()
     
+    var recipeIndex: Int {
+        recipeVm.recipes.firstIndex(where: { $0.title == recipe.title})!
+    }
+    
     var body: some View {
         
         Form {
@@ -48,8 +54,12 @@ struct MyRecipeDetailView: View {
                         .frame(width: 325, height: 300)
                         .aspectRatio(contentMode: .fit)
                     
-                    Text(title)
-                        .font(.title)
+                    HStack {
+                        Text(title)
+                            .font(.title)
+                        FavoriteButton(isSet: $recipeVm.recipes[recipeIndex].isFavorite)
+                            
+                    }
                 }
             }
             .listRowBackground(Color.primary.opacity(0.2))
@@ -123,8 +133,8 @@ struct MyRecipeDetailView: View {
     }
 }
 
-struct MyRecipeDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyRecipeDetailView()
-    }
-}
+//struct MyRecipeDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MyRecipeDetailView()
+//    }
+//}

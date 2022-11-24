@@ -15,19 +15,27 @@ struct MyRecipesView: View {
     
     @State private var addViewShown = false
     @StateObject var vm = MyRecipeViewModel()
+    @State private var showFavoritesOnly = false
+    
+    var filteredRecipes: [RecipeEntity] {
+        vm.recipes.filter { recipe in
+            (!showFavoritesOnly || recipe.isFavorite)
+        }
+    }
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
-
     }
     
     var body: some View {
         
         NavigationView {
             List {
-                ForEach(vm.recipes) { recipe in
+                Toggle("Favorites only", isOn: $showFavoritesOnly)
+        
+                ForEach(filteredRecipes) { recipe in
                     NavigationLink {
-                        MyRecipeDetailView(recipeId: recipe.objectID)
+                        MyRecipeDetailView(recipeId: recipe.objectID, recipe: recipe)
                     } label: {
                         MyRecipeRow(entity: recipe)
                     }
@@ -40,13 +48,6 @@ struct MyRecipesView: View {
             .navigationTitle("My Recipes")
             .scrollContentBackground(.hidden)
             .background(backgroundGradient)
-            .toolbar {
-                Button {
-                    print("Favorite Button Tapped")
-                } label: {
-                    Label("Favorites", systemImage: "star")
-                }
-            }
             .onAppear {
                 vm.getRecipes()
             }
