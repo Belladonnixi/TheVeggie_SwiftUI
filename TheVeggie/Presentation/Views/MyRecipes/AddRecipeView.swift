@@ -106,6 +106,10 @@ struct AddRecipeView: View {
                         
                         addVm.addIngredient(ingredientValues: values)
                         
+                        newIngredientName = ""
+                        newIngredientMeasure = ""
+                        newIngredientQuantity = ""
+                        
                         
                     } label: {
                         HStack {
