@@ -37,20 +37,4 @@ class CoreDataManager {
         }
     }
     
-    func delete(entity: RecipeEntity) {
-        context.delete(entity)
-        updateView()
-    }
-    
-    func updateView() {
-        save()
-        
-    }
-    
-//    func getRecipes() {
-//        let request = NSFetchRequest<RecipeEntity>(entityName: "RecipeEntity")
-//        do {
-//            
-//        }
-//    }
 }

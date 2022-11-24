@@ -13,6 +13,8 @@ import SwiftUI
 
 struct AddApiRecipeView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     var recipe: Recipe
     
     // Recipe
@@ -24,6 +26,7 @@ struct AddApiRecipeView: View {
     @State var imageUrl: String = ""
     @State var imageKey: String = ""
     @State var totalTime: String = ""
+    @State var image: UIImage?
     
     //Ingredients
     @State var ingredients = [IngredientEntity]()
@@ -34,7 +37,7 @@ struct AddApiRecipeView: View {
     
     @StateObject var vm = ApiWebViewViewModel()
     
-    
+    @StateObject var addVm = AddRecipeViewModel()
     
     var body: some View {
         Form {
@@ -104,22 +107,7 @@ struct AddApiRecipeView: View {
                 .listRowBackground(Color.primary.opacity(0.2))
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .padding(8)
-            }  
-            
-            Button(action: {
-                print("Save to my recipes")
-                
-            }, label: {
-                HStack {
-                    Spacer()
-                    Label("Save to my recipes", systemImage: "square.and.arrow.down")
-                    Spacer()
-                }
-                
-            })
-            .padding(8)
-            .foregroundColor(Color.white)
-            .listRowBackground(CustomColor.forestGreen)
+            }
             
         }
         .scrollContentBackground(.hidden)
@@ -133,6 +121,38 @@ struct AddApiRecipeView: View {
             imageKey = "\(recipe.label)"
             imageUrl = recipe.image
             totalTime = "\(recipe.totalTime) min"
+        }
+        .safeAreaInset(edge: .bottom) {
+            Button(action: {
+                let value = RecipeValues(
+                    title: title,
+                    category: category,
+                    image: ImageLoadingViewModel(url: imageUrl  , key: imageKey).image ?? UIImage(systemName: "photo.artframe"),
+                    imageUrl: "",
+                    instruction: instruction,
+                    source: source,
+                    sourceUrl: sourceUrl,
+                    totalTime: Int64(totalTime) ?? 0
+                )
+                addVm.addRecipe(recipeValues: value)
+
+                
+            }, label: {
+                HStack {
+                    Spacer()
+                    Label("Save to my recipes", systemImage: "square.and.arrow.down")
+                    Spacer()
+                }
+                
+            })
+            .padding(.vertical)
+            .frame(width: 355)
+            .foregroundColor(title.isEmpty ? Color.gray : Color.white)
+            .background(title.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
+            .disabled(title.isEmpty)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .padding( .bottom)
+            
         }
     }
 }

@@ -13,8 +13,6 @@ import SwiftUI
 
 struct AddRecipeView: View {
     
-    @Environment(\.dismiss) private var dismiss
-    
     // ImagePicker
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentation
@@ -31,7 +29,6 @@ struct AddRecipeView: View {
     @State var totalTime: String = ""
     
     //Ingredients
-    @State var ingredients = [IngredientEntity]()
     @State private var newIngredientName = ""
     @State private var newIngredientQuantity = ""
     @State private var newIngredientMeasure = ""
@@ -44,6 +41,9 @@ struct AddRecipeView: View {
     @StateObject var vm = ApiWebViewViewModel()
     
     @StateObject var addVm = AddRecipeViewModel()
+    
+    // saved Alert
+    @State private var presentAlert = false
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
@@ -175,8 +175,14 @@ struct AddRecipeView: View {
                     .listRowBackground(Color.primary.opacity(0.2))
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                     .padding(8)
-                } 
-                
+                }
+
+            }
+            .scrollContentBackground(.hidden)
+            .background(backgroundGradient)
+            .navigationBarTitleDisplayMode(.automatic)
+            .navigationTitle("Add Recipe")
+            .safeAreaInset(edge: .bottom) {
                 Button(action: {
                     let value = RecipeValues(
                         title: title,
@@ -189,7 +195,18 @@ struct AddRecipeView: View {
                         totalTime: Int64(totalTime) ?? 0
                     )
                     addVm.addRecipe(recipeValues: value)
-                    dismiss()
+                    
+                    selectedImage = nil
+                    addVm.ingredients = []
+                    title = ""
+                    category = ""
+                    instruction = ""
+                    source = ""
+                    sourceUrl = ""
+                    totalTime = ""
+                    
+                    presentAlert = true
+                    
                 }, label: {
                     HStack {
                         Spacer()
@@ -198,15 +215,16 @@ struct AddRecipeView: View {
                     }
                         
                 })
-                .padding(8)
-                .foregroundColor(Color.white)
-                .listRowBackground(CustomColor.forestGreen)
+                .padding(.vertical)
+                .frame(width: 355)
+                .alert("Recipe saved", isPresented: $presentAlert, actions: {})
+                .foregroundColor(title.isEmpty ? Color.gray : Color.white)
+                .background(title.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
+                .disabled(title.isEmpty)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .padding( .bottom)
                 
             }
-            .scrollContentBackground(.hidden)
-            .background(backgroundGradient)
-            .navigationBarTitleDisplayMode(.automatic)
-            .navigationTitle("Add Recipe")
         }
     }
 }
