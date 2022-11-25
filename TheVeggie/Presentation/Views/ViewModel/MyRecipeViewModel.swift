@@ -19,6 +19,16 @@ class MyRecipeViewModel: ObservableObject {
     let manager = CoreDataManager.instance
     @Published var recipes: [RecipeEntity] = []
     @Published var ingredients: [IngredientEntity] = []
+    @Published var isFavorite: Bool? {
+        didSet {
+            do {
+                try manager.context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+        }
+    }
     
     init() {
         getRecipes()
@@ -80,4 +90,5 @@ class MyRecipeViewModel: ObservableObject {
         }
         return recipe
     }
+    
 }

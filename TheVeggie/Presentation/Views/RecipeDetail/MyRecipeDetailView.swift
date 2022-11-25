@@ -18,8 +18,6 @@ struct MyRecipeDetailView: View {
     
     var recipe: RecipeEntity
     
-    @StateObject var recipeVm = MyRecipeViewModel()
-    
     // Recipe
     @State var title: String = ""
     @State var category: String = ""
@@ -40,6 +38,7 @@ struct MyRecipeDetailView: View {
     @StateObject var vm = ApiWebViewViewModel()
     
     @StateObject var addVm = AddRecipeViewModel()
+    @StateObject var recipeVm = MyRecipeViewModel()
     
     var recipeIndex: Int {
         recipeVm.recipes.firstIndex(where: { $0.title == recipe.title})!
@@ -58,6 +57,12 @@ struct MyRecipeDetailView: View {
                         Text(title)
                             .font(.title)
                         FavoriteButton(isSet: $recipeVm.recipes[recipeIndex].isFavorite)
+                        
+//                        if recipeVm.isFavorite! {
+//                            
+//                        } else {
+//                            
+//                        }
                             
                     }
                 }
@@ -83,7 +88,7 @@ struct MyRecipeDetailView: View {
             
             Section("preparation") {
                 VStack(alignment: .leading) {
-                    Text("Meal preparation instructions only at source website")
+                    Text(instruction)
                     
                     if !sourceUrl.isEmpty {
                         Toggle("Show Original Recipe Instructions", isOn: $showWebView)

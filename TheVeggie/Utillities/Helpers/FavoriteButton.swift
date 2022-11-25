@@ -14,9 +14,12 @@ import SwiftUI
 struct FavoriteButton: View {
     @Binding var isSet: Bool
     
+    @StateObject var isFavorite = MyRecipeViewModel()
+    
     var body: some View {
         Button {
             isSet.toggle()
+            isFavorite.isFavorite = isSet
         } label: {
             Label("Toggle Favorite", systemImage: isSet ? "star.fill" : "star")
                 .labelStyle(.iconOnly)
