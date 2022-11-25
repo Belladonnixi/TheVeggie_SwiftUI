@@ -21,12 +21,7 @@ class MyRecipeViewModel: ObservableObject {
     @Published var ingredients: [IngredientEntity] = []
     @Published var isFavorite: Bool? {
         didSet {
-            do {
-                try manager.context.save()
-            } catch {
-                print(error.localizedDescription)
-            }
-            
+            update()
         }
     }
     
