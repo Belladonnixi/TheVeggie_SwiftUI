@@ -81,17 +81,17 @@ struct AddMyRecipeView: View {
                     }
                     TextField("Recipe title", text: $title, prompt: Text("Recipe Title..."))
                 }
-                .listRowBackground(Color.primary.opacity(0.2))
+                .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
                 Section("Category") {
                     TextField("Category", text: $category, prompt: Text("Category..."))
                 }
-                .listRowBackground(Color.primary.opacity(0.2))
+                .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
                 Section("Total Time") {
                     TextField("Total Time", text: $totalTime, prompt: Text("Total Time..."))
                 }
-                .listRowBackground(Color.primary.opacity(0.2))
+                .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
                 Section("Ingredients") {
                     TextField("Ingredient", text: $newIngredientName, prompt: Text("Ingredient..."))
@@ -135,13 +135,12 @@ struct AddMyRecipeView: View {
                   
                     
                 }
-                .listRowBackground(Color.primary.opacity(0.2))
+                .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
                 Section("Preparation...") {
                     List {
                         ZStack(alignment:. topLeading) {
                             TextEditor(text: $instruction)
-                                .foregroundColor(Color.black)
                                 .background(Color("textBackground"))
                                 .cornerRadius(10.0)
                                 .frame(height: 150.0)
@@ -149,7 +148,7 @@ struct AddMyRecipeView: View {
                         .padding(.bottom)
                     }
                 }
-                .listRowBackground(Color.primary.opacity(0.2))
+                .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
                 Section("Recipe Source") {
                     VStack {
@@ -161,7 +160,7 @@ struct AddMyRecipeView: View {
                         
                     }
                 }
-                .listRowBackground(Color.primary.opacity(0.2))
+                .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
                 if showWebView {
                     
@@ -172,7 +171,7 @@ struct AddMyRecipeView: View {
                             }
                             .frame(width:325,height: 600)
                     }
-                    .listRowBackground(Color.primary.opacity(0.2))
+                    .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                     .padding(8)
                 }

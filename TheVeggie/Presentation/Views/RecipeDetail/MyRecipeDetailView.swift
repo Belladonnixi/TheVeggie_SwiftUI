@@ -153,6 +153,7 @@ struct MyRecipeDetailView: View {
                     .background(newIngredientName.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                     .disabled(newIngredientName.isEmpty)
+                    
                 }
                 
                 List {
@@ -165,11 +166,10 @@ struct MyRecipeDetailView: View {
             }
             .listRowBackground(isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
             
-            Section("preparation") {
+            Section("Preparation") {
                 List {
                     ZStack(alignment:. topLeading) {
                         TextEditor(text: $instruction)
-                            .foregroundColor(Color.black)
                             .background(Color("textBackground"))
                             .cornerRadius(10.0)
                             .frame(height: 150.0)

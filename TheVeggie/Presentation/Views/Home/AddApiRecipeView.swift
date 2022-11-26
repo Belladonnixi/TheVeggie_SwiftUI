@@ -48,17 +48,17 @@ struct AddApiRecipeView: View {
                 
                 TextField("Recipe title", text: $title, prompt: Text("Recipe Title"))
             }
-            .listRowBackground(Color.primary.opacity(0.2))
+            .listRowBackground(CustomColor.forestGreen.opacity(0.2))
             
             Section("Category") {
                 TextField("Category", text: $category, prompt: Text("Category"))
             }
-            .listRowBackground(Color.primary.opacity(0.2))
+            .listRowBackground(CustomColor.forestGreen.opacity(0.2))
             
             Section("Total Time") {
                 TextField("Total Time", text: $totalTime, prompt: Text("Total Time..."))
             }
-            .listRowBackground(Color.primary.opacity(0.2))
+            .listRowBackground(CustomColor.forestGreen.opacity(0.2))
             
             Section("Ingredients") {
                 ForEach(recipe.ingredients,id: \.foodID ) { ingredient in
@@ -67,13 +67,12 @@ struct AddApiRecipeView: View {
                     }
                 }
             }
-            .listRowBackground(Color.primary.opacity(0.2))
+            .listRowBackground(CustomColor.forestGreen.opacity(0.2))
             
             Section("Preparation") {
                 List {
                     ZStack(alignment:. topLeading) {
                         TextEditor(text: $instruction)
-                            .foregroundColor(Color.black)
                             .background(Color("textBackground"))
                             .cornerRadius(10.0)
                             .frame(height: 150.0)
@@ -81,7 +80,7 @@ struct AddApiRecipeView: View {
                     .padding(.bottom)
                 }
             }
-            .listRowBackground(Color.primary.opacity(0.2))
+            .listRowBackground(CustomColor.forestGreen.opacity(0.2))
             
             Section("Recipe Source") {
                 VStack {
@@ -90,7 +89,7 @@ struct AddApiRecipeView: View {
                     Toggle("Show Original Recipe Instructions", isOn: $showWebView)
                 }
             }
-            .listRowBackground(Color.primary.opacity(0.2))
+            .listRowBackground(CustomColor.forestGreen.opacity(0.2))
             
             if showWebView {
                 
@@ -101,7 +100,7 @@ struct AddApiRecipeView: View {
                         }
                         .frame(width:325,height: 600)
                 }
-                .listRowBackground(Color.primary.opacity(0.2))
+                .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .padding(8)
             }
