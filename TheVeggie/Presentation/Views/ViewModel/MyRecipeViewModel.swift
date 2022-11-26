@@ -86,4 +86,29 @@ class MyRecipeViewModel: ObservableObject {
         return recipe
     }
     
+    // MARK: - Edit Mode
+    func updateRecipe(
+        
+    ) {
+        
+    }
+    
+    func addIngredient(ingredientValues: IngredientValues) {
+        let newIngredient = IngredientEntity(context: manager.context)
+        newIngredient.name = ingredientValues.name
+        newIngredient.quantity = ingredientValues.quantity
+        newIngredient.measure = ingredientValues.measure
+        newIngredient.text = ingredientValues.text
+        newIngredient.weight = ingredientValues.weight
+        
+        ingredients.append(newIngredient)
+    }
+    
+    func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { ingredients[$0] }.forEach(manager.context.delete)
+            ingredients.remove(atOffsets: offsets)
+        }
+    }
+    
 }
