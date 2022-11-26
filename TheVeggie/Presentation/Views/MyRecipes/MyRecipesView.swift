@@ -16,6 +16,7 @@ struct MyRecipesView: View {
     @State private var addViewShown = false
     @StateObject var vm = MyRecipeViewModel()
     @State private var showFavoritesOnly = false
+    @State private var isOwnRecipe = false
     
     var filteredRecipes: [RecipeEntity] {
         vm.recipes.filter { recipe in
@@ -35,9 +36,12 @@ struct MyRecipesView: View {
                     NavigationLink {
                         MyRecipeDetailView(recipeId: recipe.objectID, recipe: recipe)
                     } label: {
-                        MyRecipeRow(entity: recipe)
+                        if recipe.isOwnRecipe {
+                            MyOwnRecipeRow(entity: recipe)
+                        } else {
+                            MyApiRecipeRow(entity: recipe)
+                        }
                     }
-                    
                 }
                 .onDelete(perform: vm.deleteRecipes)
                 .listRowBackground(Color.primary.opacity(0.2))

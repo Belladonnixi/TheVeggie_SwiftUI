@@ -30,6 +30,7 @@ class AddRecipeViewModel: ObservableObject {
         newRecipe.isFavorite = recipeValues.isFavorite
         newRecipe.ingredients = NSSet(array: ingredients)
         newRecipe.totalTime = Int64(recipeValues.totalTime) ?? 0
+        newRecipe.isOwnRecipe = recipeValues.isOwnRecipe
         
         if let image = recipeValues.image {
             let imageData = image.jpegData(compressionQuality: 1.0)

@@ -23,5 +23,6 @@ struct RecipeValues {
     let sourceUrl: String
     let isFavorite: Bool = false
     let totalTime: String
+    let isOwnRecipe: Bool
     
 }

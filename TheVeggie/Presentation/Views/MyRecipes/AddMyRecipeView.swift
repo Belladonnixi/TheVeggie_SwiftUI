@@ -192,7 +192,8 @@ struct AddMyRecipeView: View {
                         instruction: instruction,
                         source: source,
                         sourceUrl: sourceUrl,
-                        totalTime: totalTime
+                        totalTime: totalTime,
+                        isOwnRecipe: true
                     )
                     addVm.addRecipe(recipeValues: value)
                     

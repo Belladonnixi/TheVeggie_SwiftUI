@@ -14,6 +14,7 @@
         <attribute name="imageUrl" optional="YES" attributeType="String"/>
         <attribute name="instruction" optional="YES" attributeType="String"/>
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isOwnRecipe" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="source" optional="YES" attributeType="String"/>
         <attribute name="sourceUrl" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>

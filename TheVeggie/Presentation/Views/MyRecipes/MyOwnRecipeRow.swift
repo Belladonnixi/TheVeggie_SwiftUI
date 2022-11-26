@@ -1,9 +1,9 @@
 //
 //  Project: TheVeggie
-//  MyRecipeRow.swift
+//  MyOwnRecipeRow.swift
 //
 //
-//  Created by Jessica Ernst on 06.11.22
+//  Created by Jessica Ernst on 26.11.22
 //
 /// Copyright © 2022 Jessica Ernst. All rights reserved.
 //
@@ -11,16 +11,20 @@
 
 import SwiftUI
 
-struct MyRecipeRow: View {
-    
+struct MyOwnRecipeRow: View {
     let entity: RecipeEntity
     let vm = MyRecipeViewModel()
     
     var body: some View {
         HStack {
-            RectangleImage(image: Image(uiImage: vm.getImageFromData(recipe: entity)))
-                .frame(width: 160, height: 160)
-                .aspectRatio(contentMode: .fit)
+            
+            if entity.isFavorite {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+            }
+            
+            Spacer()
+            
             VStack(alignment: .leading) {
                 Text(entity.title!)
                     .font(.headline)
@@ -31,13 +35,10 @@ struct MyRecipeRow: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            Spacer()
+            RectangleImage(image: Image(uiImage: vm.getImageFromData(recipe: entity)))
+                .frame(width: 160, height: 160)
+                .aspectRatio(contentMode: .fit)
             
-            if entity.isFavorite {
-                Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
-            }
         }
     }
 }
-
