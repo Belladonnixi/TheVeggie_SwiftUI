@@ -157,6 +157,7 @@ struct MyRecipeDetailView: View {
                         Text(ingredient.text!)
                     }
                     .onDelete(perform: recipeVm.deleteItems)
+                    .deleteDisabled(!isInEditMode)
                 }
             }
             .listRowBackground(isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
@@ -200,11 +201,7 @@ struct MyRecipeDetailView: View {
                         .frame(width:325,height: 600)
                 }
                 .listRowBackground(isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
-            }
-            
-            
-            
-            
+            }            
         }
         .scrollContentBackground(.hidden)
         .background(backgroundGradient)
@@ -219,7 +216,19 @@ struct MyRecipeDetailView: View {
             if isInEditMode {
                 ToolbarItem {
                     Button("Save") {
+                        let value = RecipeValues(
+                            title: title,
+                            category: category,
+                            image: selectedImage ?? UIImage(systemName: "photo.artframe"),
+                            imageUrl: "",
+                            instruction: instruction,
+                            source: source,
+                            sourceUrl: sourceUrl,
+                            totalTime: totalTime
+                        )
+                        recipeVm.updateRecipe(recipeId: recipeId!, with: value)
                         
+                        isInEditMode.toggle()
                     }
                 }
             }
@@ -249,12 +258,12 @@ struct MyRecipeDetailView: View {
             
             viewContext.rollback()
             
-            
             self.title = recipe.title ?? ""
             self.category = recipe.category ?? ""
             self.totalTime = recipe.totalTime.description
             self.instruction = recipe.instruction ?? "Instructions"
             self.recipeVm.ingredients = recipe.ingredients?.allObjects as! [IngredientEntity]
+            print(recipeVm.ingredients)
             self.selectedImage = recipeVm.getImageFromData(recipe: recipe)
             
             self.newIngredientName = ""

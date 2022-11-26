@@ -88,9 +88,24 @@ class MyRecipeViewModel: ObservableObject {
     
     // MARK: - Edit Mode
     func updateRecipe(
-        
+        recipeId: NSManagedObjectID,
+        with recipeValues: RecipeValues
     ) {
+        let recipe: RecipeEntity
+        let fetchedRecipe = fetchRecipe(for: recipeId)
+        recipe = fetchedRecipe!
         
+        recipe.title = recipeValues.title
+        recipe.category = recipeValues.category
+        recipe.imageUrl = recipeValues.imageUrl
+        recipe.source = recipeValues.source
+        recipe.sourceUrl = recipeValues.sourceUrl
+        recipe.instruction = recipeValues.instruction
+        recipe.isFavorite = recipeValues.isFavorite
+        recipe.ingredients = NSSet(array: ingredients)
+        recipe.totalTime = Int64(recipeValues.totalTime) ?? 0
+        
+        update()
     }
     
     func addIngredient(ingredientValues: IngredientValues) {
