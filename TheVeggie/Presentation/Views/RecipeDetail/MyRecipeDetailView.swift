@@ -30,6 +30,7 @@ struct MyRecipeDetailView: View {
     @State var imageUrl: String = ""
     @State private var image = UIImage()
     @State var isOwnRecipe: Bool = false
+    @State var isFavorite: Bool = false
     
     // webview
     @State private var showWebView = false
@@ -226,6 +227,7 @@ struct MyRecipeDetailView: View {
                             instruction: instruction,
                             source: source,
                             sourceUrl: sourceUrl,
+                            isFavorite: isFavorite,
                             totalTime: totalTime,
                             isOwnRecipe: isOwnRecipe
                         )
@@ -254,6 +256,7 @@ struct MyRecipeDetailView: View {
             recipeVm.ingredients = recipe.ingredients?.allObjects as! [IngredientEntity]
             imageUrl = recipe.imageUrl ?? ""
             isOwnRecipe = recipe.isOwnRecipe
+            isFavorite = recipe.isFavorite
         }
     }
     

@@ -141,6 +141,7 @@ struct AddApiRecipeView: View {
                     instruction: instruction,
                     source: source,
                     sourceUrl: sourceUrl,
+                    isFavorite: false,
                     totalTime: String(recipe.totalTime),
                     isOwnRecipe: false
                 )

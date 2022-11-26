@@ -192,6 +192,7 @@ struct AddMyRecipeView: View {
                         instruction: instruction,
                         source: source,
                         sourceUrl: sourceUrl,
+                        isFavorite: false,
                         totalTime: totalTime,
                         isOwnRecipe: true
                     )
