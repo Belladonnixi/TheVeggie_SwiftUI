@@ -41,7 +41,7 @@ struct AddApiRecipeView: View {
             Section {
                 
                 DownloadingImageView(url: imageUrl  , key: imageKey)
-                    .frame(width: 300, height: 250)
+                    .frame(width: 325, height: 300)
                     .aspectRatio(contentMode: .fit)
                     .padding(8)
                 

@@ -56,10 +56,10 @@ struct AddMyRecipeView: View {
                     HStack {
                         
                         RectangleImage(image: selectedImage == nil ? Image(systemName: "photo.artframe") : Image(uiImage: self.selectedImage!))
-                            .frame(width: 230, height: 200)
+                            .frame(width: 250, height: 225)
                             .aspectRatio(contentMode: .fit)
                             .foregroundColor(CustomColor.lightGray)
-                            .padding(8)
+                            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 0))
                         
                         Button {
                             withAnimation {
@@ -68,10 +68,10 @@ struct AddMyRecipeView: View {
                         } label: {
                             Image(systemName: "camera.circle.fill")
                                 .resizable()
-                                .frame(width: 50, height: 50)
+                                .frame(width: 60, height: 60)
                                 .foregroundColor(CustomColor.forestGreen)
                         }
-                        .padding()
+                        .padding(8)
                         .onTapGesture {
                             showSheet = true
                         }
@@ -80,6 +80,7 @@ struct AddMyRecipeView: View {
                         }
                     }
                     TextField("Recipe title", text: $title, prompt: Text("Recipe Title..."))
+                        .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
                 }
                 .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
