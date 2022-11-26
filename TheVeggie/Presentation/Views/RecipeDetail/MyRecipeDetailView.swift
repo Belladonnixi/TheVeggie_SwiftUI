@@ -27,6 +27,7 @@ struct MyRecipeDetailView: View {
     @State var source: String = ""
     @State var sourceUrl: String = ""
     @State var totalTime: String = ""
+    @State var imageUrl: String = ""
     @State private var image = UIImage()
     
     // webview
@@ -220,7 +221,7 @@ struct MyRecipeDetailView: View {
                             title: title,
                             category: category,
                             image: selectedImage ?? UIImage(systemName: "photo.artframe"),
-                            imageUrl: "",
+                            imageUrl: imageUrl,
                             instruction: instruction,
                             source: source,
                             sourceUrl: sourceUrl,
@@ -249,6 +250,7 @@ struct MyRecipeDetailView: View {
             totalTime = recipe.totalTime.description
             selectedImage = recipeVm.getImageFromData(recipe: recipe)
             recipeVm.ingredients = recipe.ingredients?.allObjects as! [IngredientEntity]
+            imageUrl = recipe.imageUrl ?? ""
         }
     }
     

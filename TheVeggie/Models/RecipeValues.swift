@@ -17,7 +17,7 @@ struct RecipeValues {
     let title: String
     let category: String
     let image: UIImage?
-    let imageUrl: String
+    let imageUrl: String?
     let instruction: String
     let source: String
     let sourceUrl: String

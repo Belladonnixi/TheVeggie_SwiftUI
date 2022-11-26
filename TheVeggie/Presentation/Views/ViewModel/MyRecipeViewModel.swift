@@ -105,6 +105,11 @@ class MyRecipeViewModel: ObservableObject {
         recipe.ingredients = NSSet(array: ingredients)
         recipe.totalTime = Int64(recipeValues.totalTime) ?? 0
         
+        if let image = recipeValues.image {
+            let imageData = image.jpegData(compressionQuality: 1.0)
+            recipe.image = imageData
+        }
+        
         update()
     }
     
