@@ -64,7 +64,7 @@ class MyRecipeViewModel: ObservableObject {
         return finalImage!
     }
     
-    func deleteItems(offsets: IndexSet) {
+    func deleteRecipes(offsets: IndexSet) {
         withAnimation {
             offsets.map { recipes[$0] }.forEach(manager.context.delete)
             recipes.remove(atOffsets: offsets)

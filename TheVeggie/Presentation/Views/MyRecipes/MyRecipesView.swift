@@ -31,8 +31,6 @@ struct MyRecipesView: View {
         
         NavigationView {
             List {
-                Toggle("Favorites only", isOn: $showFavoritesOnly)
-        
                 ForEach(filteredRecipes) { recipe in
                     NavigationLink {
                         MyRecipeDetailView(recipeId: recipe.objectID, recipe: recipe)
@@ -41,11 +39,14 @@ struct MyRecipesView: View {
                     }
                     
                 }
-                .onDelete(perform: vm.deleteItems)
+                .onDelete(perform: vm.deleteRecipes)
                 .listRowBackground(Color.primary.opacity(0.2))
             }
             .navigationBarTitleDisplayMode(.automatic)
             .navigationTitle("My Recipes")
+            .toolbar {
+                Toggle("Favorites only", isOn: $showFavoritesOnly)
+            }
             .scrollContentBackground(.hidden)
             .background(backgroundGradient)
             .onAppear {
