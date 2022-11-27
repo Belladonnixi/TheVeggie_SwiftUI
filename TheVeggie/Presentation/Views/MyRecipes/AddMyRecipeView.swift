@@ -80,7 +80,6 @@ struct AddMyRecipeView: View {
                         }
                     }
                     TextField("Recipe title", text: $title, prompt: Text("Recipe Title..."))
-                        .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
                 }
                 .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
@@ -125,6 +124,7 @@ struct AddMyRecipeView: View {
                     .padding(8)
                     .background(newIngredientName.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .shadow(radius: 5)
                     .disabled(newIngredientName.isEmpty)
                     
                     List {
@@ -133,8 +133,6 @@ struct AddMyRecipeView: View {
                         }
                         .onDelete(perform: addVm.deleteItems)
                     }
-                  
-                    
                 }
                 .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
@@ -225,7 +223,7 @@ struct AddMyRecipeView: View {
                 .disabled(title.isEmpty)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .padding( .bottom)
-                
+                .shadow(radius: 5)
             }
         }
     }
