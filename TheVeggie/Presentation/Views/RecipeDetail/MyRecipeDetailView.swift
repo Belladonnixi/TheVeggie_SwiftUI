@@ -66,7 +66,6 @@ struct MyRecipeDetailView: View {
                 VStack {
                     if isInEditMode {
                         HStack {
-                            
                             RectangleImage(image: selectedImage == nil ? Image(systemName: "photo.artframe") : Image(uiImage: self.selectedImage!))
                                 .frame(width: 250, height: 225)
                                 .aspectRatio(contentMode: .fit)
@@ -102,7 +101,6 @@ struct MyRecipeDetailView: View {
                             Text(title)
                                 .font(.title)
                             FavoriteButton(isSet: $recipeVm.recipes[recipeIndex].isFavorite)
-                            
                         }
                     }
                 }
@@ -153,6 +151,7 @@ struct MyRecipeDetailView: View {
                     .padding(8)
                     .background(newIngredientName.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .shadow(radius: 5)
                     .disabled(newIngredientName.isEmpty)
                     
                 }

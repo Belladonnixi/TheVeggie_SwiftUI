@@ -13,10 +13,14 @@ import SwiftUI
 
 struct MyRecipesView: View {
     
+    @State var scrollViewOffset: CGFloat = 0
+    @State var startOffset: CGFloat = 0
+    
     @State private var addViewShown = false
     @StateObject var vm = MyRecipeViewModel()
     @State private var showFavoritesOnly = false
     @State private var isOwnRecipe = false
+    @State var searchText: String = ""
     
     var filteredRecipes: [RecipeEntity] {
         vm.recipes.filter { recipe in
@@ -31,32 +35,61 @@ struct MyRecipesView: View {
     var body: some View {
         
         NavigationView {
-            ScrollView(.vertical, showsIndicators: false, content:  {
-                VStack(spacing: 16) {
-                    ForEach(filteredRecipes) { recipe in
-                        NavigationLink {
-                            MyRecipeDetailView(recipeId: recipe.objectID, recipe: recipe)
-                        } label: {
-                            if recipe.isOwnRecipe {
-                                MyOwnRecipeRow(entity: recipe)
-                            } else {
-                                MyApiRecipeRow(entity: recipe)
+            ScrollViewReader { proxyReader in
+                
+                ZStack {
+                    backgroundGradient.edgesIgnoringSafeArea([.all])
+                    
+                    ScrollView(.vertical, showsIndicators: false, content:  {
+                        
+                        _HSpacer(minWidth: 16)
+                        
+                        VStack(spacing: 16) {
+                            
+                            ForEach(filteredRecipes) { recipe in
+                                NavigationLink {
+                                    MyRecipeDetailView(recipeId: recipe.objectID, recipe: recipe)
+                                } label: {
+                                    if recipe.isOwnRecipe {
+                                        MyOwnRecipeRow(entity: recipe)
+                                    } else {
+                                        MyApiRecipeRow(entity: recipe)
+                                    }
+                                }
                             }
+                            .onDelete(perform: vm.deleteRecipes)
                         }
+                        .padding()
+                        .id("TOP")
+                    })
+                    .navigationBarTitleDisplayMode(.automatic)
+                    .navigationTitle("My Recipes")
+                    .toolbar {
+                        Toggle("Favorites only", isOn: $showFavoritesOnly)
                     }
-                    .onDelete(perform: vm.deleteRecipes)
-                    .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                    .onAppear {
+                        vm.getRecipes()
+                    }
+                    .overlay(
+                        Button {
+                            withAnimation(.spring()) {
+                                proxyReader.scrollTo("TOP", anchor: .top)
+                            }
+                        } label: {
+                            Image(systemName: "arrow.up")
+                                .font(.system(size: 20, weight: .semibold))
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(.orange.opacity(0.7))
+                                .clipShape(Circle())
+                                .shadow(radius: 10)
+                        }
+                            .padding(.trailing)
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
+                            .animation(.easeInOut, value: 1)
+                        ,alignment: .bottomTrailing
+                    )
                 }
-            })
-            .navigationBarTitleDisplayMode(.automatic)
-            .navigationTitle("My Recipes")
-            .toolbar {
-                Toggle("Favorites only", isOn: $showFavoritesOnly)
-            }
-            .scrollContentBackground(.hidden)
-            .background(backgroundGradient)
-            .onAppear {
-                vm.getRecipes()
             }
         }
     }

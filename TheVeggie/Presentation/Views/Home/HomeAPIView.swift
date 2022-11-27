@@ -13,6 +13,9 @@ import SwiftUI
 
 struct HomeAPIView: View {
     
+    @State var scrollViewOffset: CGFloat = 0
+    @State var startOffset: CGFloat = 0
+    
     @StateObject var vm = ApiWebViewViewModel()
     
     init() {
@@ -22,38 +25,88 @@ struct HomeAPIView: View {
     var body: some View {
         
         NavigationView {
-            ScrollView(.vertical, showsIndicators: false, content:  {
-                VStack(spacing: 16) {
-                    ForEach(vm.dataArray, id: \.label) { model in
-                        NavigationLink {
-                            ApiRecipeDetailView(recipe: model)
-                        } label: {
-                            HomeApiRecipeRow(recipe: model)
-                        }
-                        .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-                    }
+            
+            ScrollViewReader { proxyReader in
+                
+                ZStack {
+                    backgroundGradient.edgesIgnoringSafeArea([.all])
                     
-                    Button {
-                        vm.dataService.downloadData()
-                    } label: {
-                        HStack {
-                            Spacer()
-                            Label("load more", systemImage: "square.and.arrow.down")
-                            Spacer()
-                        }
+                    ScrollView(.vertical, showsIndicators: false, content:  {
                         
-                    }
-                    .padding(.vertical)
-                    .foregroundColor(Color.white)
-                    .background(CustomColor.forestGreen)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .shadow(radius: 7)
-                    .padding(16)
+                        _HSpacer(minWidth: 16)
+                        
+                        VStack(spacing: 16) {
+                            ForEach(vm.dataArray, id: \.label) { model in
+                                NavigationLink {
+                                    ApiRecipeDetailView(recipe: model)
+                                } label: {
+                                    HomeApiRecipeRow(recipe: model)
+                                }
+                            }
+                            
+                            Button {
+                                vm.dataService.downloadData()
+                            } label: {
+                                HStack {
+                                    Spacer()
+                                    Label("load more", systemImage: "square.and.arrow.down")
+                                    Spacer()
+                                }
+                                
+                            }
+                            .padding(.vertical)
+                            .frame(width: 150)
+                            .foregroundColor(Color.white)
+                            .background(CustomColor.forestGreen)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .shadow(radius: 7)
+                            .padding(16)
+                        }
+                        .padding()
+                        .id("TOP")
+                        .overlay(
+                            // getting ScrollView Offset using GeometryRadar
+                            GeometryReader { proxy -> Color in
+                                
+                                DispatchQueue.main.async {
+                                    if startOffset == 0 {
+                                        self.startOffset = proxy.frame(in: .global).minY
+                                    }
+                                    
+                                    let offset = proxy.frame(in: .global).minY
+                                    self.scrollViewOffset = offset - startOffset
+                                }
+                                
+                                return Color.clear
+                            }
+                                .frame(width: 0, height: 0)
+                            ,alignment: .top
+                        )
+                    })
+                    .navigationBarTitleDisplayMode(.automatic)
+                    .navigationTitle("The Veggie")
+                    .overlay(
+                        Button {
+                            withAnimation(.spring()) {
+                                proxyReader.scrollTo("TOP", anchor: .top)
+                            }
+                        } label: {
+                            Image(systemName: "arrow.up")
+                                .font(.system(size: 20, weight: .semibold))
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(.orange)
+                                .clipShape(Circle())
+                                .shadow(radius: 10)
+                        }
+                            .padding(.trailing)
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
+                            .opacity(-scrollViewOffset > 450 ? 1 : 0)
+                            .animation(.easeInOut, value: 1)
+                        ,alignment: .bottomTrailing
+                    )
                 }
-            })
-            .navigationBarTitleDisplayMode(.automatic)
-            .navigationTitle("The Veggie")
-            .background(backgroundGradient)
+            }
         }
     }
 }

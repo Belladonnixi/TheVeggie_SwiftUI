@@ -164,8 +164,8 @@ struct AddApiRecipeView: View {
             .background(title.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
             .disabled(title.isEmpty)
             .clipShape(RoundedRectangle(cornerRadius: 10))
+            .shadow(radius: 5)
             .padding( .bottom)
-            
         }
     }
 }
