@@ -56,43 +56,31 @@ struct MyRecipesView: View {
                                 NavigationLink {
                                     MyRecipeDetailView(recipeId: recipe.objectID, recipe: recipe)
                                 } label: {
-                                    if recipe.isOwnRecipe {
-                                        HStack {
-                                            if isInDeleteMode {
-                                                Button {
-                                                    vm.deleteRecipe(at: toDeleteIndex!)
-                                                } label: {
-                                                    Image(systemName: "trash")
-                                                        .font(.system(size: 20, weight: .semibold))
-                                                        .foregroundColor(.white)
-                                                        .padding()
-                                                        .background(.red)
-                                                        .clipShape(Circle())
-                                                        .shadow(radius: 10)
-                                                }
+                                    HStack {
+                                        if isInDeleteMode {
+                                            Button {
+                                                vm.deleteRecipe(at: toDeleteIndex!)
+                                            } label: {
+                                                Image(systemName: "trash")
+                                                    .font(.system(size: 20, weight: .semibold))
+                                                    .foregroundColor(.white)
+                                                    .padding()
+                                                    .background(.red)
+                                                    .clipShape(Circle())
+                                                    .shadow(radius: 10)
                                             }
-                                            
-                                            MyOwnRecipeRow(entity: recipe)
                                         }
                                         
-                                    } else {
-                                        HStack {
-                                            if isInDeleteMode {
-                                                Button {
-                                                    vm.deleteRecipe(at: toDeleteIndex!)
-                                                } label: {
-                                                    Image(systemName: "trash")
-                                                        .font(.system(size: 20, weight: .semibold))
-                                                        .foregroundColor(.white)
-                                                        .padding()
-                                                        .background(.red)
-                                                        .clipShape(Circle())
-                                                        .shadow(radius: 10)
-                                                }
-                                            }
+                                        if recipe.isOwnRecipe {
+                                            
+                                            MyOwnRecipeRow(entity: recipe)
+                                            
+                                        } else {
                                             
                                             MyApiRecipeRow(entity: recipe)
+                                            
                                         }
+                                        
                                     }
                                 }
                                 .contextMenu {
