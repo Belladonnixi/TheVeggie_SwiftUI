@@ -72,10 +72,24 @@ class MyRecipeViewModel: ObservableObject {
         update()
     }
     
-    func update() {
+    func deleteRecipe(at index: Int) {
+        withAnimation {
+            let deletedRecipe = recipes[index]
+            self.manager.context.delete(deletedRecipe)
+        }
+        save()
+    }
+    
+    func save() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.manager.save()
+            self.getRecipes()
+            self.getIngredients()
         }
+    }
+    
+    func update() {
+        save()
     }
     
     func fetchRecipe(for objectId: NSManagedObjectID) ->

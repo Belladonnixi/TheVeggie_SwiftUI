@@ -44,23 +44,70 @@ struct MyRecipesView: View {
                         
                         _HSpacer(minWidth: 16)
                         
-                        VStack(spacing: 16) {
-                            
-                            ForEach(filteredRecipes) { recipe in
-                                NavigationLink {
-                                    MyRecipeDetailView(recipeId: recipe.objectID, recipe: recipe)
-                                } label: {
-                                    if recipe.isOwnRecipe {
-                                        MyOwnRecipeRow(entity: recipe)
-                                    } else {
-                                        MyApiRecipeRow(entity: recipe)
-                                    }
+                        HStack {
+                            HStack {
+                                HStack {
+                                    LazyVStack.init(spacing: 16, content: {
+                                        
+                                        ForEach(filteredRecipes) { recipe in
+                                            let toDeleteIndex = vm.recipes.firstIndex(of: recipe)
+                                            NavigationLink {
+                                                MyRecipeDetailView(recipeId: recipe.objectID, recipe: recipe)
+                                            } label: {
+                                                if recipe.isOwnRecipe {
+                                                    HStack {
+//                                                        Button {
+//                                                            vm.deleteRecipe(at: toDeleteIndex!)
+//                                                        } label: {
+//                                                            Image(systemName: "trash")
+//                                                                .font(.system(size: 20, weight: .semibold))
+//                                                                .foregroundColor(.white)
+//                                                                .padding()
+//                                                                .background(.red)
+//                                                                .clipShape(Circle())
+//                                                                .shadow(radius: 10)
+//                                                        }
+                                                        
+                                                        MyOwnRecipeRow(entity: recipe)
+                                                    }
+                                                    
+                                                } else {
+                                                    HStack {
+//                                                        Button {
+//                                                            vm.deleteRecipe(at: toDeleteIndex!)
+//                                                        } label: {
+//                                                            Image(systemName: "trash")
+//                                                                .font(.system(size: 20, weight: .semibold))
+//                                                                .foregroundColor(.white)
+//                                                                .padding()
+//                                                                .background(.red)
+//                                                                .clipShape(Circle())
+//                                                                .shadow(radius: 10)
+//                                                        }
+                                                        
+                                                        MyApiRecipeRow(entity: recipe)
+                                                    }
+                                                }
+                                            }
+                                            .contextMenu {
+                                                Button {
+                                                    vm.deleteRecipe(at: toDeleteIndex!)
+                                                } label: {
+                                                    HStack {
+                                                        Text("Delete")
+                                                            .foregroundColor(.red)
+                                                        Image(systemName: "trash")
+                                                    }
+                                                }
+                                            }
+                                        }
+//                                        .onDelete(perform: vm.deleteRecipes)
+                                    })
+                                    .padding()
                                 }
                             }
-                            .onDelete(perform: vm.deleteRecipes)
-                        }
-                        .padding()
                         .id("TOP")
+                        }
                     })
                     .navigationBarTitleDisplayMode(.automatic)
                     .navigationTitle("My Recipes")
