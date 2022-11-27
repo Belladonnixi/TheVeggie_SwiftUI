@@ -52,8 +52,8 @@ struct ApiRecipeDetailView: View {
             .foregroundColor(Color.white)
             .listRowBackground(CustomColor.forestGreen)
             
-            Section("Total Time") {
-                Text("\(recipe.totalTime) min")
+            Section("Total Time in minutes") {
+                Text(recipe.totalTime.description)
             }
             .listRowBackground(Color.primary.opacity(0.2))
             
