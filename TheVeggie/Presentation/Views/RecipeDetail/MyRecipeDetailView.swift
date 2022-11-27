@@ -14,6 +14,8 @@ import CoreData
 
 struct MyRecipeDetailView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     var recipeId: NSManagedObjectID?
     
     var recipe: RecipeEntity
@@ -204,39 +206,49 @@ struct MyRecipeDetailView: View {
                         .frame(width:325,height: 600)
                 }
                 .listRowBackground(isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
-            }            
+            }
         }
         .scrollContentBackground(.hidden)
         .background(backgroundGradient)
         .navigationBarTitleDisplayMode(.automatic)
         .navigationTitle("Recipe Details")
         .toolbar {
-            ToolbarItem {
-                Button(isInEditMode ? "Cancel" : "Edit") {
-                    editCancelButtonPressed()
-                }
+            
+            Button(isInEditMode ? "Cancel" : "Edit") {
+                editCancelButtonPressed()
             }
+            
             if isInEditMode {
-                ToolbarItem {
-                    Button("Save") {
-                        let value = RecipeValues(
-                            title: title,
-                            category: category,
-                            image: selectedImage ?? UIImage(systemName: "photo.artframe"),
-                            imageUrl: imageUrl,
-                            instruction: instruction,
-                            source: source,
-                            sourceUrl: sourceUrl,
-                            isFavorite: isFavorite,
-                            totalTime: totalTime,
-                            isOwnRecipe: isOwnRecipe
-                        )
-                        recipeVm.updateRecipe(recipeId: recipeId!, with: value)
-                        
-                        isInEditMode.toggle()
-                    }
+                
+                Button("Save") {
+                    let value = RecipeValues(
+                        title: title,
+                        category: category,
+                        image: selectedImage ?? UIImage(systemName: "photo.artframe"),
+                        imageUrl: imageUrl,
+                        instruction: instruction,
+                        source: source,
+                        sourceUrl: sourceUrl,
+                        isFavorite: isFavorite,
+                        totalTime: totalTime,
+                        isOwnRecipe: isOwnRecipe
+                    )
+                    recipeVm.updateRecipe(recipeId: recipeId!, with: value)
+                    
+                    isInEditMode.toggle()
+                }
+                
+                
+                Button {
+                    recipeVm.deleteRecipe(at: recipeIndex)
+                    dismiss()
+                } label: {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
                 }
             }
+            
+            
         }
         .onAppear {
             guard
