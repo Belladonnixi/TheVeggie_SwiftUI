@@ -31,7 +31,6 @@ struct HomeAPIView: View {
                             HomeApiRecipeRow(recipe: model)
                         }
                         .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-                        .shadow(radius: 7)
                     }
                     
                     Button {

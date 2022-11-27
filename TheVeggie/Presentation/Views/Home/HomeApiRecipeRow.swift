@@ -34,6 +34,7 @@ struct HomeApiRecipeRow: View {
         }
         .background(Color.primary.opacity(0.2))
         .clipShape(RoundedRectangle(cornerRadius: 10))
+        .shadow(radius: 5)
     }
 }
 
