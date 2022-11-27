@@ -19,11 +19,12 @@ struct MyApiRecipeRow: View {
     var body: some View {
         HStack {
             RectangleImage(image: Image(uiImage: vm.getImageFromData(recipe: entity)))
-                .frame(width: 160, height: 160)
+                .frame(width: 175, height: 160)
                 .aspectRatio(contentMode: .fit)
             VStack(alignment: .leading) {
                 Text(entity.title!)
                     .font(.headline)
+                    .foregroundColor(Color.primary)
                     .frame(height: 160)
                     .lineLimit(5)
                     .scaledToFit()
@@ -37,7 +38,11 @@ struct MyApiRecipeRow: View {
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)
             }
+            
+            Spacer()
         }
+        .background(Color.primary.opacity(0.2))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
 

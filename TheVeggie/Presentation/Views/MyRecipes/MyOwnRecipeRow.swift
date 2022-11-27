@@ -17,6 +17,7 @@ struct MyOwnRecipeRow: View {
     
     var body: some View {
         HStack {
+            Spacer()
             
             if entity.isFavorite {
                 Image(systemName: "star.fill")
@@ -28,6 +29,7 @@ struct MyOwnRecipeRow: View {
             VStack(alignment: .leading) {
                 Text(entity.title!)
                     .font(.headline)
+                    .foregroundColor(Color.primary)
                     .frame(height: 160)
                     .lineLimit(5)
                     .scaledToFit()
@@ -36,9 +38,10 @@ struct MyOwnRecipeRow: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             
             RectangleImage(image: Image(uiImage: vm.getImageFromData(recipe: entity)))
-                .frame(width: 160, height: 160)
+                .frame(width: 175, height: 160)
                 .aspectRatio(contentMode: .fit)
-            
         }
+        .background(Color.primary.opacity(0.2))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }

@@ -22,21 +22,38 @@ struct HomeAPIView: View {
     var body: some View {
         
         NavigationView {
-            List {
-                ForEach(vm.dataArray, id: \.label) { model in
-                    NavigationLink {
-                        ApiRecipeDetailView(recipe: model)
-                    } label: {
-                        HomeApiRecipeRow(recipe: model)
+            ScrollView(.vertical, showsIndicators: false, content:  {
+                VStack(spacing: 16) {
+                    ForEach(vm.dataArray, id: \.label) { model in
+                        NavigationLink {
+                            ApiRecipeDetailView(recipe: model)
+                        } label: {
+                            HomeApiRecipeRow(recipe: model)
+                        }
+                        .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                        .shadow(radius: 7)
                     }
+                    
+                    Button {
+                        vm.dataService.downloadData()
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Label("load more", systemImage: "square.and.arrow.down")
+                            Spacer()
+                        }
+                        
+                    }
+                    .padding(.vertical)
+                    .foregroundColor(Color.white)
+                    .background(CustomColor.forestGreen)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .shadow(radius: 7)
+                    .padding(16)
                 }
-                .listRowBackground(Color.primary.opacity(0.2))
-                
-                Button("load more", action: vm.dataService.downloadData)
-            }
+            })
             .navigationBarTitleDisplayMode(.automatic)
             .navigationTitle("The Veggie")
-            .scrollContentBackground(.hidden)
             .background(backgroundGradient)
         }
     }

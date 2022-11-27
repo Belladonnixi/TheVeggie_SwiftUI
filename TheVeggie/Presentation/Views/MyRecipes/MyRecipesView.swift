@@ -31,21 +31,24 @@ struct MyRecipesView: View {
     var body: some View {
         
         NavigationView {
-            List {
-                ForEach(filteredRecipes) { recipe in
-                    NavigationLink {
-                        MyRecipeDetailView(recipeId: recipe.objectID, recipe: recipe)
-                    } label: {
-                        if recipe.isOwnRecipe {
-                            MyOwnRecipeRow(entity: recipe)
-                        } else {
-                            MyApiRecipeRow(entity: recipe)
+            ScrollView(.vertical, showsIndicators: false, content:  {
+                VStack(spacing: 16) {
+                    ForEach(filteredRecipes) { recipe in
+                        NavigationLink {
+                            MyRecipeDetailView(recipeId: recipe.objectID, recipe: recipe)
+                        } label: {
+                            if recipe.isOwnRecipe {
+                                MyOwnRecipeRow(entity: recipe)
+                            } else {
+                                MyApiRecipeRow(entity: recipe)
+                            }
                         }
                     }
+                    .onDelete(perform: vm.deleteRecipes)
+                    .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                    .shadow(radius: 7)
                 }
-                .onDelete(perform: vm.deleteRecipes)
-                .listRowBackground(Color.primary.opacity(0.2))
-            }
+            })
             .navigationBarTitleDisplayMode(.automatic)
             .navigationTitle("My Recipes")
             .toolbar {

@@ -14,22 +14,26 @@ import SwiftUI
 struct HomeApiRecipeRow: View {
     
     let recipe: Recipe
-        
+    
     var body: some View {
         HStack {
             DownloadingImageView(url: recipe.image, key: "\(recipe.label)")
-                .frame(width: 160, height: 160)
+                .frame(width: 185, height: 160)
                 .aspectRatio(contentMode: .fit)
-            VStack(alignment: .leading) {
+            
+            VStack(alignment: .center) {
                 Text(recipe.label)
                     .font(.headline)
+                    .foregroundColor(Color.primary)
                     .frame(height: 160)
                     .lineLimit(5)
                     .scaledToFit()
-                    .padding(EdgeInsets(top: 0.0, leading: 8.0, bottom: 0.0, trailing: 0.0))
+                    .padding(EdgeInsets(top: 0.0, leading: 8.0, bottom: 0.0, trailing: 8.0))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .background(Color.primary.opacity(0.2))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
 
