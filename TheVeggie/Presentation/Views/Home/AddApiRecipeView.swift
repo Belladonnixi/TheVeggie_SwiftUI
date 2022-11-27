@@ -55,7 +55,7 @@ struct AddApiRecipeView: View {
             }
             .listRowBackground(CustomColor.forestGreen.opacity(0.2))
             
-            Section("Total Time") {
+            Section("Total Time in minutes") {
                 TextField("Total Time", text: $totalTime, prompt: Text("Total Time..."))
             }
             .listRowBackground(CustomColor.forestGreen.opacity(0.2))
