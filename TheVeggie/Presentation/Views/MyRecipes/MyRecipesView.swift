@@ -22,11 +22,16 @@ struct MyRecipesView: View {
     @State private var isOwnRecipe = false
     @State var searchText: String = ""
     
+    @State private var isInDeleteMode = false
+    
+    
     var filteredRecipes: [RecipeEntity] {
         vm.recipes.filter { recipe in
             (!showFavoritesOnly || recipe.isFavorite)
         }
     }
+    
+    @State private var deleteIndex: Int = 0
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
@@ -44,28 +49,74 @@ struct MyRecipesView: View {
                         
                         _HSpacer(minWidth: 16)
                         
-                        VStack(spacing: 16) {
+                        LazyVStack.init(spacing: 16, content: {
                             
                             ForEach(filteredRecipes) { recipe in
+                                let toDeleteIndex = filteredRecipes.firstIndex(of: recipe)
                                 NavigationLink {
                                     MyRecipeDetailView(recipeId: recipe.objectID, recipe: recipe)
                                 } label: {
-                                    if recipe.isOwnRecipe {
-                                        MyOwnRecipeRow(entity: recipe)
-                                    } else {
-                                        MyApiRecipeRow(entity: recipe)
+                                    HStack {
+                                        if isInDeleteMode {
+                                            Button {
+                                                vm.deleteRecipe(at: toDeleteIndex!)
+                                            } label: {
+                                                Image(systemName: "trash")
+                                                    .font(.system(size: 20, weight: .semibold))
+                                                    .foregroundColor(.white)
+                                                    .padding()
+                                                    .background(.red)
+                                                    .clipShape(Circle())
+                                                    .shadow(radius: 10)
+                                            }
+                                        }
+                                        
+                                        if recipe.isOwnRecipe {
+                                            
+                                            MyOwnRecipeRow(entity: recipe)
+                                            
+                                        } else {
+                                            
+                                            MyApiRecipeRow(entity: recipe)
+                                            
+                                        }
+                                        
+                                    }
+                                }
+                                .contextMenu {
+                                    Button {
+                                        vm.deleteRecipe(at: toDeleteIndex!)
+                                    } label: {
+                                        HStack {
+                                            Text("Delete")
+                                                .foregroundColor(.red)
+                                            Image(systemName: "trash")
+                                        }
                                     }
                                 }
                             }
-                            .onDelete(perform: vm.deleteRecipes)
-                        }
+                        })
                         .padding()
+                        
+                        
                         .id("TOP")
+                        
                     })
                     .navigationBarTitleDisplayMode(.automatic)
                     .navigationTitle("My Recipes")
                     .toolbar {
-                        Toggle("Favorites only", isOn: $showFavoritesOnly)
+                        Button {
+                            isInDeleteMode.toggle()
+                        } label: {
+                            if isInDeleteMode {
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 16, weight: .semibold))
+                            } else {
+                                Image(systemName: "trash")
+                            }
+                        }
+                        
+                        Toggle("Favorites", isOn: $showFavoritesOnly)
                     }
                     .onAppear {
                         vm.getRecipes()

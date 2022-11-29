@@ -19,7 +19,7 @@ struct FavoriteButton: View {
     var body: some View {
         Button {
             isSet.toggle()
-            isFavorite.isFavorite = isSet
+            isFavorite.saveIsFavorite = isSet
         } label: {
             Image(systemName: isSet ? "star.fill" : "star")
                 .resizable()

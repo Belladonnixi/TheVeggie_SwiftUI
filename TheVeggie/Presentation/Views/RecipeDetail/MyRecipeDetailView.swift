@@ -18,43 +18,18 @@ struct MyRecipeDetailView: View {
     
     var recipe: RecipeEntity
     
+    // ImagePicker editMode
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) var presentation
+    
+    @Environment(\.dismiss) private var dismiss
+    
     @StateObject var recipeVm = MyRecipeViewModel()
-    
-    // Recipe
-    @State var title: String = ""
-    @State var category: String = ""
-    @State var instruction: String = ""
-    @State var source: String = ""
-    @State var sourceUrl: String = ""
-    @State var totalTime: String = ""
-    @State var imageUrl: String = ""
-    @State private var image = UIImage()
-    @State var isOwnRecipe: Bool = false
-    @State var isFavorite: Bool = false
-    
-    // webview
-    @State private var showWebView = false
-    @State private var showToggle = false
     
     // WebView
     @StateObject var vm = ApiWebViewViewModel()
     
-    // EditMode
-    @State private var isInEditMode = false
-    
-    //Ingredients editMode
-    @State private var newIngredientName = ""
-    @State private var newIngredientQuantity = ""
-    @State private var newIngredientMeasure = ""
-    
-    // ImagePicker editMode
-    @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.presentationMode) var presentation
-    @State var pickerPresented = false
-    @State private var selectedImage: UIImage?
-    @State private var showSheet = false
-    
-    // favorite
+    // favorite recipe
     var recipeIndex: Int {
         recipeVm.recipes.firstIndex(where: { $0.title == recipe.title})!
     }
@@ -64,9 +39,9 @@ struct MyRecipeDetailView: View {
         Form {
             Section {
                 VStack {
-                    if isInEditMode {
+                    if recipeVm.isInEditMode {
                         HStack {
-                            RectangleImage(image: selectedImage == nil ? Image(systemName: "photo.artframe") : Image(uiImage: self.selectedImage!))
+                            RectangleImage(image: recipeVm.selectedImage == nil ? Image(systemName: "photo.artframe") : Image(uiImage: self.recipeVm.selectedImage!))
                                 .frame(width: 250, height: 225)
                                 .aspectRatio(contentMode: .fit)
                                 .foregroundColor(CustomColor.lightGray)
@@ -74,7 +49,7 @@ struct MyRecipeDetailView: View {
                             
                             Button {
                                 withAnimation {
-                                    pickerPresented = true
+                                    recipeVm.pickerPresented = true
                                 }
                             } label: {
                                 Image(systemName: "camera.circle.fill")
@@ -84,61 +59,51 @@ struct MyRecipeDetailView: View {
                             }
                             .padding(8)
                             .onTapGesture {
-                                showSheet = true
+                                recipeVm.showSheet = true
                             }
-                            .sheet(isPresented: $showSheet) {
-                                ImagePicker(selectedImage: $selectedImage)
+                            .sheet(isPresented: $recipeVm.showSheet) {
+                                ImagePicker(selectedImage: $recipeVm.selectedImage)
                             }
                         }
-                        TextField("Recipe title", text: $title, prompt: Text("Recipe Title..."))
+                        TextField("Recipe title", text: $recipeVm.title, prompt: Text("Recipe Title..."))
                             .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
                     } else {
-                        RectangleImage(image: selectedImage == nil ? Image(systemName: "photo.artframe") : Image(uiImage: self.selectedImage!))
+                        RectangleImage(image: recipeVm.selectedImage == nil ? Image(systemName: "photo.artframe") : Image(uiImage: self.recipeVm.selectedImage!))
                             .frame(width: 325, height: 300)
                             .aspectRatio(contentMode: .fit)
                         
                         HStack {
-                            Text(title)
+                            Text(recipeVm.title)
                                 .font(.title)
                             FavoriteButton(isSet: $recipeVm.recipes[recipeIndex].isFavorite)
                         }
                     }
                 }
             }
-            .listRowBackground(isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
+            .listRowBackground(recipeVm.isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
             
             Section("Category") {
-                TextField("Category", text: $category, prompt: Text("Category..."))
-                    .disabled(!isInEditMode)
+                TextField("Category", text: $recipeVm.category, prompt: Text("Category..."))
+                    .disabled(!recipeVm.isInEditMode)
             }
-            .listRowBackground(isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
+            .listRowBackground(recipeVm.isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
             
             Section("Total Time in minutes") {
-                TextField("Total Time", text: $totalTime, prompt: Text("Total Time..."))
-                    .disabled(!isInEditMode)
+                TextField("Total Time", text: $recipeVm.totalTime, prompt: Text("Total Time..."))
+                    .disabled(!recipeVm.isInEditMode)
             }
-            .listRowBackground(isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
+            .listRowBackground(recipeVm.isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
             
             Section("Ingredients") {
-                if isInEditMode {
-                    TextField("Ingredient", text: $newIngredientName, prompt: Text("Ingredient..."))
+                if recipeVm.isInEditMode {
+                    TextField("Ingredient", text: $recipeVm.newIngredientName, prompt: Text("Ingredient..."))
                     HStack {
-                        TextField("Quantity", text: $newIngredientQuantity, prompt: Text("Quantity..."))
-                        TextField("Unit", text: $newIngredientMeasure, prompt: Text("Unit..."))
+                        TextField("Quantity", text: $recipeVm.newIngredientQuantity, prompt: Text("Quantity..."))
+                        TextField("Unit", text: $recipeVm.newIngredientMeasure, prompt: Text("Unit..."))
                     }
                     Button {
-                        let values = IngredientValues(
-                            name: newIngredientName,
-                            text: "\(newIngredientQuantity) \(newIngredientMeasure) \(newIngredientName)",
-                            measure: newIngredientMeasure,
-                            quantity: Float(newIngredientQuantity) ?? 0,
-                            weight: 0.00)
                         
-                        recipeVm.addIngredient(ingredientValues: values)
-                        
-                        newIngredientName = ""
-                        newIngredientMeasure = ""
-                        newIngredientQuantity = ""
+                        recipeVm.addIngredient()
                         
                     } label: {
                         HStack {
@@ -147,12 +112,12 @@ struct MyRecipeDetailView: View {
                             Spacer()
                         }
                     }
-                    .foregroundColor(newIngredientName.isEmpty ? Color.gray : Color.white)
+                    .foregroundColor(recipeVm.newIngredientName.isEmpty ? Color.gray : Color.white)
                     .padding(8)
-                    .background(newIngredientName.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
+                    .background(recipeVm.newIngredientName.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                     .shadow(radius: 5)
-                    .disabled(newIngredientName.isEmpty)
+                    .disabled(recipeVm.newIngredientName.isEmpty)
                     
                 }
                 
@@ -161,124 +126,99 @@ struct MyRecipeDetailView: View {
                         Text(ingredient.text!)
                     }
                     .onDelete(perform: recipeVm.deleteItems)
-                    .deleteDisabled(!isInEditMode)
+                    .deleteDisabled(!recipeVm.isInEditMode)
                 }
             }
-            .listRowBackground(isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
+            .listRowBackground(recipeVm.isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
             
             Section("Preparation") {
                 List {
                     ZStack(alignment:. topLeading) {
-                        TextEditor(text: $instruction)
+                        TextEditor(text: $recipeVm.instruction)
                             .background(Color("textBackground"))
                             .cornerRadius(10.0)
                             .frame(height: 150.0)
-                            .disabled(!isInEditMode)
+                            .disabled(!recipeVm.isInEditMode)
                     }
                     .padding(.bottom)
                 }
             }
-            .listRowBackground(isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
+            .listRowBackground(recipeVm.isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
             
             Section("Recipe Source") {
                 VStack {
-                    TextField("Recipe Source", text: $source, prompt: Text("Recipe Source..."))
-                        .disabled(!isInEditMode)
-                    TextField("Recipe Source URL", text: $sourceUrl, prompt: Text("Recipe Source URL..."))
-                        .disabled(!isInEditMode)
-                    if !sourceUrl.isEmpty {
-                        Toggle("Show Original Recipe Instructions", isOn: $showWebView)
+                    TextField("Recipe Source", text: $recipeVm.source, prompt: Text("Recipe Source..."))
+                        .disabled(!recipeVm.isInEditMode)
+                    TextField("Recipe Source URL", text: $recipeVm.sourceUrl, prompt: Text("Recipe Source URL..."))
+                        .disabled(!recipeVm.isInEditMode)
+                    if !recipeVm.sourceUrl.isEmpty {
+                        Toggle("Show Original Recipe Instructions", isOn: $recipeVm.showWebView)
                     }
                     
                 }
             }
-            .listRowBackground(isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
+            .listRowBackground(recipeVm.isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
             
-            if showWebView {
+            if recipeVm.showWebView {
                 
                 Section("Original Recipe Source") {
                     RecipeWebView(webView: vm.webView)
                         .onAppear {
-                            vm.loadUrl(urlString: sourceUrl)
+                            vm.loadUrl(urlString: recipeVm.sourceUrl)
                         }
                         .frame(width:325,height: 600)
                 }
-                .listRowBackground(isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
-            }            
+                .listRowBackground(recipeVm.isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
+            }
         }
         .scrollContentBackground(.hidden)
         .background(backgroundGradient)
         .navigationBarTitleDisplayMode(.automatic)
         .navigationTitle("Recipe Details")
         .toolbar {
-            ToolbarItem {
-                Button(isInEditMode ? "Cancel" : "Edit") {
-                    editCancelButtonPressed()
-                }
+            
+            Button(recipeVm.isInEditMode ? "Cancel" : "Edit") {
+                recipeVm.editCancelButtonPressed(recipeId: recipeId!)
             }
-            if isInEditMode {
-                ToolbarItem {
-                    Button("Save") {
-                        let value = RecipeValues(
-                            title: title,
-                            category: category,
-                            image: selectedImage ?? UIImage(systemName: "photo.artframe"),
-                            imageUrl: imageUrl,
-                            instruction: instruction,
-                            source: source,
-                            sourceUrl: sourceUrl,
-                            isFavorite: isFavorite,
-                            totalTime: totalTime,
-                            isOwnRecipe: isOwnRecipe
-                        )
-                        recipeVm.updateRecipe(recipeId: recipeId!, with: value)
-                        
-                        isInEditMode.toggle()
-                    }
+            
+            if recipeVm.isInEditMode {
+                
+                Button("Save") {
+                
+                    recipeVm.updateRecipe(recipeId: recipeId!)
+                    
+                    recipeVm.isInEditMode.toggle()
+                    
+                }
+                
+                Button {
+                    recipeVm.deleteRecipe(at: recipeIndex)
+                    dismiss()
+                } label: {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
                 }
             }
         }
         .onAppear {
             guard
                 let objectId = recipeId,
-                let recipe = recipeVm.fetchRecipe(for: objectId)
+                let recipe = recipeVm.getSpecificRecipe(for: objectId)
             else {
                 return
             }
             
-            title = recipe.title ?? ""
-            category = recipe.category ?? ""
-            instruction = recipe.instruction ?? ""
-            source = recipe.source ?? ""
-            sourceUrl = recipe.sourceUrl ?? ""
-            totalTime = recipe.totalTime.description
-            selectedImage = recipeVm.getImageFromData(recipe: recipe)
+            recipeVm.title = recipe.title ?? ""
+            recipeVm.category = recipe.category ?? ""
+            recipeVm.instruction = recipe.instruction ?? ""
+            recipeVm.source = recipe.source ?? ""
+            recipeVm.sourceUrl = recipe.sourceUrl ?? ""
+            recipeVm.totalTime = recipe.totalTime.description
+            recipeVm.selectedImage = recipeVm.getImageFromData(recipe: recipe)
             recipeVm.ingredients = recipe.ingredients?.allObjects as! [IngredientEntity]
-            imageUrl = recipe.imageUrl ?? ""
-            isOwnRecipe = recipe.isOwnRecipe
-            isFavorite = recipe.isFavorite
+            recipeVm.imageUrl = recipe.imageUrl ?? ""
+            recipeVm.isOwnRecipe = recipe.isOwnRecipe
+            recipeVm.isFavorite = recipe.isFavorite
         }
-    }
-    
-    private func editCancelButtonPressed() {
-        
-        if isInEditMode {
-            
-            viewContext.rollback()
-            
-            self.title = recipe.title ?? ""
-            self.category = recipe.category ?? ""
-            self.totalTime = recipe.totalTime.description
-            self.instruction = recipe.instruction ?? "Instructions"
-            self.recipeVm.ingredients = recipe.ingredients?.allObjects as! [IngredientEntity]
-            print(recipeVm.ingredients)
-            self.selectedImage = recipeVm.getImageFromData(recipe: recipe)
-            
-            self.newIngredientName = ""
-            self.newIngredientMeasure = ""
-            self.newIngredientQuantity = ""
-            
-        }
-        isInEditMode.toggle()
     }
 }

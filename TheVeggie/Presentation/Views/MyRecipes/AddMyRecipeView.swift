@@ -16,31 +16,11 @@ struct AddMyRecipeView: View {
     // ImagePicker
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentation
-    @State var pickerPresented = false
-    @State private var selectedImage: UIImage?
-    @State private var showSheet = false
-    
-    // Recipe
-    @State var title: String = ""
-    @State var category: String = ""
-    @State var instruction: String = ""
-    @State var source: String = ""
-    @State var sourceUrl: String = ""
-    @State var totalTime: String = ""
-    
-    //Ingredients
-    @State private var newIngredientName = ""
-    @State private var newIngredientQuantity = ""
-    @State private var newIngredientMeasure = ""
-    
-    // webview
-    @State private var showWebView = false
-    @State private var showToggle = false
     
     // WebView
     @StateObject var vm = ApiWebViewViewModel()
     
-    @StateObject var addVm = AddRecipeViewModel()
+    @StateObject var addVm = MyRecipeViewModel()
     
     // saved Alert
     @State private var presentAlert = false
@@ -55,7 +35,7 @@ struct AddMyRecipeView: View {
                 Section {
                     HStack {
                         
-                        RectangleImage(image: selectedImage == nil ? Image(systemName: "photo.artframe") : Image(uiImage: self.selectedImage!))
+                        RectangleImage(image: addVm.selectedImage == nil ? Image(systemName: "photo.artframe") : Image(uiImage: self.addVm.selectedImage!))
                             .frame(width: 250, height: 225)
                             .aspectRatio(contentMode: .fit)
                             .foregroundColor(CustomColor.lightGray)
@@ -63,7 +43,7 @@ struct AddMyRecipeView: View {
                         
                         Button {
                             withAnimation {
-                                pickerPresented = true
+                                addVm.pickerPresented = true
                             }
                         } label: {
                             Image(systemName: "camera.circle.fill")
@@ -73,45 +53,35 @@ struct AddMyRecipeView: View {
                         }
                         .padding(8)
                         .onTapGesture {
-                            showSheet = true
+                            addVm.showSheet = true
                         }
-                        .sheet(isPresented: $showSheet) {
-                            ImagePicker(selectedImage: $selectedImage)
+                        .sheet(isPresented: $addVm.showSheet) {
+                            ImagePicker(selectedImage: $addVm.selectedImage)
                         }
                     }
-                    TextField("Recipe title", text: $title, prompt: Text("Recipe Title..."))
+                    TextField("Recipe title", text: $addVm.title, prompt: Text("Recipe Title..."))
                 }
                 .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
                 Section("Category") {
-                    TextField("Category", text: $category, prompt: Text("Category..."))
+                    TextField("Category", text: $addVm.category, prompt: Text("Category..."))
                 }
                 .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
                 Section("Total Time in minutes") {
-                    TextField("Total Time", text: $totalTime, prompt: Text("Total Time..."))
+                    TextField("Total Time", text: $addVm.totalTime, prompt: Text("Total Time..."))
                 }
                 .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
                 Section("Ingredients") {
-                    TextField("Ingredient", text: $newIngredientName, prompt: Text("Ingredient..."))
+                    TextField("Ingredient", text: $addVm.newIngredientName, prompt: Text("Ingredient..."))
                     HStack {
-                        TextField("Quantity", text: $newIngredientQuantity, prompt: Text("Quantity..."))
-                        TextField("Unit", text: $newIngredientMeasure, prompt: Text("Unit..."))
+                        TextField("Quantity", text: $addVm.newIngredientQuantity, prompt: Text("Quantity..."))
+                        TextField("Unit", text: $addVm.newIngredientMeasure, prompt: Text("Unit..."))
                     }
                     Button {
-                        let values = IngredientValues(
-                            name: newIngredientName,
-                            text: "\(newIngredientQuantity) \(newIngredientMeasure) \(newIngredientName)",
-                            measure: newIngredientMeasure,
-                            quantity: Float(newIngredientQuantity) ?? 0,
-                            weight: 0.00)
-                        
-                        addVm.addIngredient(ingredientValues: values)
-                        
-                        newIngredientName = ""
-                        newIngredientMeasure = ""
-                        newIngredientQuantity = ""
+                                                
+                        addVm.addIngredient()
                         
                     } label: {
                         HStack {
@@ -120,12 +90,12 @@ struct AddMyRecipeView: View {
                             Spacer()
                         }
                     }
-                    .foregroundColor(newIngredientName.isEmpty ? Color.gray : Color.white)
+                    .foregroundColor(addVm.newIngredientName.isEmpty ? Color.gray : Color.white)
                     .padding(8)
-                    .background(newIngredientName.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
+                    .background(addVm.newIngredientName.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                     .shadow(radius: 5)
-                    .disabled(newIngredientName.isEmpty)
+                    .disabled(addVm.newIngredientName.isEmpty)
                     
                     List {
                         ForEach(addVm.ingredients) { ingredient in
@@ -139,7 +109,7 @@ struct AddMyRecipeView: View {
                 Section("Preparation...") {
                     List {
                         ZStack(alignment:. topLeading) {
-                            TextEditor(text: $instruction)
+                            TextEditor(text: $addVm.instruction)
                                 .background(Color("textBackground"))
                                 .cornerRadius(10.0)
                                 .frame(height: 150.0)
@@ -151,22 +121,22 @@ struct AddMyRecipeView: View {
                 
                 Section("Recipe Source") {
                     VStack {
-                        TextField("Recipe Source", text: $source, prompt: Text("Recipe Source..."))
-                        TextField("Recipe Source URL", text: $sourceUrl, prompt: Text("Recipe Source URL..."))
-                        if !sourceUrl.isEmpty {
-                            Toggle("Show Original Recipe Instructions", isOn: $showWebView)
+                        TextField("Recipe Source", text: $addVm.source, prompt: Text("Recipe Source..."))
+                        TextField("Recipe Source URL", text: $addVm.sourceUrl, prompt: Text("Recipe Source URL..."))
+                        if !addVm.sourceUrl.isEmpty {
+                            Toggle("Show Original Recipe Instructions", isOn: $addVm.showWebView)
                         }
                         
                     }
                 }
                 .listRowBackground(CustomColor.forestGreen.opacity(0.2))
                 
-                if showWebView {
+                if addVm.showWebView {
                     
                     Section("Original Recipe Source") {
                         RecipeWebView(webView: vm.webView)
                             .onAppear {
-                                vm.loadUrl(urlString: sourceUrl)
+                                vm.loadUrl(urlString: addVm.sourceUrl)
                             }
                             .frame(width:325,height: 600)
                     }
@@ -182,30 +152,21 @@ struct AddMyRecipeView: View {
             .navigationTitle("Add Recipe")
             .safeAreaInset(edge: .bottom) {
                 Button(action: {
-                    let value = RecipeValues(
-                        title: title,
-                        category: category,
-                        image: selectedImage ?? UIImage(systemName: "photo.artframe"),
-                        imageUrl: "",
-                        instruction: instruction,
-                        source: source,
-                        sourceUrl: sourceUrl,
-                        isFavorite: false,
-                        totalTime: totalTime,
-                        isOwnRecipe: true
-                    )
-                    addVm.addRecipe(recipeValues: value)
                     
-                    selectedImage = nil
-                    addVm.ingredients = []
-                    title = ""
-                    category = ""
-                    instruction = ""
-                    source = ""
-                    sourceUrl = ""
-                    totalTime = ""
-                    
+                    addVm.image = addVm.selectedImage ?? UIImage(systemName: "photo.artframe")
+                   
+                    addVm.addRecipe()
+                                       
                     presentAlert = true
+                    
+                    addVm.selectedImage = nil
+                    addVm.ingredients = []
+                    addVm.title = ""
+                    addVm.category = ""
+                    addVm.instruction = ""
+                    addVm.source = ""
+                    addVm.sourceUrl = ""
+                    addVm.totalTime = ""
                     
                 }, label: {
                     HStack {
@@ -218,12 +179,15 @@ struct AddMyRecipeView: View {
                 .padding(.vertical)
                 .frame(width: 355)
                 .alert("Recipe saved", isPresented: $presentAlert, actions: {})
-                .foregroundColor(title.isEmpty ? Color.gray : Color.white)
-                .background(title.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
-                .disabled(title.isEmpty)
+                .foregroundColor(addVm.title.isEmpty ? Color.gray : Color.white)
+                .background(addVm.title.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
+                .disabled(addVm.title.isEmpty)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .padding( .bottom)
                 .shadow(radius: 5)
+            }
+            .onAppear {
+                addVm.ingredients = []
             }
         }
     }
