@@ -35,7 +35,7 @@ struct HomeAPIView: View {
                         
                         _HSpacer(minWidth: 16)
                         
-                        VStack(spacing: 16) {
+                        LazyVStack.init(spacing: 16, content: {
                             ForEach(vm.dataArray, id: \.label) { model in
                                 NavigationLink {
                                     ApiRecipeDetailView(recipe: model)
@@ -61,7 +61,7 @@ struct HomeAPIView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .shadow(radius: 7)
                             .padding(16)
-                        }
+                        })
                         .padding()
                         .id("TOP")
                         .overlay(

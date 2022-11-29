@@ -16,14 +16,45 @@ import SwiftUI
 
 class MyRecipeViewModel: ObservableObject {
     
+    // MARK: - Core Data
     let manager = CoreDataManager.instance
+    
     @Published var recipes: [RecipeEntity] = []
     @Published var ingredients: [IngredientEntity] = []
-    @Published var isFavorite: Bool? {
+    
+    // Favorite
+    @Published var saveIsFavorite: Bool? {
         didSet {
             update()
         }
     }
+    
+    // Recipe
+    @Published var title: String = ""
+    @Published var category: String = ""
+    @Published var instruction: String = ""
+    @Published var source: String = ""
+    @Published var sourceUrl: String = ""
+    @Published var totalTime: String = ""
+    @Published var imageUrl: String = ""
+    @Published var image: UIImage?
+    @Published var isOwnRecipe: Bool = false
+    @Published var isFavorite: Bool = false
+    
+    // MARK: - EditMode
+    
+    // EditMode
+    @Published var isInEditMode = false
+    
+    //Ingredients editMode
+    @Published var newIngredientName = ""
+    @Published var newIngredientQuantity = ""
+    @Published var newIngredientMeasure = ""
+    
+    // imagePicker
+    @Published var pickerPresented = false
+    @Published var selectedImage: UIImage?
+    @Published var showSheet = false
     
     init() {
         getRecipes()
@@ -100,26 +131,24 @@ class MyRecipeViewModel: ObservableObject {
         return recipe
     }
     
-    // MARK: - Edit Mode
-    func updateRecipe(
-        recipeId: NSManagedObjectID,
-        with recipeValues: RecipeValues
-    ) {
+    // MARK: - Edit Mode funcs
+
+    func updateRecipe(recipeId: NSManagedObjectID) {
         let recipe: RecipeEntity
         let fetchedRecipe = fetchRecipe(for: recipeId)
         recipe = fetchedRecipe!
         
-        recipe.title = recipeValues.title
-        recipe.category = recipeValues.category
-        recipe.imageUrl = recipeValues.imageUrl
-        recipe.source = recipeValues.source
-        recipe.sourceUrl = recipeValues.sourceUrl
-        recipe.instruction = recipeValues.instruction
-        recipe.isFavorite = recipeValues.isFavorite
+        recipe.title = title
+        recipe.category = category
+        recipe.imageUrl = imageUrl
+        recipe.source = source
+        recipe.sourceUrl = sourceUrl
+        recipe.instruction = instruction
+        recipe.isFavorite = isFavorite
         recipe.ingredients = NSSet(array: ingredients)
-        recipe.totalTime = Int64(recipeValues.totalTime) ?? 0
+        recipe.totalTime = Int64(totalTime) ?? 0
         
-        if let image = recipeValues.image {
+        if let image = image {
             let imageData = image.jpegData(compressionQuality: 1.0)
             recipe.image = imageData
         }
@@ -127,15 +156,19 @@ class MyRecipeViewModel: ObservableObject {
         update()
     }
     
-    func addIngredient(ingredientValues: IngredientValues) {
+    func addIngredient() {
         let newIngredient = IngredientEntity(context: manager.context)
-        newIngredient.name = ingredientValues.name
-        newIngredient.quantity = ingredientValues.quantity
-        newIngredient.measure = ingredientValues.measure
-        newIngredient.text = ingredientValues.text
-        newIngredient.weight = ingredientValues.weight
+        newIngredient.name = newIngredientName
+        newIngredient.quantity = Float(newIngredientQuantity) ?? 0
+        newIngredient.measure = newIngredientMeasure
+        newIngredient.text = "\(newIngredientQuantity) \(newIngredientMeasure) \(newIngredientName)"
+        newIngredient.weight = 0.00
         
         ingredients.append(newIngredient)
+        
+        newIngredientName = ""
+        newIngredientMeasure = ""
+        newIngredientQuantity = ""
     }
     
     func deleteItems(offsets: IndexSet) {
@@ -145,4 +178,23 @@ class MyRecipeViewModel: ObservableObject {
         }
     }
     
+    func editCancelButtonPressed(recipe: RecipeEntity) {
+        
+        if isInEditMode {
+            
+            self.title = recipe.title ?? ""
+            self.category = recipe.category ?? ""
+            self.totalTime = recipe.totalTime.description
+            self.instruction = recipe.instruction ?? "Instructions"
+            self.ingredients = recipe.ingredients?.allObjects as! [IngredientEntity]
+            print(ingredients)
+            self.selectedImage = getImageFromData(recipe: recipe)
+            
+            self.newIngredientName = ""
+            self.newIngredientMeasure = ""
+            self.newIngredientQuantity = ""
+            
+        }
+        isInEditMode.toggle()
+    }
 }

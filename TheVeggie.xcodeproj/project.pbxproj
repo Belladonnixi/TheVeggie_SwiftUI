@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D19E4802935FCE400BE58D8 /* RecipeLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D19E47F2935FCE400BE58D8 /* RecipeLoadingViewModel.swift */; };
 		1D305F9A28FD298F00EE3FDF /* TheVeggieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305F9928FD298F00EE3FDF /* TheVeggieApp.swift */; };
 		1D305F9E28FD299100EE3FDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D305F9D28FD299100EE3FDF /* Assets.xcassets */; };
 		1D305FA128FD299100EE3FDF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D305FA028FD299100EE3FDF /* Preview Assets.xcassets */; };
@@ -63,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D19E47F2935FCE400BE58D8 /* RecipeLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeLoadingViewModel.swift; sourceTree = "<group>"; };
 		1D305F9628FD298F00EE3FDF /* TheVeggie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheVeggie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D305F9928FD298F00EE3FDF /* TheVeggieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheVeggieApp.swift; sourceTree = "<group>"; };
 		1D305F9D28FD299100EE3FDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				1D576ED62910174800D39134 /* ImageLoadingViewModel.swift */,
 				1D46F725291565AD00CC28CF /* MyRecipeViewModel.swift */,
 				1D5BAD382927B4D5009DD7DD /* AddRecipeViewModel.swift */,
+				1D19E47F2935FCE400BE58D8 /* RecipeLoadingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				1D676A3A28FEDE8700449823 /* HomeAPIView.swift in Sources */,
 				1D576ED52910159E00D39134 /* DownloadingImageView.swift in Sources */,
 				1D67C8CA29252C9800BBCBA3 /* MyRecipeDetailView.swift in Sources */,
+				1D19E4802935FCE400BE58D8 /* RecipeLoadingViewModel.swift in Sources */,
 				1D5E891F291532D8000BEA53 /* ContentView.swift in Sources */,
 				1D50066729014D6800530D8F /* RecipeModel.swift in Sources */,
 				1DCAD7B1292BAB7B0009532F /* AddApiRecipeView.swift in Sources */,
