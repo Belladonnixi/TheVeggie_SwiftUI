@@ -104,6 +104,29 @@ class MyRecipeViewModel: ObservableObject {
         return finalImage!
     }
     
+    // adding recipe
+    func addRecipe() {
+        let newRecipe = RecipeEntity(context: manager.context)
+        newRecipe.title = title
+        newRecipe.category = category
+        newRecipe.imageUrl = ""
+        newRecipe.source = source
+        newRecipe.sourceUrl = sourceUrl
+        newRecipe.instruction = instruction
+        newRecipe.isFavorite = false
+        newRecipe.ingredients = NSSet(array: ingredients)
+        newRecipe.totalTime = Int64(totalTime) ?? 0
+        newRecipe.isOwnRecipe = true
+        
+        if let image = image {
+            let imageData = image.jpegData(compressionQuality: 1.0)
+            newRecipe.image = imageData
+        }
+        
+        save()
+        
+    }
+    
     // fetch recipe with objectId
     func getSpecificRecipe(for objectId: NSManagedObjectID) ->
     RecipeEntity? {
@@ -112,7 +135,7 @@ class MyRecipeViewModel: ObservableObject {
         }
         return recipe
     }
-
+    
     // delete, save, update recipe
     func deleteRecipe(at index: Int) {
         withAnimation {
@@ -137,7 +160,7 @@ class MyRecipeViewModel: ObservableObject {
     }
     
     // MARK: - Edit Mode funcs
-
+    
     func updateRecipe(recipeId: NSManagedObjectID) {
         let recipe: RecipeEntity
         let fetchedRecipe = getSpecificRecipe(for: recipeId)
@@ -173,6 +196,20 @@ class MyRecipeViewModel: ObservableObject {
         newIngredientName = ""
         newIngredientMeasure = ""
         newIngredientQuantity = ""
+    }
+    
+    func addApiIngredients(recipe: Recipe) {
+        
+        for ingredient in recipe.ingredients {
+            let newIngredient = IngredientEntity(context: manager.context)
+            newIngredient.name = ingredient.food
+            newIngredient.text = ingredient.text
+            newIngredient.measure = ingredient.measure ?? ""
+            newIngredient.quantity = Float(ingredient.quantity)
+            newIngredient.weight = Float(ingredient.weight )
+            
+            ingredients.append(newIngredient)
+        }
     }
     
     func deleteItems(offsets: IndexSet) {

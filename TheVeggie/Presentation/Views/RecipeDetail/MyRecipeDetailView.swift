@@ -188,6 +188,7 @@ struct MyRecipeDetailView: View {
                     recipeVm.updateRecipe(recipeId: recipeId!)
                     
                     recipeVm.isInEditMode.toggle()
+                    
                 }
                 
                 Button {

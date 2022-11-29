@@ -17,46 +17,33 @@ struct AddApiRecipeView: View {
     
     var recipe: Recipe
     
-    // Recipe
-    @State var title: String = ""
-    @State var category: String = ""
-    @State var instruction: String = "Meal preparation instructions only at source website"
-    @State var source: String = ""
-    @State var sourceUrl: String = ""
-    @State var imageUrl: String = ""
     @State var imageKey: String = ""
-    @State var totalTime: String = ""
-    @State var image: UIImage?
-    
-    // webview
-    @State private var showWebView = false
-    @State private var showToggle = false
     
     @StateObject var vm = ApiWebViewViewModel()
     
-    @StateObject var addVm = AddRecipeViewModel()
+    @StateObject var addVm = MyRecipeViewModel()
     
     var body: some View {
         Form {
             Section {
                 
-                DownloadingImageView(url: imageUrl  , key: imageKey)
+                DownloadingImageView(url: addVm.imageUrl  , key: imageKey)
                     .frame(width: 325, height: 300)
                     .aspectRatio(contentMode: .fit)
                     .padding(8)
                 
                 
-                TextField("Recipe title", text: $title, prompt: Text("Recipe Title"))
+                TextField("Recipe title", text: $addVm.title, prompt: Text("Recipe Title"))
             }
             .listRowBackground(CustomColor.forestGreen.opacity(0.2))
             
             Section("Category") {
-                TextField("Category", text: $category, prompt: Text("Category"))
+                TextField("Category", text: $addVm.category, prompt: Text("Category"))
             }
             .listRowBackground(CustomColor.forestGreen.opacity(0.2))
             
             Section("Total Time in minutes") {
-                TextField("Total Time", text: $totalTime, prompt: Text("Total Time..."))
+                TextField("Total Time", text: $addVm.totalTime, prompt: Text("Total Time..."))
             }
             .listRowBackground(CustomColor.forestGreen.opacity(0.2))
             
@@ -72,7 +59,7 @@ struct AddApiRecipeView: View {
             Section("Preparation") {
                 List {
                     ZStack(alignment:. topLeading) {
-                        TextEditor(text: $instruction)
+                        TextEditor(text: $addVm.instruction)
                             .background(Color("textBackground"))
                             .cornerRadius(10.0)
                             .frame(height: 150.0)
@@ -84,19 +71,19 @@ struct AddApiRecipeView: View {
             
             Section("Recipe Source") {
                 VStack {
-                    TextField("Recipe Source", text: $source, prompt: Text("Recipe Source"))
-                    TextField("Recipe Source URL", text: $sourceUrl, prompt: Text("Recipe Source URL"))
-                    Toggle("Show Original Recipe Instructions", isOn: $showWebView)
+                    TextField("Recipe Source", text: $addVm.source, prompt: Text("Recipe Source"))
+                    TextField("Recipe Source URL", text: $addVm.sourceUrl, prompt: Text("Recipe Source URL"))
+                    Toggle("Show Original Recipe Instructions", isOn: $addVm.showWebView)
                 }
             }
             .listRowBackground(CustomColor.forestGreen.opacity(0.2))
             
-            if showWebView {
+            if addVm.showWebView {
                 
                 Section("Original Recipe Source") {
                     RecipeWebView(webView: vm.webView)
                         .onAppear {
-                            vm.loadUrl(urlString: sourceUrl)
+                            vm.loadUrl(urlString: addVm.sourceUrl)
                         }
                         .frame(width:325,height: 600)
                 }
@@ -111,41 +98,19 @@ struct AddApiRecipeView: View {
         .navigationBarTitleDisplayMode(.automatic)
         .navigationTitle("Add Recipe")
         .onAppear {
-            title = recipe.label
-            source = recipe.source
-            sourceUrl = recipe.url
+            addVm.title = recipe.label
+            addVm.source = recipe.source
+            addVm.sourceUrl = recipe.url
             imageKey = "\(recipe.label)"
-            imageUrl = recipe.image
-            totalTime = "\(recipe.totalTime) min"
+            addVm.imageUrl = recipe.image
+            addVm.totalTime = recipe.totalTime.description
+            addVm.instruction = "Meal preparation instructions only at source website"
+            addVm.image = ImageLoadingViewModel(url: addVm.imageUrl  , key: imageKey).image ?? UIImage(systemName: "photo.artframe")
         }
         .safeAreaInset(edge: .bottom) {
             Button(action: {
-                
-                for ingredient in recipe.ingredients {
-                    let value = IngredientValues(
-                        name: ingredient.food,
-                        text: ingredient.text,
-                        measure: ingredient.measure ?? "",
-                        quantity: Float(ingredient.quantity),
-                        weight: Float(ingredient.weight )
-                    )
-                    addVm.addIngredient(ingredientValues: value)
-                }
-            
-                let value = RecipeValues(
-                    title: title,
-                    category: category,
-                    image: ImageLoadingViewModel(url: imageUrl  , key: imageKey).image ?? UIImage(systemName: "photo.artframe"),
-                    imageUrl: "",
-                    instruction: instruction,
-                    source: source,
-                    sourceUrl: sourceUrl,
-                    isFavorite: false,
-                    totalTime: String(recipe.totalTime),
-                    isOwnRecipe: false
-                )
-                addVm.addRecipe(recipeValues: value)
-                
+                addVm.addApiIngredients(recipe: recipe)
+                addVm.addRecipe()
                 addVm.ingredients = []
                 
                 dismiss()
@@ -160,9 +125,9 @@ struct AddApiRecipeView: View {
             })
             .padding(.vertical)
             .frame(width: 355)
-            .foregroundColor(title.isEmpty ? Color.gray : Color.white)
-            .background(title.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
-            .disabled(title.isEmpty)
+            .foregroundColor(addVm.title.isEmpty ? Color.gray : Color.white)
+            .background(addVm.title.isEmpty ? CustomColor.lightGray : CustomColor.forestGreen)
+            .disabled(addVm.title.isEmpty)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .shadow(radius: 5)
             .padding( .bottom)
