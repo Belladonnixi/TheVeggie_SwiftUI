@@ -26,14 +26,10 @@ struct MyRecipeDetailView: View {
     
     @StateObject var recipeVm = MyRecipeViewModel()
     
-    // webview
-    @State private var showWebView = false
-    @State private var showToggle = false
-    
     // WebView
     @StateObject var vm = ApiWebViewViewModel()
     
-    // favorite
+    // favorite recipe
     var recipeIndex: Int {
         recipeVm.recipes.firstIndex(where: { $0.title == recipe.title})!
     }
@@ -156,14 +152,14 @@ struct MyRecipeDetailView: View {
                     TextField("Recipe Source URL", text: $recipeVm.sourceUrl, prompt: Text("Recipe Source URL..."))
                         .disabled(!recipeVm.isInEditMode)
                     if !recipeVm.sourceUrl.isEmpty {
-                        Toggle("Show Original Recipe Instructions", isOn: $showWebView)
+                        Toggle("Show Original Recipe Instructions", isOn: $recipeVm.showWebView)
                     }
                     
                 }
             }
             .listRowBackground(recipeVm.isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
             
-            if showWebView {
+            if recipeVm.showWebView {
                 
                 Section("Original Recipe Source") {
                     RecipeWebView(webView: vm.webView)
@@ -182,7 +178,7 @@ struct MyRecipeDetailView: View {
         .toolbar {
             
             Button(recipeVm.isInEditMode ? "Cancel" : "Edit") {
-                recipeVm.editCancelButtonPressed(recipe: recipe)
+                recipeVm.editCancelButtonPressed(recipeId: recipeId!)
             }
             
             if recipeVm.isInEditMode {
@@ -202,12 +198,11 @@ struct MyRecipeDetailView: View {
                         .foregroundColor(.red)
                 }
             }
-            
         }
         .onAppear {
             guard
                 let objectId = recipeId,
-                let recipe = recipeVm.fetchRecipe(for: objectId)
+                let recipe = recipeVm.getSpecificRecipe(for: objectId)
             else {
                 return
             }

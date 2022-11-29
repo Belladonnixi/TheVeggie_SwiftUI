@@ -56,11 +56,19 @@ class MyRecipeViewModel: ObservableObject {
     @Published var selectedImage: UIImage?
     @Published var showSheet = false
     
+    
+    // webview
+    @Published var showWebView = false
+    @Published var showToggle = false
+    
     init() {
         getRecipes()
         getIngredients()
     }
     
+    // MARK: - Core Data funcs
+    
+    // fetch all recipes
     func getRecipes() {
         let request = NSFetchRequest<RecipeEntity>(entityName: "RecipeEntity")
         
@@ -74,6 +82,7 @@ class MyRecipeViewModel: ObservableObject {
         }
     }
     
+    // fetch ingredients for recipe
     func getIngredients() {
         let request = NSFetchRequest<IngredientEntity>(entityName: "IngredientEntity")
         
@@ -95,14 +104,16 @@ class MyRecipeViewModel: ObservableObject {
         return finalImage!
     }
     
-    func deleteRecipes(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { recipes[$0] }.forEach(manager.context.delete)
-            recipes.remove(atOffsets: offsets)
+    // fetch recipe with objectId
+    func getSpecificRecipe(for objectId: NSManagedObjectID) ->
+    RecipeEntity? {
+        guard let recipe = manager.context.object(with: objectId) as? RecipeEntity else {
+            return nil
         }
-        update()
+        return recipe
     }
-    
+
+    // delete, save, update recipe
     func deleteRecipe(at index: Int) {
         withAnimation {
             let deletedRecipe = recipes[index]
@@ -120,22 +131,16 @@ class MyRecipeViewModel: ObservableObject {
     }
     
     func update() {
-        save()
-    }
-    
-    func fetchRecipe(for objectId: NSManagedObjectID) ->
-    RecipeEntity? {
-        guard let recipe = manager.context.object(with: objectId) as? RecipeEntity else {
-            return nil
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.manager.save()
         }
-        return recipe
     }
     
     // MARK: - Edit Mode funcs
 
     func updateRecipe(recipeId: NSManagedObjectID) {
         let recipe: RecipeEntity
-        let fetchedRecipe = fetchRecipe(for: recipeId)
+        let fetchedRecipe = getSpecificRecipe(for: recipeId)
         recipe = fetchedRecipe!
         
         recipe.title = title
@@ -162,7 +167,6 @@ class MyRecipeViewModel: ObservableObject {
         newIngredient.quantity = Float(newIngredientQuantity) ?? 0
         newIngredient.measure = newIngredientMeasure
         newIngredient.text = "\(newIngredientQuantity) \(newIngredientMeasure) \(newIngredientName)"
-        newIngredient.weight = 0.00
         
         ingredients.append(newIngredient)
         
@@ -178,16 +182,22 @@ class MyRecipeViewModel: ObservableObject {
         }
     }
     
-    func editCancelButtonPressed(recipe: RecipeEntity) {
+    func editCancelButtonPressed(recipeId: NSManagedObjectID) {
+        
+        let recipe: RecipeEntity
+        let fetchedRecipe = getSpecificRecipe(for: recipeId)
+        recipe = fetchedRecipe!
         
         if isInEditMode {
+            
+            manager.context.rollback()
             
             self.title = recipe.title ?? ""
             self.category = recipe.category ?? ""
             self.totalTime = recipe.totalTime.description
             self.instruction = recipe.instruction ?? "Instructions"
             self.ingredients = recipe.ingredients?.allObjects as! [IngredientEntity]
-            print(ingredients)
+            
             self.selectedImage = getImageFromData(recipe: recipe)
             
             self.newIngredientName = ""
