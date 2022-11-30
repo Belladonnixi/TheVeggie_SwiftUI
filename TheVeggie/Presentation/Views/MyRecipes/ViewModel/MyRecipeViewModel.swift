@@ -25,7 +25,7 @@ class MyRecipeViewModel: ObservableObject {
     // Favorite
     @Published var saveIsFavorite: Bool? {
         didSet {
-            update()
+            save()
         }
     }
     
@@ -148,14 +148,6 @@ class MyRecipeViewModel: ObservableObject {
     func save() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.manager.save()
-            self.getRecipes()
-            self.getIngredients()
-        }
-    }
-    
-    func update() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.manager.save()
         }
     }
     
@@ -181,7 +173,7 @@ class MyRecipeViewModel: ObservableObject {
             recipe.image = imageData
         }
         
-        update()
+        save()
     }
     
     func addIngredient() {
