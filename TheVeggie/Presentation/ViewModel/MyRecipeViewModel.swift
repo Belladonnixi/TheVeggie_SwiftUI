@@ -143,6 +143,7 @@ class MyRecipeViewModel: ObservableObject {
             self.manager.context.delete(deletedRecipe)
         }
         save()
+        getRecipes()
     }
     
     func save() {

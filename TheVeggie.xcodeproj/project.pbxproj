@@ -202,7 +202,6 @@
 		1D5E891D29152E4B000BEA53 /* MyRecipes */ = {
 			isa = PBXGroup;
 			children = (
-				1D5FAF4A2902BA05004F28C3 /* ViewModel */,
 				1D5E891B29152E3C000BEA53 /* MyRecipesView.swift */,
 				1D5E89202915464A000BEA53 /* AddMyRecipeView.swift */,
 				1D46F7272917D2DF00CC28CF /* MyApiRecipeRow.swift */,
@@ -245,6 +244,7 @@
 		1D676A3028FDB16B00449823 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				1D5FAF4A2902BA05004F28C3 /* ViewModel */,
 				1D676A3528FDB20900449823 /* Views */,
 			);
 			path = Presentation;

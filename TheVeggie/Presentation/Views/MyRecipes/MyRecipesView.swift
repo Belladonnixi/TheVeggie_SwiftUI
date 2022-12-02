@@ -70,17 +70,11 @@ struct MyRecipesView: View {
                                                     .shadow(radius: 10)
                                             }
                                         }
-                                        
                                         if recipe.isOwnRecipe {
-                                            
                                             MyOwnRecipeRow(entity: recipe)
-                                            
                                         } else {
-                                            
                                             MyApiRecipeRow(entity: recipe)
-                                            
                                         }
-                                        
                                     }
                                 }
                                 .contextMenu {
@@ -97,10 +91,7 @@ struct MyRecipesView: View {
                             }
                         })
                         .padding()
-                        
-                        
-                        .id("TOP")
-                        
+                        .id("TOP")                        
                     })
                     .navigationBarTitleDisplayMode(.automatic)
                     .navigationTitle("My Recipes")
@@ -135,9 +126,9 @@ struct MyRecipesView: View {
                                 .clipShape(Circle())
                                 .shadow(radius: 10)
                         }
-                            .padding(.trailing)
-                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
-                            .animation(.easeInOut, value: 1)
+                        .padding(.trailing)
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
+                        .animation(.easeInOut, value: 1)
                         ,alignment: .bottomTrailing
                     )
                 }

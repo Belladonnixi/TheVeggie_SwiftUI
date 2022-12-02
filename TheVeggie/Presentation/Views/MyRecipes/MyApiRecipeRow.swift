@@ -22,7 +22,7 @@ struct MyApiRecipeRow: View {
                 .frame(width: 175, height: 160)
                 .aspectRatio(contentMode: .fit)
             VStack(alignment: .leading) {
-                Text(entity.title!)
+                Text(entity.title ?? "")
                     .font(.headline)
                     .foregroundColor(Color.primary)
                     .frame(height: 160)
