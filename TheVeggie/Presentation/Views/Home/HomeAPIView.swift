@@ -13,14 +13,13 @@ import SwiftUI
 
 struct HomeAPIView: View {
     
+    var recipes: [Recipe]
+    
     @State var scrollViewOffset: CGFloat = 0
     @State var startOffset: CGFloat = 0
     
     @StateObject var vm = ApiWebViewViewModel()
-    
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
-    }
+    @StateObject var load = RecipeLoadingViewModel()
     
     var body: some View {
         
@@ -36,7 +35,7 @@ struct HomeAPIView: View {
                         _HSpacer(minWidth: 16)
                         
                         LazyVStack.init(spacing: 16, content: {
-                            ForEach(vm.dataArray, id: \.label) { model in
+                            ForEach(recipes, id: \.label) { model in
                                 NavigationLink {
                                     ApiRecipeDetailView(recipe: model)
                                 } label: {
@@ -45,7 +44,7 @@ struct HomeAPIView: View {
                             }
                             
                             Button {
-                                vm.dataService.downloadData()
+                                load.load()
                             } label: {
                                 HStack {
                                     Spacer()
@@ -111,8 +110,8 @@ struct HomeAPIView: View {
     }
 }
 
-struct HomeAPIView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeAPIView()
-    }
-}
+//struct HomeAPIView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeAPIView()
+//    }
+//}

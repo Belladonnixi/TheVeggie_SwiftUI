@@ -19,7 +19,7 @@ class ApiWebViewViewModel: ObservableObject {
     @Published var dataArray: [Recipe] = []
     var cancellables = Set<AnyCancellable>()
 
-    let dataService = RecipeModelDataService.instance
+//    let dataService = RecipeModelDataService.instance
     
     let webView: WKWebView
     
@@ -30,11 +30,11 @@ class ApiWebViewViewModel: ObservableObject {
     }
     
     func addSubscribers() {
-        dataService.$recipes
-            .sink { [weak self] (returnedRecipes) in
-                self?.dataArray.append(contentsOf: returnedRecipes)
-            }
-            .store(in: &cancellables)
+//        dataService.$recipes
+//            .sink { [weak self] (returnedRecipes) in
+//                self?.dataArray.append(contentsOf: returnedRecipes)
+//            }
+//            .store(in: &cancellables)
     }
     
     func loadUrl(urlString: String) {

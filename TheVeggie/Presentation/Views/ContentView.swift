@@ -23,7 +23,7 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $selection) {
-            HomeAPIView()
+            RecipeLoadingView()
                 .tabItem {
                     Label("New Recipes", systemImage: "star")
                 }
