@@ -42,6 +42,23 @@ struct HomeAPIView: View {
                                     HomeApiRecipeRow(recipe: model)
                                 }
                             }
+                            
+                            Button {
+                                load.load(refresh: false)
+                            } label: {
+                                HStack {
+                                    Spacer()
+                                    Label("load more", systemImage: "square.and.arrow.down")
+                                    Spacer()
+                                }
+                            }
+                            .padding(.vertical)
+                            .frame(width: 150, height: 30)
+                            .foregroundColor(Color.white)
+                            .background(CustomColor.forestGreen)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .shadow(radius: 7)
+                            .padding(16)
                         })
                         .padding()
                         .id("TOP")

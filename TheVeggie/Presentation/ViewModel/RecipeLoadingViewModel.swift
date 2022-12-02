@@ -23,12 +23,14 @@ class RecipeLoadingViewModel: ObservableObject {
     
     private var recipes: [Recipe] = []
     
+//    let dataService = RecipeModelDataService.instance
+    
     @Published var state: State = .loading
     private var cancellables = Set<AnyCancellable>()
     
     func load(refresh: Bool) {
         guard let url = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&beta=true&q=vegetarian&app_id=\(EdamamApi.appId)&app_key=\(EdamamApi.appKey)&random=true") else { return }
-        
+
         URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
@@ -45,11 +47,11 @@ class RecipeLoadingViewModel: ObservableObject {
                 if returnedValues.hits.isEmpty {
                     self?.state = .empty("No Recipes found....")
                 } else {
-                    
+
                     if refresh {
                         self!.recipes = []
                     }
-                    
+
                     for hit in returnedValues.hits {
                         self!.recipes.append(hit.recipe)
                     }
@@ -57,6 +59,28 @@ class RecipeLoadingViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellables)
+//        dataService.$recipes
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] completion in
+//                switch completion {
+//                case .finished:
+//                    break
+//                case .failure(let error):
+//                    self?.state = .error(error.localizedDescription)
+//                }
+//            } receiveValue: { [weak self] (receivedRecipes) in
+//                if receivedRecipes.isEmpty {
+//                    self?.state = .empty("No Recipes found....")
+//                } else {
+//                    if refresh {
+//                        self?.recipes = []
+//                    }
+//
+//                    self?.recipes.ap
+//                    self?.state = .loaded(receivedRecipes)
+//                }
+//            }
+//            .store(in: &cancellables)
     }
     
     private func handleOutput(output: URLSession.DataTaskPublisher.Output) throws -> Data {

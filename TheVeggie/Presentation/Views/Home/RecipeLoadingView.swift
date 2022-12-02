@@ -42,7 +42,8 @@ struct RecipeLoadingView: View {
                             vm.load(refresh: true)
                         }
                 }
-                
+            }
+            .safeAreaInset(edge: .bottom) {
                 Button {
                     vm.load(refresh: false)
                 } label: {
@@ -51,17 +52,15 @@ struct RecipeLoadingView: View {
                         Label("load more", systemImage: "square.and.arrow.down")
                         Spacer()
                     }
-                    
                 }
                 .padding(.vertical)
-                .frame(width: 150)
+                .frame(width: 150, height: 30)
                 .foregroundColor(Color.white)
                 .background(CustomColor.forestGreen)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .shadow(radius: 7)
                 .padding(16)
             }
-                
         }
     }
 }
