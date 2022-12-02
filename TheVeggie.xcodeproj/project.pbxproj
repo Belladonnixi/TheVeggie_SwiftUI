@@ -244,8 +244,8 @@
 		1D676A3028FDB16B00449823 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				1D5FAF4A2902BA05004F28C3 /* ViewModel */,
 				1D676A3528FDB20900449823 /* Views */,
+				1D5FAF4A2902BA05004F28C3 /* ViewModel */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
