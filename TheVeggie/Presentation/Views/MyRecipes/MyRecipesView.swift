@@ -12,18 +12,14 @@
 import SwiftUI
 
 struct MyRecipesView: View {
-    
-    @State var scrollViewOffset: CGFloat = 0
-    @State var startOffset: CGFloat = 0
-    
+        
     @State private var addViewShown = false
-    @StateObject var vm = MyRecipeViewModel()
+    
     @State private var showFavoritesOnly = false
-    @State private var isOwnRecipe = false
-    @State var searchText: String = ""
     
     @State private var isInDeleteMode = false
     
+    @StateObject var vm = MyRecipeViewModel()
     
     var filteredRecipes: [RecipeEntity] {
         vm.recipes.filter { recipe in
