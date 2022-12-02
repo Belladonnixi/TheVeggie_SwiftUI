@@ -17,8 +17,6 @@ struct AddApiRecipeView: View {
     
     var recipe: Recipe
     
-    @State var imageKey: String = ""
-    
     @StateObject var vm = ApiWebViewViewModel()
     
     @StateObject var addVm = MyRecipeViewModel()
@@ -27,7 +25,7 @@ struct AddApiRecipeView: View {
         Form {
             Section {
                 
-                DownloadingImageView(url: addVm.imageUrl  , key: imageKey)
+                DownloadingImageView(url: addVm.imageUrl  , key: addVm.imageKey)
                     .frame(width: 325, height: 300)
                     .aspectRatio(contentMode: .fit)
                     .padding(8)
@@ -98,20 +96,13 @@ struct AddApiRecipeView: View {
         .navigationBarTitleDisplayMode(.automatic)
         .navigationTitle("Add Recipe")
         .onAppear {
-            addVm.title = recipe.label
-            addVm.source = recipe.source
-            addVm.sourceUrl = recipe.url
-            imageKey = "\(recipe.label)"
-            addVm.imageUrl = recipe.image
-            addVm.totalTime = recipe.totalTime.description
-            addVm.instruction = "Meal preparation instructions only at source website"
-            addVm.image = ImageLoadingViewModel(url: addVm.imageUrl  , key: imageKey).image ?? UIImage(systemName: "photo.artframe")
+            addVm.initialSetUpAddApiRecipeView(recipe: recipe)
         }
         .safeAreaInset(edge: .bottom) {
             Button(action: {
                 addVm.addApiIngredients(recipe: recipe)
                 addVm.addApiRecipe()
-                addVm.ingredients = []
+                addVm.clearIngredients()
                 
                 dismiss()
                 

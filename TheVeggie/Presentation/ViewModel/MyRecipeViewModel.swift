@@ -40,6 +40,7 @@ class MyRecipeViewModel: ObservableObject {
     @Published var image: UIImage?
     @Published var isOwnRecipe: Bool = false
     @Published var isFavorite: Bool = false
+    @Published var imageKey: String = ""
     
     // MARK: - EditMode
     
@@ -133,28 +134,6 @@ class MyRecipeViewModel: ObservableObject {
         source = ""
         sourceUrl = ""
         totalTime = ""
-        
-    }
-    
-    func addApiRecipe() {
-        let newRecipe = RecipeEntity(context: manager.context)
-        newRecipe.title = title
-        newRecipe.category = category
-        newRecipe.imageUrl = ""
-        newRecipe.source = source
-        newRecipe.sourceUrl = sourceUrl
-        newRecipe.instruction = instruction
-        newRecipe.isFavorite = false
-        newRecipe.ingredients = NSSet(array: ingredients)
-        newRecipe.totalTime = Int64(totalTime) ?? 0
-        newRecipe.isOwnRecipe = false
-        
-        if let image = image {
-            let imageData = image.jpegData(compressionQuality: 1.0)
-            newRecipe.image = imageData
-        }
-        
-        save()
         
     }
     
@@ -271,5 +250,40 @@ class MyRecipeViewModel: ObservableObject {
             
         }
         isInEditMode.toggle()
+    }
+    
+    // MARK: - API
+    // adding recipe from api
+    func addApiRecipe() {
+        let newRecipe = RecipeEntity(context: manager.context)
+        newRecipe.title = title
+        newRecipe.category = category
+        newRecipe.imageUrl = ""
+        newRecipe.source = source
+        newRecipe.sourceUrl = sourceUrl
+        newRecipe.instruction = instruction
+        newRecipe.isFavorite = false
+        newRecipe.ingredients = NSSet(array: ingredients)
+        newRecipe.totalTime = Int64(totalTime) ?? 0
+        newRecipe.isOwnRecipe = false
+        
+        if let image = image {
+            let imageData = image.jpegData(compressionQuality: 1.0)
+            newRecipe.image = imageData
+        }
+        
+        save()
+    }
+    
+    // initilizing AddApiRecipeView
+    func initialSetUpAddApiRecipeView(recipe: Recipe) {
+        title = recipe.label
+        source = recipe.source
+        sourceUrl = recipe.url
+        imageKey = "\(recipe.label)"
+        imageUrl = recipe.image
+        totalTime = recipe.totalTime.description
+        instruction = "Meal preparation instructions only at source website"
+        image = ImageLoadingViewModel(url: imageUrl  , key: imageKey).image ?? UIImage(systemName: "photo.artframe")
     }
 }
