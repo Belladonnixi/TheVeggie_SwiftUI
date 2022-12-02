@@ -127,6 +127,28 @@ class MyRecipeViewModel: ObservableObject {
         
     }
     
+    func addApiRecipe() {
+        let newRecipe = RecipeEntity(context: manager.context)
+        newRecipe.title = title
+        newRecipe.category = category
+        newRecipe.imageUrl = ""
+        newRecipe.source = source
+        newRecipe.sourceUrl = sourceUrl
+        newRecipe.instruction = instruction
+        newRecipe.isFavorite = false
+        newRecipe.ingredients = NSSet(array: ingredients)
+        newRecipe.totalTime = Int64(totalTime) ?? 0
+        newRecipe.isOwnRecipe = false
+        
+        if let image = image {
+            let imageData = image.jpegData(compressionQuality: 1.0)
+            newRecipe.image = imageData
+        }
+        
+        save()
+        
+    }
+    
     // fetch recipe with objectId
     func getSpecificRecipe(for objectId: NSManagedObjectID) ->
     RecipeEntity? {

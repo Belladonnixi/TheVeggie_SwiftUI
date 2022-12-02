@@ -110,7 +110,7 @@ struct AddApiRecipeView: View {
         .safeAreaInset(edge: .bottom) {
             Button(action: {
                 addVm.addApiIngredients(recipe: recipe)
-                addVm.addRecipe()
+                addVm.addApiRecipe()
                 addVm.ingredients = []
                 
                 dismiss()
