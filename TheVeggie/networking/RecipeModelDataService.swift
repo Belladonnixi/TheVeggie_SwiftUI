@@ -1,9 +1,9 @@
 //
 //  Project: TheVeggie
-//  RecipeLoadingViewModel.swift
+//  RecipeModelDataService.swift
 //
 //
-//  Created by Jessica Ernst on 29.11.22
+//  Created by Jessica Ernst on 20.10.22
 //
 /// Copyright © 2022 Jessica Ernst. All rights reserved.
 //
@@ -12,21 +12,18 @@
 import Foundation
 import Combine
 
-class RecipeLoadingViewModel: ObservableObject {
+class RecipeModelDataService {
     
-    enum State {
-        case loading
-        case loaded([Recipe])
-        case empty(String)
-        case error(String)
+    static let instance = RecipeModelDataService() // Singleton
+    
+    @Published var recipes: [Recipe] = []
+    var cancellables = Set<AnyCancellable>()
+    
+    private init() {
+        downloadData()
     }
     
-    private var recipes: [Recipe] = []
-    
-    @Published var state: State = .loading
-    private var cancellables = Set<AnyCancellable>()
-    
-    func load(refresh: Bool) {
+    func downloadData() {
         guard let url = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&beta=true&q=vegetarian&app_id=\(EdamamApi.appId)&app_key=\(EdamamApi.appKey)&random=true") else { return }
         
         URLSession.shared.dataTaskPublisher(for: url)
@@ -39,21 +36,13 @@ class RecipeLoadingViewModel: ObservableObject {
                 case .finished:
                     break
                 case .failure(let error):
-                    self.state = .error(error.localizedDescription)
+                    print("Error downloading data. \(error)")
                 }
             } receiveValue: { [weak self] (returnedValues) in
-                if returnedValues.hits.isEmpty {
-                    self?.state = .empty("No Recipes found....")
-                } else {
-                    
-                    if refresh {
-                        self!.recipes = []
-                    }
-                    
-                    for hit in returnedValues.hits {
-                        self!.recipes.append(hit.recipe)
-                    }
-                    self?.state = .loaded(self!.recipes)
+                for hit in returnedValues.hits {
+                    var array = [Recipe]()
+                    array.append(hit.recipe)
+                    self?.recipes = array
                 }
             }
             .store(in: &cancellables)
