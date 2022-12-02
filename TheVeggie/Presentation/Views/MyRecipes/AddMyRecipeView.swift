@@ -155,18 +155,9 @@ struct AddMyRecipeView: View {
                     
                     addVm.image = addVm.selectedImage ?? UIImage(systemName: "photo.artframe")
                    
-                    addVm.addRecipe()
+                    addVm.addMyRecipe()
                                        
                     presentAlert = true
-                    
-                    addVm.selectedImage = nil
-                    addVm.ingredients = []
-                    addVm.title = ""
-                    addVm.category = ""
-                    addVm.instruction = ""
-                    addVm.source = ""
-                    addVm.sourceUrl = ""
-                    addVm.totalTime = ""
                     
                 }, label: {
                     HStack {
@@ -187,7 +178,7 @@ struct AddMyRecipeView: View {
                 .shadow(radius: 5)
             }
             .onAppear {
-                addVm.ingredients = []
+                addVm.clearIngredients()
             }
         }
     }

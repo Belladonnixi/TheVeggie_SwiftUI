@@ -105,7 +105,7 @@ class MyRecipeViewModel: ObservableObject {
     }
     
     // adding recipe
-    func addRecipe() {
+    func addMyRecipe() {
         let newRecipe = RecipeEntity(context: manager.context)
         newRecipe.title = title
         newRecipe.category = category
@@ -124,6 +124,15 @@ class MyRecipeViewModel: ObservableObject {
         }
         
         save()
+        
+        selectedImage = nil
+        ingredients = []
+        title = ""
+        category = ""
+        instruction = ""
+        source = ""
+        sourceUrl = ""
+        totalTime = ""
         
     }
     
@@ -147,6 +156,10 @@ class MyRecipeViewModel: ObservableObject {
         
         save()
         
+    }
+    
+    func clearIngredients() {
+        ingredients = []
     }
     
     // fetch recipe with objectId
