@@ -13,15 +13,18 @@ import SwiftUI
 
 struct MessageView: View {
     var message: String
+    var color: Color
     
     var body: some View {
         Text(message)
+            .foregroundColor(color)
     }
 }
 
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
         let message = "test"
-        MessageView(message: message)
+        let color = Color.red
+        MessageView(message: message, color: color)
     }
 }

@@ -23,8 +23,6 @@ class RecipeLoadingViewModel: ObservableObject {
     
     private var recipes: [Recipe] = []
     
-//    let dataService = RecipeModelDataService.instance
-    
     @Published var state: State = .loading
     private var cancellables = Set<AnyCancellable>()
     
@@ -59,28 +57,6 @@ class RecipeLoadingViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellables)
-//        dataService.$recipes
-//            .receive(on: DispatchQueue.main)
-//            .sink { [weak self] completion in
-//                switch completion {
-//                case .finished:
-//                    break
-//                case .failure(let error):
-//                    self?.state = .error(error.localizedDescription)
-//                }
-//            } receiveValue: { [weak self] (receivedRecipes) in
-//                if receivedRecipes.isEmpty {
-//                    self?.state = .empty("No Recipes found....")
-//                } else {
-//                    if refresh {
-//                        self?.recipes = []
-//                    }
-//
-//                    self?.recipes.ap
-//                    self?.state = .loaded(receivedRecipes)
-//                }
-//            }
-//            .store(in: &cancellables)
     }
     
     private func handleOutput(output: URLSession.DataTaskPublisher.Output) throws -> Data {

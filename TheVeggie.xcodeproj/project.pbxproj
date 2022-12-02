@@ -194,6 +194,7 @@
 		1D46F7292917D42500CC28CF /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1DAD24EC293A27BB00E9E73D /* MessageView.swift */,
 				1D5E8917291406BA000BEA53 /* RecipeWebView.swift */,
 				1D576ED42910159E00D39134 /* DownloadingImageView.swift */,
 				1D46F72A2917D4C600CC28CF /* RectangleImage.swift */,
@@ -290,7 +291,6 @@
 				1D676A3B28FEDF2700449823 /* HomeApiRecipeRow.swift */,
 				1DCAD7B0292BAB7B0009532F /* AddApiRecipeView.swift */,
 				1DAD24EA293A238E00E9E73D /* RecipeLoadingView.swift */,
-				1DAD24EC293A27BB00E9E73D /* MessageView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
