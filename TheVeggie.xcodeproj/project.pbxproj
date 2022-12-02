@@ -15,8 +15,8 @@
 		1D305FB128FD299100EE3FDF /* TheVeggieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FB028FD299100EE3FDF /* TheVeggieTests.swift */; };
 		1D305FBB28FD299100EE3FDF /* TheVeggieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FBA28FD299100EE3FDF /* TheVeggieUITests.swift */; };
 		1D305FBD28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D305FBC28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift */; };
-		1D36EA54293A47F9008F9BF6 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D36EA53293A47F9008F9BF6 /* ApiKeys.swift */; };
 		1D36EA56293A48C3008F9BF6 /* RecipeModelDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D36EA55293A48C3008F9BF6 /* RecipeModelDataService.swift */; };
+		1D36EA5A293AA649008F9BF6 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D36EA59293AA649008F9BF6 /* ApiKeys.swift */; };
 		1D46F726291565AD00CC28CF /* MyRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46F725291565AD00CC28CF /* MyRecipeViewModel.swift */; };
 		1D46F7282917D2DF00CC28CF /* MyApiRecipeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46F7272917D2DF00CC28CF /* MyApiRecipeRow.swift */; };
 		1D46F72B2917D4C600CC28CF /* RectangleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46F72A2917D4C600CC28CF /* RectangleImage.swift */; };
@@ -75,8 +75,8 @@
 		1D305FB628FD299100EE3FDF /* TheVeggieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheVeggieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D305FBA28FD299100EE3FDF /* TheVeggieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheVeggieUITests.swift; sourceTree = "<group>"; };
 		1D305FBC28FD299100EE3FDF /* TheVeggieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheVeggieUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		1D36EA53293A47F9008F9BF6 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		1D36EA55293A48C3008F9BF6 /* RecipeModelDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeModelDataService.swift; sourceTree = "<group>"; };
+		1D36EA59293AA649008F9BF6 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		1D46F725291565AD00CC28CF /* MyRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeViewModel.swift; sourceTree = "<group>"; };
 		1D46F7272917D2DF00CC28CF /* MyApiRecipeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApiRecipeRow.swift; sourceTree = "<group>"; };
 		1D46F72A2917D4C600CC28CF /* RectangleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleImage.swift; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				1D36EA55293A48C3008F9BF6 /* RecipeModelDataService.swift */,
-				1D36EA53293A47F9008F9BF6 /* ApiKeys.swift */,
+				1D36EA59293AA649008F9BF6 /* ApiKeys.swift */,
 			);
 			path = networking;
 			sourceTree = "<group>";
@@ -459,7 +459,7 @@
 				1D576ED72910174800D39134 /* ImageLoadingViewModel.swift in Sources */,
 				1D305FA628FD299100EE3FDF /* TheVeggie.xcdatamodeld in Sources */,
 				1D576ED929104D3100D39134 /* RecipeImageModelFileManager.swift in Sources */,
-				1D36EA54293A47F9008F9BF6 /* ApiKeys.swift in Sources */,
+				1D36EA5A293AA649008F9BF6 /* ApiKeys.swift in Sources */,
 				1DAD24EB293A238E00E9E73D /* RecipeLoadingView.swift in Sources */,
 				1D46F7282917D2DF00CC28CF /* MyApiRecipeRow.swift in Sources */,
 				1DFA1EE12912A855000C98D8 /* ApiRecipeDetailView.swift in Sources */,

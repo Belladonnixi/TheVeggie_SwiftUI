@@ -27,6 +27,7 @@ struct RecipeLoadingView: View {
                             .refreshable {
                                 vm.load(refresh: true)
                             }
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 4, trailing: 0))
                     case .empty(let message):
                         MessageView(message: message, color: Color.gray)
                             .refreshable {
@@ -51,16 +52,13 @@ struct RecipeLoadingView: View {
                         HStack {
                             Spacer()
                             Label("load more", systemImage: "square.and.arrow.down")
+                                .font(.system(size: 18, weight: .semibold))
                             Spacer()
                         }
                     }
                     .padding(.vertical)
-                    .frame(width: 150, height: 48)
-                    .foregroundColor(Color.white)
-                    .background(CustomColor.forestGreen.opacity(0.7))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .shadow(radius: 7)
-                    .padding(8)
+                    .foregroundColor(CustomColor.forestGreen)
+                    .background(.clear)
                 }
             }
         }
