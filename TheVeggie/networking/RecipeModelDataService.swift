@@ -24,7 +24,7 @@ class RecipeModelDataService {
     }
     
     func downloadData() {
-        guard let url = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&beta=true&q=vegetarian&app_id=\(appId)&app_key=\(appKey)&random=true") else { return }
+        guard let url = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&beta=true&q=vegetarian&app_id=\(EdamamApi.appId)&app_key=\(EdamamApi.appKey)&random=true") else { return }
         
         URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .background))
