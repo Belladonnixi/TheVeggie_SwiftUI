@@ -13,14 +13,13 @@ import SwiftUI
 
 struct HomeAPIView: View {
     
+    var recipes: [Recipe]
+    
     @State var scrollViewOffset: CGFloat = 0
     @State var startOffset: CGFloat = 0
     
     @StateObject var vm = ApiWebViewViewModel()
-    
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Gill Sans UltraBold", size: 34)!]
-    }
+    @StateObject var load = RecipeLoadingViewModel()
     
     var body: some View {
         
@@ -36,31 +35,13 @@ struct HomeAPIView: View {
                         _HSpacer(minWidth: 16)
                         
                         LazyVStack.init(spacing: 16, content: {
-                            ForEach(vm.dataArray, id: \.label) { model in
+                            ForEach(recipes, id: \.label) { model in
                                 NavigationLink {
                                     ApiRecipeDetailView(recipe: model)
                                 } label: {
                                     HomeApiRecipeRow(recipe: model)
                                 }
                             }
-                            
-                            Button {
-                                vm.dataService.downloadData()
-                            } label: {
-                                HStack {
-                                    Spacer()
-                                    Label("load more", systemImage: "square.and.arrow.down")
-                                    Spacer()
-                                }
-                                
-                            }
-                            .padding(.vertical)
-                            .frame(width: 150)
-                            .foregroundColor(Color.white)
-                            .background(CustomColor.forestGreen)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .shadow(radius: 7)
-                            .padding(16)
                         })
                         .padding()
                         .id("TOP")
@@ -108,11 +89,5 @@ struct HomeAPIView: View {
                 }
             }
         }
-    }
-}
-
-struct HomeAPIView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeAPIView()
     }
 }

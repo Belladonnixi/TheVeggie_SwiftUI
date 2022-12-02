@@ -20,10 +20,10 @@ class RecipeModelDataService {
     var cancellables = Set<AnyCancellable>()
     
     private init() {
-        downloadData()
+        fetch()
     }
     
-    func downloadData() {
+    func fetch() {
         guard let url = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&beta=true&q=vegetarian&app_id=\(EdamamApi.appId)&app_key=\(EdamamApi.appKey)&random=true") else { return }
         
         URLSession.shared.dataTaskPublisher(for: url)
