@@ -27,7 +27,7 @@ struct RecipeLoadingView: View {
                             .refreshable {
                                 vm.load(refresh: true)
                             }
-                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 4, trailing: 0))
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
                     case .empty(let message):
                         MessageView(message: message, color: Color.gray)
                             .refreshable {
@@ -52,7 +52,7 @@ struct RecipeLoadingView: View {
                         HStack {
                             Spacer()
                             Label("load more", systemImage: "square.and.arrow.down")
-                                .font(.system(size: 18, weight: .semibold))
+                                .font(.system(size: 16, weight: .semibold))
                             Spacer()
                         }
                     }
