@@ -15,6 +15,8 @@ struct RecipeLoadingView: View {
     
     @StateObject var vm = RecipeLoadingViewModel()
     
+    @State private var isFailure: Bool = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -28,15 +30,24 @@ struct RecipeLoadingView: View {
                                 vm.load(refresh: true)
                             }
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
+                            .onAppear {
+                                isFailure = false
+                            }
                     case .empty(let message):
                         MessageView(message: message, color: Color.gray)
                             .refreshable {
                                 vm.load(refresh: true)
                             }
+                            .onAppear {
+                                isFailure = true
+                            }
                     case .error(let message):
                         MessageView(message: message, color: Color.red)
                             .refreshable {
                                 vm.load(refresh: true)
+                            }
+                            .onAppear {
+                                isFailure = true
                             }
                     case .loading:
                         ProgressView()
@@ -51,8 +62,13 @@ struct RecipeLoadingView: View {
                     } label: {
                         HStack {
                             Spacer()
-                            Label("load more", systemImage: "square.and.arrow.down")
-                                .font(.system(size: 16, weight: .semibold))
+                            if isFailure {
+                                Label("reload", systemImage: "arrow.clockwise")
+                                    .font(.system(size: 16, weight: .semibold))
+                            } else {
+                                Label("load more", systemImage: "square.and.arrow.down")
+                                    .font(.system(size: 16, weight: .semibold))
+                            }
                             Spacer()
                         }
                     }

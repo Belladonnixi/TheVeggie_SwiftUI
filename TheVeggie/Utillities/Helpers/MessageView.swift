@@ -16,14 +16,20 @@ struct MessageView: View {
     var color: Color
     
     var body: some View {
-        Text(message)
-            .foregroundColor(color)
+        VStack {
+            Spacer()
+            
+            Text(message)
+                .foregroundColor(color)
+            
+            Spacer()
+        }
     }
 }
 
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
-        let message = "test"
+        let message = "test error errror error"
         let color = Color.red
         MessageView(message: message, color: color)
     }
