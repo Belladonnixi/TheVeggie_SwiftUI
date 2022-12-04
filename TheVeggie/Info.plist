@@ -7,7 +7,5 @@
 		<key>UIImageName</key>
 		<string>vegetables</string>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Needed for adding Recipe Images</string>
 </dict>
 </plist>
