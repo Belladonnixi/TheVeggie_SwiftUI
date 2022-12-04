@@ -202,24 +202,7 @@ struct MyRecipeDetailView: View {
             }
         }
         .onAppear {
-            guard
-                let objectId = recipeId,
-                let recipe = recipeVm.getSpecificRecipe(for: objectId)
-            else {
-                return
-            }
-            
-            recipeVm.title = recipe.title ?? ""
-            recipeVm.category = recipe.category ?? ""
-            recipeVm.instruction = recipe.instruction ?? ""
-            recipeVm.source = recipe.source ?? ""
-            recipeVm.sourceUrl = recipe.sourceUrl ?? ""
-            recipeVm.totalTime = recipe.totalTime.description
-            recipeVm.selectedImage = recipeVm.getImageFromData(recipe: recipe)
-            recipeVm.ingredients = recipe.ingredients?.allObjects as! [IngredientEntity]
-            recipeVm.imageUrl = recipe.imageUrl ?? ""
-            recipeVm.isOwnRecipe = recipe.isOwnRecipe
-            recipeVm.isFavorite = recipe.isFavorite
+            recipeVm.initialSetUpMyRecipeDetail(recipeId: recipeId)
         }
     }
 }

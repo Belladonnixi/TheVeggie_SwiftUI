@@ -286,4 +286,26 @@ class MyRecipeViewModel: ObservableObject {
         instruction = "Meal preparation instructions only at source website"
         image = ImageLoadingViewModel(url: imageUrl  , key: imageKey).image ?? UIImage(systemName: "photo.artframe")
     }
+    
+    // initializing MyRecipeDetailView
+    func initialSetUpMyRecipeDetail(recipeId: NSManagedObjectID?) {
+        guard
+            let objectId = recipeId,
+            let recipe = getSpecificRecipe(for: objectId)
+        else {
+            return
+        }
+        
+        title = recipe.title ?? ""
+        category = recipe.category ?? ""
+        instruction = recipe.instruction ?? ""
+        source = recipe.source ?? ""
+        sourceUrl = recipe.sourceUrl ?? ""
+        totalTime = recipe.totalTime.description
+        selectedImage = getImageFromData(recipe: recipe)
+        ingredients = recipe.ingredients?.allObjects as! [IngredientEntity]
+        imageUrl = recipe.imageUrl ?? ""
+        isOwnRecipe = recipe.isOwnRecipe
+        isFavorite = recipe.isFavorite
+    }
 }

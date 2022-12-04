@@ -241,7 +241,6 @@
 				1D576ED829104D3100D39134 /* RecipeImageModelFileManager.swift */,
 				1D576EDA2910525B00D39134 /* RecipeImageModelCacheManager.swift */,
 				1DFA1EE22912A8E9000C98D8 /* Design */,
-				1D46F7292917D42500CC28CF /* Helpers */,
 			);
 			path = Utillities;
 			sourceTree = "<group>";
@@ -280,6 +279,7 @@
 				1D676A3828FEDE6500449823 /* Home */,
 				1D5E891D29152E4B000BEA53 /* MyRecipes */,
 				1DFA1EDF2912A811000C98D8 /* RecipeDetail */,
+				1D46F7292917D42500CC28CF /* Helpers */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -15,7 +15,6 @@ import SwiftUI
 class RecipeImageModelCacheManager {
     
     static let instance = RecipeImageModelCacheManager()
-    private init() { }
     
     var imageCache: NSCache<NSString, UIImage> = {
         var cache = NSCache<NSString, UIImage>()
