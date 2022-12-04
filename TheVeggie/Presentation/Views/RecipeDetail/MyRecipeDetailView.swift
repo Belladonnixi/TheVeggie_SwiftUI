@@ -82,12 +82,6 @@ struct MyRecipeDetailView: View {
             }
             .listRowBackground(recipeVm.isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
             
-            Section("Category") {
-                TextField("Category", text: $recipeVm.category, prompt: Text("Category..."))
-                    .disabled(!recipeVm.isInEditMode)
-            }
-            .listRowBackground(recipeVm.isInEditMode ? CustomColor.forestGreen.opacity(0.2) : Color.primary.opacity(0.2))
-            
             Section("Total Time in minutes") {
                 TextField("Total Time", text: $recipeVm.totalTime, prompt: Text("Total Time..."))
                     .keyboardType(.numberPad)

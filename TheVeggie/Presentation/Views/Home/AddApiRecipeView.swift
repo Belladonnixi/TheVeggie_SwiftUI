@@ -35,11 +35,6 @@ struct AddApiRecipeView: View {
             }
             .listRowBackground(CustomColor.forestGreen.opacity(0.2))
             
-            Section("Category") {
-                TextField("Category", text: $addVm.category, prompt: Text("Category"))
-            }
-            .listRowBackground(CustomColor.forestGreen.opacity(0.2))
-            
             Section("Total Time in minutes") {
                 TextField("Total Time", text: $addVm.totalTime, prompt: Text("Total Time..."))
                     .keyboardType(.numberPad)

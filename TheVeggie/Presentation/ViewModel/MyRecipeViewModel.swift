@@ -109,7 +109,6 @@ class MyRecipeViewModel: ObservableObject {
     func addMyRecipe() {
         let newRecipe = RecipeEntity(context: manager.context)
         newRecipe.title = title
-        newRecipe.category = category
         newRecipe.imageUrl = ""
         newRecipe.source = source
         newRecipe.sourceUrl = sourceUrl
@@ -174,7 +173,6 @@ class MyRecipeViewModel: ObservableObject {
         recipe = fetchedRecipe!
         
         recipe.title = title
-        recipe.category = category
         recipe.imageUrl = imageUrl
         recipe.source = source
         recipe.sourceUrl = sourceUrl
@@ -240,7 +238,6 @@ class MyRecipeViewModel: ObservableObject {
             manager.context.rollback()
             
             self.title = recipe.title ?? ""
-            self.category = recipe.category ?? ""
             self.totalTime = recipe.totalTime.description
             self.instruction = recipe.instruction ?? "Instructions"
             self.ingredients = recipe.ingredients?.allObjects as! [IngredientEntity]
@@ -260,7 +257,6 @@ class MyRecipeViewModel: ObservableObject {
     func addApiRecipe() {
         let newRecipe = RecipeEntity(context: manager.context)
         newRecipe.title = title
-        newRecipe.category = category
         newRecipe.imageUrl = ""
         newRecipe.source = source
         newRecipe.sourceUrl = sourceUrl
@@ -300,7 +296,6 @@ class MyRecipeViewModel: ObservableObject {
         }
         
         title = recipe.title ?? ""
-        category = recipe.category ?? ""
         instruction = recipe.instruction ?? ""
         source = recipe.source ?? ""
         sourceUrl = recipe.sourceUrl ?? ""
