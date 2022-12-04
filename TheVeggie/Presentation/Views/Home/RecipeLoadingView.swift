@@ -30,19 +30,15 @@ struct RecipeLoadingView: View {
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
                     case .empty(let message):
                         MessageView(message: message, color: Color.gray)
-                            .refreshable {
-                                vm.load(refresh: true)
-                            }
                     case .error(let message):
                         MessageView(message: message, color: Color.red)
-                            .refreshable {
-                                vm.load(refresh: true)
-                            }
                     case .loading:
+                        Spacer()
                         ProgressView()
                             .onAppear {
                                 vm.load(refresh: true)
                             }
+                        Spacer()
                     }
                 }
                 .safeAreaInset(edge: .bottom) {

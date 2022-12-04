@@ -160,6 +160,15 @@ class MyRecipeViewModel: ObservableObject {
         getRecipes()
     }
     
+    func deleteRecipes(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { recipes[$0] }.forEach(manager.context.delete)
+            recipes.remove(atOffsets: offsets)
+        }
+        save()
+        getRecipes()
+    }
+    
     func save() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.manager.save()

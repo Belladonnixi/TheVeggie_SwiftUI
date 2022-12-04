@@ -74,13 +74,15 @@ struct MyRecipesView: View {
                                     }
                                 }
                                 .contextMenu {
-                                    Button {
-                                        vm.deleteRecipe(at: toDeleteIndex!)
-                                    } label: {
-                                        HStack {
-                                            Text("Delete")
-                                                .foregroundColor(.red)
-                                            Image(systemName: "trash")
+                                    if !showFavoritesOnly {
+                                        Button {
+                                            vm.deleteRecipe(at: toDeleteIndex!)
+                                        } label: {
+                                            HStack {
+                                                Text("Delete")
+                                                    .foregroundColor(.red)
+                                                Image(systemName: "trash")
+                                            }
                                         }
                                     }
                                 }
@@ -92,14 +94,16 @@ struct MyRecipesView: View {
                     .navigationBarTitleDisplayMode(.automatic)
                     .navigationTitle("My Recipes")
                     .toolbar {
-                        Button {
-                            isInDeleteMode.toggle()
-                        } label: {
-                            if isInDeleteMode {
-                                Image(systemName: "xmark")
-                                    .font(.system(size: 16, weight: .semibold))
-                            } else {
-                                Image(systemName: "trash")
+                        if !showFavoritesOnly{
+                            Button {
+                                isInDeleteMode.toggle()
+                            } label: {
+                                if isInDeleteMode {
+                                    Image(systemName: "xmark")
+                                        .font(.system(size: 16, weight: .semibold))
+                                } else {
+                                    Image(systemName: "trash")
+                                }
                             }
                         }
                         
