@@ -12,7 +12,7 @@
 import SwiftUI
 
 struct MyRecipesView: View {
-        
+    
     @State private var addViewShown = false
     
     @State private var showFavoritesOnly = false
@@ -55,7 +55,7 @@ struct MyRecipesView: View {
                                     HStack {
                                         if isInDeleteMode {
                                             Button {
-                                                vm.deleteRecipe(at: toDeleteIndex!)
+                                                vm.deleteRecipe(at: toDeleteIndex!, in: filteredRecipes)
                                             } label: {
                                                 Image(systemName: "trash")
                                                     .font(.system(size: 20, weight: .semibold))
@@ -74,36 +74,33 @@ struct MyRecipesView: View {
                                     }
                                 }
                                 .contextMenu {
-                                    if !showFavoritesOnly {
-                                        Button {
-                                            vm.deleteRecipe(at: toDeleteIndex!)
-                                        } label: {
-                                            HStack {
-                                                Text("Delete")
-                                                    .foregroundColor(.red)
-                                                Image(systemName: "trash")
-                                            }
+                                    Button {
+                                        vm.deleteRecipe(at: toDeleteIndex!, in: filteredRecipes)
+                                    } label: {
+                                        HStack {
+                                            Text("Delete")
+                                                .foregroundColor(.red)
+                                            Image(systemName: "trash")
                                         }
                                     }
+                                    
                                 }
                             }
                         })
                         .padding()
-                        .id("TOP")                        
+                        .id("TOP")
                     })
                     .navigationBarTitleDisplayMode(.automatic)
                     .navigationTitle("My Recipes")
                     .toolbar {
-                        if !showFavoritesOnly{
-                            Button {
-                                isInDeleteMode.toggle()
-                            } label: {
-                                if isInDeleteMode {
-                                    Image(systemName: "xmark")
-                                        .font(.system(size: 16, weight: .semibold))
-                                } else {
-                                    Image(systemName: "trash")
-                                }
+                        Button {
+                            isInDeleteMode.toggle()
+                        } label: {
+                            if isInDeleteMode {
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 16, weight: .semibold))
+                            } else {
+                                Image(systemName: "trash")
                             }
                         }
                         
@@ -126,9 +123,9 @@ struct MyRecipesView: View {
                                 .clipShape(Circle())
                                 .shadow(radius: 10)
                         }
-                        .padding(.trailing)
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
-                        .animation(.easeInOut, value: 1)
+                            .padding(.trailing)
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
+                            .animation(.easeInOut, value: 1)
                         ,alignment: .bottomTrailing
                     )
                 }

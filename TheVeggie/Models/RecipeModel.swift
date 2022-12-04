@@ -10,10 +10,10 @@
 
 import Foundation
 
-// MARK: - Welcome
-struct Welcome: Decodable {
+// MARK: - ApiRecipes
+struct ApiRecipes: Decodable {
     let from, to, count: Int
-    let links: WelcomeLinks
+    let links: ApiRecipesLinks
     let hits: [Hit]
 
     enum CodingKeys: String, CodingKey {
@@ -98,7 +98,7 @@ enum MealType: String, Decodable {
     case snack = "snack"
 }
 
-// MARK: - WelcomeLinks
-struct WelcomeLinks: Decodable {
+// MARK: - ApiRecipesLinks
+struct ApiRecipesLinks: Decodable {
 }
 

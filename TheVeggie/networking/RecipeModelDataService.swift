@@ -30,7 +30,7 @@ class RecipeModelDataService {
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
             .tryMap(handleOutput)
-            .decode(type: Welcome.self, decoder: JSONDecoder())
+            .decode(type: ApiRecipes.self, decoder: JSONDecoder())
             .sink { (completion) in
                 switch completion {
                 case .finished:

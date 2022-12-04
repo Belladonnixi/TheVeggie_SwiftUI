@@ -193,7 +193,7 @@ struct MyRecipeDetailView: View {
                 }
                 
                 Button {
-                    recipeVm.deleteRecipe(at: recipeIndex)
+                    recipeVm.deleteRecipe(at: recipeIndex, in: recipeVm.recipes)
                     dismiss()
                 } label: {
                     Image(systemName: "trash")

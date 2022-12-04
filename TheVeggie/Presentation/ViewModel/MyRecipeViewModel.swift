@@ -150,20 +150,11 @@ class MyRecipeViewModel: ObservableObject {
         return recipe
     }
     
-    // delete, save, update recipe
-    func deleteRecipe(at index: Int) {
+    // delete, save recipe
+    func deleteRecipe(at index: Int, in recipes: [RecipeEntity]) {
         withAnimation {
             let deletedRecipe = recipes[index]
             self.manager.context.delete(deletedRecipe)
-        }
-        save()
-        getRecipes()
-    }
-    
-    func deleteRecipes(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { recipes[$0] }.forEach(manager.context.delete)
-            recipes.remove(atOffsets: offsets)
         }
         save()
         getRecipes()
