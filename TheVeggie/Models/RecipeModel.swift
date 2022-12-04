@@ -99,6 +99,7 @@ enum MealType: String, Decodable {
 }
 
 // MARK: - ApiRecipesLinks
+// seems useless but the API needs it
 struct ApiRecipesLinks: Decodable {
 }
 
