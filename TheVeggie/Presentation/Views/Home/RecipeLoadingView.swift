@@ -50,10 +50,12 @@ struct RecipeLoadingView: View {
                                 isFailure = true
                             }
                     case .loading:
+                        Spacer()
                         ProgressView()
                             .onAppear {
                                 vm.load(refresh: true)
                             }
+                        Spacer()
                     }
                 }
                 .safeAreaInset(edge: .bottom) {
