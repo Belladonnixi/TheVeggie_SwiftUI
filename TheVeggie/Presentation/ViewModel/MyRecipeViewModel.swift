@@ -192,6 +192,7 @@ class MyRecipeViewModel: ObservableObject {
     }
     
     func addIngredient() {
+        
         let newIngredient = IngredientEntity(context: manager.context)
         newIngredient.name = newIngredientName
         newIngredient.quantity = Float(newIngredientQuantity) ?? 0
@@ -206,6 +207,8 @@ class MyRecipeViewModel: ObservableObject {
     }
     
     func addApiIngredients(recipe: Recipe) {
+        
+        ingredients = []
         
         for ingredient in recipe.ingredients {
             let newIngredient = IngredientEntity(context: manager.context)
