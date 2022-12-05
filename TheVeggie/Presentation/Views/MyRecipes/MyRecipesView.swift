@@ -105,6 +105,11 @@ struct MyRecipesView: View {
                         }
                         
                         Toggle("Favorites", isOn: $showFavoritesOnly)
+                            .onChange(of: showFavoritesOnly) { newValue in
+                                withAnimation(.spring()) {
+                                    proxyReader.scrollTo("TOP", anchor: .top)
+                                }
+                            }
                     }
                     .onAppear {
                         vm.getRecipes()
