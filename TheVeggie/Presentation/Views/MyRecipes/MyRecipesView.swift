@@ -109,6 +109,7 @@ struct MyRecipesView: View {
                                 withAnimation(.spring()) {
                                     proxyReader.scrollTo("TOP", anchor: .top)
                                 }
+                                print(newValue)
                             }
                     }
                     .onAppear {
