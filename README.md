@@ -6,7 +6,7 @@
 - Used API is Edamame get your own Keys [Edamam](https://www.edamam.com))<br/> you'll need the recipe API Keys
 - CoreData
 - MVVM Pattern
-- till this point no tests but incomming....
+- till this point no tests but incoming....
 
 This Project was made for my course finals and I had to work with 2 repos..
 
