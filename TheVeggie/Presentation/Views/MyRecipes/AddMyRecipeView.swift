@@ -155,6 +155,8 @@ struct AddMyRecipeView: View {
                                        
                     presentAlert = true
                     
+                    addVm.showWebView = false
+                    
                 }, label: {
                     HStack {
                         Spacer()
