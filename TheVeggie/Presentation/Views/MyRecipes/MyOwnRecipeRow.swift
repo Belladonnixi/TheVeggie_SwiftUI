@@ -41,7 +41,7 @@ struct MyOwnRecipeRow: View {
                 .frame(width: 175, height: 160)
                 .aspectRatio(contentMode: .fit)
         }
-        .background(Color.primary.opacity(0.2))
+        .background(Color.primary.opacity(0.12))
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(radius: 5)
     }
