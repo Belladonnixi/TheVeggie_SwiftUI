@@ -8,7 +8,7 @@
 - MVVM Pattern
 - till this point no tests but incoming....
 
-This Project was made for my course finals and I had to work with 2 repos..
+## up next: cleaning up navigation and adding missing DI and more refactoring needed to improve the quality of this Project!
 
 
 ![Simulator Screen Shot - iPhone 14 Pro - 2022-12-07 at 15 57 43 Small](https://user-images.githubusercontent.com/99251460/206215029-4652653f-bd93-4b11-b7fa-f277223adbae.jpeg)
