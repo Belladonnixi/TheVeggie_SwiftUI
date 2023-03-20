@@ -196,8 +196,8 @@
 			children = (
 				1DAD24EC293A27BB00E9E73D /* MessageView.swift */,
 				1D5E8917291406BA000BEA53 /* RecipeWebView.swift */,
-				1D576ED42910159E00D39134 /* DownloadingImageView.swift */,
 				1D46F72A2917D4C600CC28CF /* RectangleImage.swift */,
+				1D576ED42910159E00D39134 /* DownloadingImageView.swift */,
 				1D53EB832918235800AC633A /* ImagePicker.swift */,
 				1D6CDA842918F18F001408CD /* FavoriteButton.swift */,
 			);
