@@ -23,7 +23,7 @@ struct HomeAPIView: View {
     
     var body: some View {
         
-        NavigationView {
+        NavigationView {  
             
             ScrollViewReader { proxyReader in
                 

@@ -20,6 +20,7 @@
 		1D46F726291565AD00CC28CF /* MyRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46F725291565AD00CC28CF /* MyRecipeViewModel.swift */; };
 		1D46F7282917D2DF00CC28CF /* MyApiRecipeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46F7272917D2DF00CC28CF /* MyApiRecipeRow.swift */; };
 		1D46F72B2917D4C600CC28CF /* RectangleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46F72A2917D4C600CC28CF /* RectangleImage.swift */; };
+		1D4A65E229D3382C00C56538 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4A65E129D3382C00C56538 /* Factory */; };
 		1D50066729014D6800530D8F /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D50066629014D6800530D8F /* RecipeModel.swift */; };
 		1D530E38293293B700BB8750 /* MyOwnRecipeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D530E37293293B700BB8750 /* MyOwnRecipeRow.swift */; };
 		1D53EB842918235800AC633A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D53EB832918235800AC633A /* ImagePicker.swift */; };
@@ -110,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D4A65E229D3382C00C56538 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +331,7 @@
 			);
 			name = TheVeggie;
 			packageProductDependencies = (
+				1D4A65E129D3382C00C56538 /* Factory */,
 			);
 			productName = TheVeggie;
 			productReference = 1D305F9628FD298F00EE3FDF /* TheVeggie.app */;
@@ -403,6 +406,7 @@
 			);
 			mainGroup = 1D305F8D28FD298F00EE3FDF;
 			packageReferences = (
+				1D4A65E029D3382C00C56538 /* XCRemoteSwiftPackageReference "Factory" */,
 			);
 			productRefGroup = 1D305F9728FD298F00EE3FDF /* Products */;
 			projectDirPath = "";
@@ -803,6 +807,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1D4A65E029D3382C00C56538 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1D4A65E129D3382C00C56538 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D4A65E029D3382C00C56538 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1D305FA428FD299100EE3FDF /* TheVeggie.xcdatamodeld */ = {
