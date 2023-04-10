@@ -23,6 +23,5 @@ struct RecipeWebView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
-    }
-    
+    }    
 }

@@ -10,10 +10,11 @@
 
 
 import SwiftUI
+import Factory
 
 struct DownloadingImageView: View {
     
-    @StateObject var loader: ImageLoadingViewModel
+    @StateObject private var loader = Container.shared.imageLoadingViewModel()
     
     init(url: String, key: String) {
         _loader = StateObject(wrappedValue: ImageLoadingViewModel(url: url, key: key))
@@ -23,7 +24,7 @@ struct DownloadingImageView: View {
         ZStack {
             if loader.isLoading {
                 ProgressView()
-            } else if let image = loader.image{
+            } else if let image = loader.image {
                 Image(uiImage: image)
                     .resizable()
                     .background(Color.black.opacity(0.3))

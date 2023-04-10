@@ -89,5 +89,6 @@ struct HomeAPIView: View {
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }

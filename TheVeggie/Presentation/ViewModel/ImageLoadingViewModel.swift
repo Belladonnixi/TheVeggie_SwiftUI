@@ -21,8 +21,8 @@ class ImageLoadingViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
     let manager = RecipeImageModelFileManager.instance
     
-    let urlString: String
-    let imageKey: String
+    private let urlString: String
+    private let imageKey: String
     
     init(url: String, key: String) {
         urlString = url

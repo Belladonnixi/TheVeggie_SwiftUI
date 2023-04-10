@@ -20,13 +20,16 @@ struct ContentView: View {
         case myRecipes
         case addRecipe
     }
-
+    
     var body: some View {
         TabView(selection: $selection) {
             RecipeLoadingView()
                 .tabItem {
                     Label("New Recipes", systemImage: "star")
                 }
+                .toolbarBackground(
+                    Color.white,
+                    for: .tabBar)
                 .tag(Tab.apiRecipes)
             
             MyRecipesView()
@@ -41,6 +44,7 @@ struct ContentView: View {
                 }
                 .tag(Tab.addRecipe)
         }
+        .background(.clear)
         .accentColor(CustomColor.forestGreen)
     }
 }

@@ -179,6 +179,7 @@ struct AddMyRecipeView: View {
                 addVm.clearIngredients()
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
